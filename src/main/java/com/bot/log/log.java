@@ -14,7 +14,8 @@ public class log {
         File f = new File(file_name);
         File f_lck = new File(file_name+".lck");
         if(!f.exists()){
-            f.createNewFile();
+           f.createNewFile();
+
 
         }
 
