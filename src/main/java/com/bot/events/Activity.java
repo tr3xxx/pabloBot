@@ -1,5 +1,5 @@
 package com.bot.events;
-import com.bot.config;
+import com.bot.core.config;
 import net.dv8tion.jda.api.JDA;
 import java.util.Timer;
 import java.util.TimerTask;

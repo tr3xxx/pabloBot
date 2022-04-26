@@ -1,4 +1,4 @@
-package com.bot;
+package com.bot.core;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
