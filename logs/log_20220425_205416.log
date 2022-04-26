@@ -1,0 +1,4 @@
+Apr. 25, 2022 8:54:16 PM com.bot.log.log <init>
+INFORMATION: Start to log.
+Apr. 25, 2022 8:54:18 PM com.bot.listeners.ReadyListener onEvent
+INFORMATION: API is ready
