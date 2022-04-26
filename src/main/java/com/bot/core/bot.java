@@ -1,12 +1,12 @@
 package com.bot.core;
 
 import com.bot.commands.basic.testCommand;
+import com.bot.commands.core.CommandLoad;
 import com.bot.commands.core.CommandManager;
 import com.bot.log.log;
 import com.bot.listeners.ReadyListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -24,17 +24,16 @@ public class bot {
                     .build();
 
             new CommandManager().load(jda);
-
-            CommandManager.addCommand(new testCommand());
-
-            new com.bot.events.Activity(jda);
+            new CommandLoad(jda);
             new console(jda);
+            new com.bot.events.Activity(jda);
+
 
         } catch (LoginException e) {
             com.bot.log.log.logger.warning(e.toString());
         }
 
-        log.logger.info("Bot is ready");
+
 
 
     }
