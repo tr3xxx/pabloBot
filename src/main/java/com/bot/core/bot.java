@@ -1,6 +1,6 @@
 package com.bot.core;
 
-import com.bot.commands.basic.test;
+import com.bot.commands.basic.testCommand;
 import com.bot.commands.core.CommandManager;
 import com.bot.log.log;
 import com.bot.listeners.ReadyListener;
@@ -25,7 +25,7 @@ public class bot {
 
             new CommandManager().load(jda);
 
-            CommandManager.addCommand(new test());
+            CommandManager.addCommand(new testCommand());
 
             new com.bot.events.Activity(jda);
             new console(jda);
