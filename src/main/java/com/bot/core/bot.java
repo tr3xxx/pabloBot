@@ -25,8 +25,9 @@ public class bot {
 
             new CommandManager().load(jda);
             new CommandLoad(jda);
-            new console(jda);
             new com.bot.events.Activity(jda);
+            new console(jda); // hier 'drunter' keine obj erstellen, da console --> == while(true) <fix: thread()...>
+
 
 
         } catch (LoginException e) {

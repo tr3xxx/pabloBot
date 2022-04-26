@@ -14,12 +14,19 @@ public class Activity {
         new Timer().schedule(new TimerTask(){
             public void run(){
 
-                switch (index){
-                    case 0: jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.competing(activities[index]));
-                    case 1: jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.listening(activities[index]));
+                switch (index) {
+                    case 0 -> {
+                        jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.competing(activities[1]));
+                        index = 1;
+                    }
+                    case 1 -> {
+                        jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.listening(activities[0]));
+                        index = 0;
+                    }
+
                 }
                 // log.logger.info("Activity got changed");  Wären 14.000+ changes daily --> Log spam
-                index=(index+1)%activities.length;
+
             }},0,10_000);
 
     }
