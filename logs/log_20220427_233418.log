@@ -1,0 +1,3 @@
+[2022-04-27 23:34:18] [INFORMATION] Start to log 
+[2022-04-27 23:34:19] [INFORMATION] API is ready 
+[2022-04-27 23:35:39] [WARNUNG] MemberVoiceUpdate[audio-channel](net.dv8tion.jda.internal.entities.VoiceChannelImpl@1af1db04->null) 

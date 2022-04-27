@@ -2,10 +2,12 @@ package com.bot.commands.core;
 
 import com.bot.commands.core.Command;
 import com.bot.core.config;
+import com.bot.log.log;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CommandManager extends ListenerAdapter {
@@ -35,7 +37,11 @@ public class CommandManager extends ListenerAdapter {
 
         commands.forEach(cmd -> {
             if(invoke.startsWith(config.get("prefix")) && cmd.call().equalsIgnoreCase(call) && !event.getAuthor().isBot()) {
-                cmd.execute(args, event);
+                try {
+                    cmd.execute(args, event);
+                } catch (SQLException e) {
+                    log.logger.warning(e.toString());
+                }
             }
         });
 

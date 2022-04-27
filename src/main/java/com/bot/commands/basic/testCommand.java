@@ -12,11 +12,6 @@ public class testCommand extends Command {
     }
 
     @Override
-    public String help() {
-        return config.get("prefix")+"test";
-    }
-
-    @Override
     public boolean execute(String[] args, MessageReceivedEvent e) {
 
         e.getChannel().sendMessage("Hallo "+e.getAuthor().getAsMention()).queue();

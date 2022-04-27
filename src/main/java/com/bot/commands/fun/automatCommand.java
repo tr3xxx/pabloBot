@@ -9,10 +9,6 @@ public class automatCommand extends Command {
         return "Automat";
     }
 
-    @Override
-    public String help() {
-        return null;
-    }
 
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) {

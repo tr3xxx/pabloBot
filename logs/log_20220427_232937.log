@@ -1,0 +1,3 @@
+[2022-04-27 23:29:37] [INFORMATION] Start to log 
+[2022-04-27 23:29:39] [INFORMATION] API is ready 
+[2022-04-27 23:29:56] [WARNUNG] org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (table voicehub has no column named categoryid) 
