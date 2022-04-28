@@ -2,9 +2,9 @@ package com.bot.core;
 
 import com.bot.commands.core.CommandLoad;
 import com.bot.commands.core.CommandManager;
-//import com.bot.commands.voice.voicehub.setvoicehub.ButtonClick;
 import com.bot.commands.voice.voicehub.setVoicehub;
 import com.bot.core.sql.SQLiteDataSource;
+import com.bot.events.GuildJoin;
 import com.bot.listeners.VoiceHub;
 import com.bot.log.log;
 import com.bot.listeners.ReadyListener;
@@ -29,6 +29,7 @@ public class bot {
                     .addEventListeners(new ReadyListener())
                     .addEventListeners(new setVoicehub.ButtonClick())
                     .addEventListeners(new VoiceHub())
+                    .addEventListeners(new GuildJoin())
                     .build();
 
             new CommandManager().load(jda);

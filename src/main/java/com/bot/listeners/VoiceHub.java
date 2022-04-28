@@ -7,10 +7,7 @@ import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLDataException;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,9 +15,8 @@ import java.util.Objects;
 public class VoiceHub extends ListenerAdapter {
 
     private boolean isVoiceHub(long id) throws SQLException {
-        try (final PreparedStatement preparedStatement = SQLiteDataSource
-                .getConnection()
-                .prepareStatement("SELECT voicehubid FROM voicehub WHERE voicehubid = ?")) {
+        try (final Connection connection = SQLiteDataSource.getConnection();
+             final PreparedStatement preparedStatement = connection.prepareStatement("SELECT voicehubid FROM voicehub WHERE voicehubid = ?")) {
             preparedStatement.setLong(1, id);
 
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -35,9 +31,8 @@ public class VoiceHub extends ListenerAdapter {
     }
 
     private boolean isValidCategory(long id) throws SQLException{
-        try (final PreparedStatement preparedStatement = SQLiteDataSource
-                .getConnection()
-                .prepareStatement("SELECT categoryid FROM voicehub WHERE categoryid = ?")) {
+        try (final Connection connection = SQLiteDataSource.getConnection();
+             final PreparedStatement preparedStatement = connection.prepareStatement("SELECT categoryid FROM voicehub WHERE categoryid = ?")) {
             preparedStatement.setLong(1, id);
 
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {

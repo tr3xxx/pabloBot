@@ -1,0 +1,7 @@
+[2022-04-28 19:16:29] [INFORMATION] Start to log 
+[2022-04-28 19:16:30] [INFORMATION] API is ready 
+[2022-04-28 19:16:38] [WARNUNG] java.sql.SQLException: Values not bound to statement 
+[2022-04-28 19:16:38] [WARNUNG] java.sql.SQLException: Values not bound to statement 
+[2022-04-28 19:17:00] [WARNUNG] java.sql.SQLException: Values not bound to statement 
+[2022-04-28 19:17:00] [WARNUNG] java.sql.SQLException: Values not bound to statement 
+[2022-04-28 19:17:30] [WARNUNG] java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30003ms. 

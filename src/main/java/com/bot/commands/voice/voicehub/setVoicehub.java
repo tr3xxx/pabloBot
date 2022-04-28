@@ -14,6 +14,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.awt.*;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -49,10 +50,8 @@ public class setVoicehub extends Command {
                         return false;
                     }
 
-                    try (final PreparedStatement insertStatement = SQLiteDataSource
-                            .getConnection()
-                            .prepareStatement("INSERT INTO voicehub(voicehubid,categoryid,guildid) VALUES(?,?,?)")) {
-
+                    try (final Connection connection = SQLiteDataSource.getConnection();
+                         final PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO voicehub(voicehubid,categoryid,guildid) VALUES(?,?,?)")) {
 
                         insertStatement.setLong(1, Long.parseLong(ch_id[0]));
                         insertStatement.setLong(2,cat_id);
