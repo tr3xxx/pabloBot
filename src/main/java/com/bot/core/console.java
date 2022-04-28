@@ -15,18 +15,21 @@ public class console {
     }
 
     public void shutdown(){
-        Scanner sc = new Scanner(System.in);
-
-        //System.out.println("1");
-        String shutdown = sc.nextLine();
-        //System.out.println("2");
-        if(shutdown.equalsIgnoreCase(config.get("shutdown"))){
-            jda.getPresence().setStatus(OnlineStatus.OFFLINE);
-            SQLite.disconnect();
-            log.logger.info("Bot Shutdown");
-            jda.shutdown();
-            System.exit(0);
-        }
+        new Thread(() -> {
+            Scanner sc = new Scanner(System.in);
+            while(true) {
+                String shutdown = sc.nextLine();
+                if (shutdown.equalsIgnoreCase(config.get("shutdown"))) {
+                    jda.getPresence().setStatus(OnlineStatus.OFFLINE);
+                    SQLite.disconnect();
+                    log.logger.info("Bot Shutdown");
+                    jda.shutdown();
+                    System.exit(0);
+                } else {
+                    System.out.println("Invalid Input: '" + config.get("shutdown") + "' to shutdown");
+                }
+            }
+        }).start();
 
     }
 

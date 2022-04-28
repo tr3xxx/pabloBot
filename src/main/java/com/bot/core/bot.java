@@ -2,6 +2,7 @@ package com.bot.core;
 
 import com.bot.commands.core.CommandLoad;
 import com.bot.commands.core.CommandManager;
+import com.bot.commands.prefix.setPrefix;
 import com.bot.commands.voice.voicehub.setVoicehub;
 import com.bot.core.sql.SQLiteDataSource;
 import com.bot.events.GuildJoin;
@@ -18,25 +19,19 @@ import java.util.Date;
 
 
 public class bot {
-    public static JDA jda;
     public static void main(String[] args) throws LoginException, IOException, SQLException {
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyyMMdd_HHmmss");
-        new log("./logs/"+"log_"+ formatter.format(new Date(System.currentTimeMillis())) +".log");
 
+        new log("./logs/"+"log_"+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date(System.currentTimeMillis())) +".log");
         SQLiteDataSource.getConnection();
-        try {
-            jda = JDABuilder.createDefault(config.get("token"))
-                    .addEventListeners(new ReadyListener())
-                    .addEventListeners(new setVoicehub.ButtonClick())
-                    .addEventListeners(new VoiceHub())
-                    .addEventListeners(new GuildJoin())
-                    .build();
 
+        try {
+            JDA jda = JDABuilder.createDefault(config.get("token")).build();
+
+            new EventListenersLoad().load(jda);
             new CommandManager().load(jda);
             new CommandLoad(jda);
+            new console(jda);
             new com.bot.events.Activity(jda);
-            new console(jda); // hier 'drunter' keine obj erstellen, da console --> == while(true) <fix: thread()...>
-
 
 
         } catch (LoginException e) {

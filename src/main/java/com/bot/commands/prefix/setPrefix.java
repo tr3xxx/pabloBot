@@ -1,4 +1,4 @@
-package com.bot.commands.settings;
+package com.bot.commands.prefix;
 
 import com.bot.commands.core.Command;
 import com.bot.core.config;
@@ -25,7 +25,6 @@ public class setPrefix extends Command {
 
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
-        System.out.println(args[0]);
         if (event.getChannelType().isGuild()) {
             if (Objects.requireNonNull(event.getMember()).hasPermission(Permission.MANAGE_SERVER)) {
                 if (args.length == 2) {
@@ -106,9 +105,9 @@ public class setPrefix extends Command {
             EmbedBuilder e = new EmbedBuilder();
             e.setColor(Color.red);
             e.setTitle("Something went wrong...", null);
-            e.setDescription("Voicehubs can not be set through DM's :( " +
+            e.setDescription("You can't get the Prefix through a DM :( " +
                     "\n" +
-                    "Please use a Server-TextChannel to set a Voicehub");
+                    "Please use a Server-TextChannel to get the Servers-Prefix");
             e.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(e.build()).queue();
         }
@@ -117,8 +116,8 @@ public class setPrefix extends Command {
 
     private static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> yes_noBT() {
         java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
-        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.success("help_yes", "Yes"));
-        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("help_no", "No"));
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.success("help_yesPrefix", "Yes"));
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("help_noPrefix", "No"));
 
         return buttons;
     }
@@ -128,10 +127,10 @@ public class setPrefix extends Command {
     public static class ButtonClick extends ListenerAdapter {
 
         public void onButtonInteraction(ButtonInteractionEvent e) {
-            e.deferEdit().queue();
+            //e.deferEdit().queue();
 
             switch (Objects.requireNonNull(e.getButton().getId())) {
-                case "help_yes" -> {
+                case "help_yesPrefix" -> {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.green);
                     eb.setTitle("How to set a Prefix", null);
@@ -143,7 +142,7 @@ public class setPrefix extends Command {
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue();
                 }
-                case "help_no" -> e.getMessage().delete().queue();
+                case "help_noPrefix" -> e.getMessage().delete().queue();
                 default -> {
                 }
             }

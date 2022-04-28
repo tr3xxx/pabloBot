@@ -1,4 +1,4 @@
-package com.bot.commands.settings;
+package com.bot.commands.prefix;
 
 import com.bot.commands.core.Command;
 import com.bot.core.config;

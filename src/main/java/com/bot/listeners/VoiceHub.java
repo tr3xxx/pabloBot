@@ -16,11 +16,13 @@ public class VoiceHub extends ListenerAdapter {
 
     private boolean isVoiceHub(long id) throws SQLException {
         try (final Connection connection = SQLiteDataSource.getConnection();
-             final PreparedStatement preparedStatement = connection.prepareStatement("SELECT voicehubid FROM voicehub WHERE voicehubid = ?")) {
+             final PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT voicehubid FROM voicehub WHERE voicehubid = ?")) {
             preparedStatement.setLong(1, id);
 
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
+
                     return true;
                 }
             }
@@ -30,13 +32,22 @@ public class VoiceHub extends ListenerAdapter {
         return false;
     }
 
+    private void setValidCategory(long cat_id,long ch_id)throws SQLException {
+        try (final Connection connection = SQLiteDataSource.getConnection();
+             final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE voicehub SET categoryid = ? WHERE voicehubid = ?")) {
+            preparedStatement.setLong(1, cat_id);
+            preparedStatement.setLong(2, ch_id);
+        }
+    }
+
     private boolean isValidCategory(long id) throws SQLException{
         try (final Connection connection = SQLiteDataSource.getConnection();
              final PreparedStatement preparedStatement = connection.prepareStatement("SELECT categoryid FROM voicehub WHERE categoryid = ?")) {
             preparedStatement.setLong(1, id);
-
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
+                System.out.println(resultSet.toString());
                 if (resultSet.next()) {
+
                     return true;
                 }
             }
@@ -67,12 +78,19 @@ public class VoiceHub extends ListenerAdapter {
                         .setParent(Objects.requireNonNull(e.getGuild().getVoiceChannelById(e.getChannelJoined().getId())).getParentCategory())
                         .setBitrate(e.getGuild().getMaxBitrate())
                         .syncPermissionOverrides()
-                        .queue(voiceChannel ->
-                                guild.moveVoiceMember(e.getMember(), guild.getVoiceChannelById(voiceChannel.getIdLong())).queue());
-                                log.logger.info("VoiceChannel got created through an Voicehub ("+
-                                        e.getGuild().getName()+","+
-                                        e.getMember().getUser().getAsTag()+
-                                        ")");
+                        .queue(voiceChannel -> {
+                                    guild.moveVoiceMember(e.getMember(),
+                                            guild.getVoiceChannelById(voiceChannel.getIdLong())).queue();
+                                    log.logger.info("VoiceChannel got created through an Voicehub ("+
+                                            e.getGuild().getName()+","+
+                                            e.getMember().getUser().getAsTag()+
+                                            ")");
+                                    try {
+                                        setValidCategory(voiceChannel.getParentCategoryIdLong(),voiceChannel.getIdLong());
+                                    } catch (SQLException ex) {
+                                        log.logger.warning(ex.toString());
+                                    }
+                                });
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
