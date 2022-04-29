@@ -1,0 +1,3 @@
+[2022-04-29 22:52:24] [INFORMATION] Start to log 
+[2022-04-29 22:52:25] [INFORMATION] API is ready 
+[2022-04-29 22:52:35] [WARNUNG] java.lang.NumberFormatException: For input string: "[Ljava.lang.String;@1505fe19" 

@@ -1,6 +1,7 @@
 package com.bot.core;
 
 import com.bot.commands.prefix.setPrefix;
+import com.bot.commands.voice.voicehub.setGeneratedNames;
 import com.bot.commands.voice.voicehub.setVoicehub;
 import com.bot.events.GuildJoin;
 import com.bot.listeners.ReadyListener;
@@ -15,6 +16,7 @@ public class EventListenersLoad {
                 jda.addEventListener(new setPrefix.ButtonClick());
                 jda.addEventListener(new VoiceHub());
                 jda.addEventListener(new GuildJoin());
+                jda.addEventListener(new setGeneratedNames.MakeSelection());
 
     }
 }

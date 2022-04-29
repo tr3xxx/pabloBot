@@ -7,7 +7,6 @@ import com.bot.commands.basic.help.helpfun.helpAutomat;
 import com.bot.commands.basic.help.helpfun.helpFun;
 import com.bot.commands.basic.testCommand;
 import com.bot.commands.fun.automatCommand;
-import com.bot.commands.games.Blackjack;
 import com.bot.commands.prefix.deletePrefix;
 import com.bot.commands.prefix.getPrefix;
 import com.bot.commands.prefix.setPrefix;
@@ -27,6 +26,5 @@ public class CommandLoad {
         CommandManager.addCommand(new helpVoicehub());
         CommandManager.addCommand(new helpFun());
         CommandManager.addCommand(new helpAutomat());
-        CommandManager.addCommand(new Blackjack());
     }
 }
