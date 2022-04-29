@@ -33,7 +33,7 @@ public class getPrefix extends Command {
                         prefix = resultSet.getString("prefix");
 
                         EmbedBuilder e = new EmbedBuilder();
-                        e.setColor(Color.green);
+                        e.setColor(Color.decode(config.get("color")));
                         e.setTitle("Prefix on this server is'" + prefix + "'", null);
                         e.setDescription("You will always be able to call " + config.get("prefix") + "deletePrefix to" +
                                 " reset the Prefix to " + config.get("prefix"));

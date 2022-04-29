@@ -36,7 +36,7 @@ public class setPrefix extends Command {
                                 e.setTitle("Something went wrong...", null);
                                 e.setDescription("Prefix contains an illegal character :( " +
                                         "\n \n" +
-                                        "Please try another one/");
+                                        "Please try another one");
                                 e.setFooter("presented by " + config.get("bot_name"));
                                 event.getChannel().sendMessageEmbeds(e.build()).queue();
                                 return false;
@@ -132,12 +132,12 @@ public class setPrefix extends Command {
             switch (Objects.requireNonNull(e.getButton().getId())) {
                 case "help_yesPrefix" -> {
                     EmbedBuilder eb = new EmbedBuilder();
-                    eb.setColor(Color.green);
+                    eb.setColor(Color.decode(config.get("color")));
                     eb.setTitle("How to set a Prefix", null);
                     eb.setDescription("To set a Prefix you need to execute: \n" +
-                            "'" + config.get("prefix") + "setPrefix ABC' " +
+                            "'" + config.get("prefix") + "setPrefix _character_' " +
                             "\n \n" +
-                            "Replace the 'ABC' with whatever you wish to be your new Prefix"
+                            "Replace the _character_ with whatever you wish to be your new Prefix"
                     );
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue();

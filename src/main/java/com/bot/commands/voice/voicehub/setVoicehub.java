@@ -128,7 +128,7 @@ public class setVoicehub extends Command {
             switch (Objects.requireNonNull(e.getButton().getId())) {
                 case "help_yes" -> {
                     EmbedBuilder eb = new EmbedBuilder();
-                    eb.setColor(Color.green);
+                    eb.setColor(Color.decode(config.get("color")));
                     eb.setTitle("How to set a VoiceHub", null);
                     eb.setDescription("To set a VoiceHub you need to execute: \n" +
                             "'" + config.get("prefix") + "setVoicehub <#channelid>' " +
