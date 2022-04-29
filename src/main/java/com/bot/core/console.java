@@ -21,7 +21,6 @@ public class console {
                 String shutdown = sc.nextLine();
                 if (shutdown.equalsIgnoreCase(config.get("shutdown"))) {
                     jda.getPresence().setStatus(OnlineStatus.OFFLINE);
-                    SQLite.disconnect();
                     log.logger.info("Bot Shutdown");
                     jda.shutdown();
                     System.exit(0);

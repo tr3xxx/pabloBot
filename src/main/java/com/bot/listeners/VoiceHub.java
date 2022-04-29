@@ -1,5 +1,6 @@
 package com.bot.listeners;
 
+import com.bot.commands.voice.voicehub.setGeneratedNames;
 import com.bot.core.sql.SQLiteDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.entities.*;
@@ -13,6 +14,7 @@ import java.util.Objects;
 
 
 public class VoiceHub extends ListenerAdapter {
+    String name;
 
     private boolean isVoiceHub(long id) throws SQLException {
         try (final Connection connection = SQLiteDataSource.getConnection();
@@ -37,6 +39,7 @@ public class VoiceHub extends ListenerAdapter {
              final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE voicehub SET categoryid = ? WHERE voicehubid = ?")) {
             preparedStatement.setLong(1, cat_id);
             preparedStatement.setLong(2, ch_id);
+            preparedStatement.executeUpdate();
         }
     }
 
@@ -45,10 +48,8 @@ public class VoiceHub extends ListenerAdapter {
              final PreparedStatement preparedStatement = connection.prepareStatement("SELECT categoryid FROM voicehub WHERE categoryid = ?")) {
             preparedStatement.setLong(1, id);
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
-                System.out.println(resultSet.toString());
                 if (resultSet.next()) {
-
-                    return true;
+                    return resultSet.getLong("categoryid") == id;
                 }
             }
         } catch (SQLDataException e) {
@@ -56,7 +57,25 @@ public class VoiceHub extends ListenerAdapter {
         }
         return false;
 
+
     }
+    private boolean getName(long id){
+        try (final Connection connection = SQLiteDataSource.getConnection();
+             final PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT name FROM voicehub WHERE voicehubid = ?")) {
+            preparedStatement.setLong(1, id);
+            try (final ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    this.name = resultSet.getString("name");
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            log.logger.warning(e.toString());
+        }
+        return false;
+    }
+
 
     public void onGuildVoiceJoin(GuildVoiceJoinEvent e) {
 
@@ -66,31 +85,37 @@ public class VoiceHub extends ListenerAdapter {
                 Guild guild = e.getGuild();
 
                 List<GuildChannel> cat = Objects.requireNonNull(Objects.requireNonNull(e.getGuild().getVoiceChannelById(e.getChannelJoined().getId())).getParentCategory()).getChannels();
-                String name = "Voice #" + cat.size();
-
-                for (GuildChannel ch : cat) {
-                    if (ch.getName().equals(name)) {
-                        name = "Voice #" + cat.size() + 1;
+                if(getName(e.getChannelJoined().getIdLong())){
+                    int index = cat.size();
+                    name = name.replace("{index}",String.valueOf(index));
+                    for (GuildChannel ch : cat) {
+                        if (ch.getName().equals(name)) {
+                            name = name.replace("{index}",String.valueOf(index+1));
+                        }
                     }
                 }
+                else{
+                    this.name = "das sollte nicht so sein";
+                }
+
                 guild.createVoiceChannel(name)
                         .setUserlimit(69)
                         .setParent(Objects.requireNonNull(e.getGuild().getVoiceChannelById(e.getChannelJoined().getId())).getParentCategory())
                         .setBitrate(e.getGuild().getMaxBitrate())
                         .syncPermissionOverrides()
                         .queue(voiceChannel -> {
-                                    guild.moveVoiceMember(e.getMember(),
-                                            guild.getVoiceChannelById(voiceChannel.getIdLong())).queue();
-                                    log.logger.info("VoiceChannel got created through an Voicehub ("+
-                                            e.getGuild().getName()+","+
-                                            e.getMember().getUser().getAsTag()+
-                                            ")");
-                                    try {
-                                        setValidCategory(voiceChannel.getParentCategoryIdLong(),voiceChannel.getIdLong());
-                                    } catch (SQLException ex) {
-                                        log.logger.warning(ex.toString());
-                                    }
-                                });
+                            guild.moveVoiceMember(e.getMember(),
+                                    guild.getVoiceChannelById(voiceChannel.getIdLong())).queue();
+                            log.logger.info("VoiceChannel got created through an Voicehub ("+
+                                    e.getGuild().getName()+","+
+                                    e.getMember().getUser().getAsTag()+
+                                    ")");
+                            try {
+                                setValidCategory(voiceChannel.getParentCategoryIdLong(),e.getChannelJoined().getIdLong());
+                            } catch (SQLException ex) {
+                                log.logger.warning(ex.toString());
+                            }
+                        });
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -103,11 +128,11 @@ public class VoiceHub extends ListenerAdapter {
             assert channel != null;
             if (!isVoiceHub(channel.getIdLong())) {
                 try{
-                if(isValidCategory(channel.getParentCategoryIdLong())){
-                    if(channel.getMembers().size() == 0){
-                        channel.delete().queue();
-                        log.logger.info("Voice Channel got deleted ("+
-                                e.getGuild().getName()+")");
+                    if(isValidCategory(channel.getParentCategoryIdLong())){
+                        if(channel.getMembers().size() == 0){
+                            channel.delete().queue();
+                            log.logger.info("Voice Channel got deleted ("+
+                                    e.getGuild().getName()+")");
                         }
                     }
                 }
