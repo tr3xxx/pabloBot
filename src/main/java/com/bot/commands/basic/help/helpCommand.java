@@ -24,7 +24,7 @@ public class helpCommand extends Command {
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
 
 
-
+        log.logger.info("["+getClass().getName()+"] was executed by "+event.getAuthor().getAsTag()+" on '"+event.getGuild().getName()+"'");
 
 
         try (final Connection connection = SQLiteDataSource.getConnection();

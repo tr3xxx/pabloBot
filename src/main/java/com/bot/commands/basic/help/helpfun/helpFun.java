@@ -25,7 +25,7 @@ public class helpFun extends Command {
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
 
-
+        log.logger.info("["+getClass().getName()+"] was executed by "+event.getAuthor().getAsTag()+" on '"+event.getGuild().getName()+"'");
 
         try (final Connection connection = SQLiteDataSource.getConnection();
              final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {

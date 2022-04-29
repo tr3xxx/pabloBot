@@ -2,6 +2,7 @@ package com.bot.commands.basic.help.helpfun;
 
 import com.bot.commands.core.Command;
 import com.bot.core.config;
+import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -17,6 +18,7 @@ public class helpAutomat extends Command {
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
 
+        log.logger.info("["+getClass().getName()+"] was executed by "+event.getAuthor().getAsTag()+" on '"+event.getGuild().getName()+"'");
         EmbedBuilder eb = new EmbedBuilder();
         eb.setColor(Color.decode(config.get("color")));
         eb.setTitle("Why you even want to use this", null);
