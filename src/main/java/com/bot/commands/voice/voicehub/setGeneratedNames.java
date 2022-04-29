@@ -143,6 +143,11 @@ public static class MakeSelection extends ListenerAdapter {
     public void onButtonInteraction(ButtonInteractionEvent e) {
         //e.deferEdit().queue();
         this.event = e;
+        try {
+            getPrefix();
+        } catch (SQLException ex) {
+            log.logger.warning(e.toString());
+        }
 
         switch (Objects.requireNonNull(e.getButton().getId())) {
             case "help_yesNames" -> {
@@ -266,6 +271,7 @@ public static class MakeSelection extends ListenerAdapter {
             eb.setDescription("\n\n");
             eb.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(eb.build()).queue();
+            log.logger.info("A Voicehub-Name has been changed (Server:"+ Objects.requireNonNull(event.getGuild()).getName()+")");
 
 
         }
