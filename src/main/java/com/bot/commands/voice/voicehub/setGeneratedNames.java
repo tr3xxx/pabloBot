@@ -182,7 +182,7 @@ public static class MakeSelection extends ListenerAdapter {
     }
 
     public void casesMenu(SelectMenuInteraction event) throws SQLException {
-        if (event.getComponent().getId().equals("names")) {
+        if (Objects.equals(event.getComponent().getId(), "names")) {
             for (int i = 0; i < event.getValues().size(); i++) {
                 System.out.println(event.getValues().get(i));
                 switch (event.getValues().get(i)) {
