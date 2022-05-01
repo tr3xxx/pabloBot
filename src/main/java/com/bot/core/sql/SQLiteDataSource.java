@@ -41,9 +41,8 @@ public class SQLiteDataSource {
         ds = new HikariDataSource(config);
 
         try (final Statement statement = getConnection().createStatement()) {
-
-            statement.execute("CREATE TABLE IF NOT EXISTS voicehub (voicehubid INTEGER, categoryid INTEGER, guildid INTEGER,name STRING);");
-            statement.execute("CREATE TABLE IF NOT EXISTS prefix (prefix STRING, guildid INTEGER);");
+            statement.execute("CREATE TABLE IF NOT EXISTS voicehub (voicehubid INTEGER, categoryid INTEGER, guildid INTEGER,name STRING, userlimit INTEGER)");
+            statement.execute("CREATE TABLE IF NOT EXISTS prefix (prefix STRING, guildid INTEGER)");
             statement.execute("CREATE TABLE IF NOT EXISTS stats(namemember STRING,namebooster STRING,nameonline STRING, categoryid INTEGER, memberid INTEGER,onlineid INTEGER, boosterid INTEGER)");
         } catch (SQLException e) {
             e.printStackTrace();

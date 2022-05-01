@@ -3,6 +3,7 @@ package com.bot.core;
 import com.bot.commands.manage.stats.setStatsNames;
 import com.bot.commands.prefix.setPrefix;
 import com.bot.commands.voice.voicehub.setGeneratedNames;
+import com.bot.commands.voice.voicehub.setVoiceUserLimit;
 import com.bot.commands.voice.voicehub.setVoicehub;
 import com.bot.events.GuildJoinPrefix;
 import com.bot.listeners.ReadyListener;
@@ -19,6 +20,7 @@ public class EventListenersLoad {
                 jda.addEventListener(new GuildJoinPrefix());
                 jda.addEventListener(new setGeneratedNames.MakeSelection());
                 jda.addEventListener(new setStatsNames.ButtonClick());
+                jda.addEventListener(new setVoiceUserLimit.ButtonClick());
 
     }
 }

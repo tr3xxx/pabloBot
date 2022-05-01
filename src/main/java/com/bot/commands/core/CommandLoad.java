@@ -14,6 +14,7 @@ import com.bot.commands.prefix.deletePrefix;
 import com.bot.commands.prefix.getPrefix;
 import com.bot.commands.prefix.setPrefix;
 import com.bot.commands.voice.voicehub.setGeneratedNames;
+import com.bot.commands.voice.voicehub.setVoiceUserLimit;
 import com.bot.commands.voice.voicehub.setVoicehub;
 import net.dv8tion.jda.api.JDA;
 
@@ -34,5 +35,6 @@ public class CommandLoad {
         CommandManager.addCommand(new createStats());
         CommandManager.addCommand(new setStatsNames());
         CommandManager.addCommand(new setGeneratedNames());
+        CommandManager.addCommand(new setVoiceUserLimit());
     }
 }

@@ -6,72 +6,75 @@ import com.bot.core.sql.SQLiteDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.IPermissionHolder;
-import net.dv8tion.jda.api.entities.PermissionOverride;
-import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
-public class setVoicehub extends Command {
-    String[] ch_id;
-    long cat_id;
-    long guild_id;
-
+public class setVoiceUserLimit extends Command {
+    long channelid;
+    int userlimit;
     @Override
     public String call() {
-        return "setVoicehub";
+        return "setUserlimit";
     }
 
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
-
         if (event.getChannelType().isGuild()) {
             if (Objects.requireNonNull(event.getMember()).hasPermission(Permission.MANAGE_CHANNEL)) {
-                if (args.length == 2) {
+                if (args.length == 3) {
                     try {
                         String[] trimmed = args[1].trim().split("#");
-                        ch_id = trimmed[1].trim().split(">");
-                        cat_id = Objects.requireNonNull(event.getGuild().getVoiceChannelById(Long.parseLong(ch_id[0]))).getParentCategoryIdLong();
-                        guild_id = event.getGuild().getIdLong();
-
-
-
-
-                    } catch (Exception err) {
-                        log.logger.warning(err.toString());
+                        String[] ch_id = trimmed[1].trim().split(">");
+                        channelid = Long.parseLong(ch_id[0]);
+                        userlimit = Integer.parseInt(String.valueOf(args[2]));
+                    }catch (Exception e){
+                        EmbedBuilder eb = new EmbedBuilder();
+                        eb.setColor(Color.red);
+                        eb.setTitle("Something went wrong...", null);
+                        eb.setDescription("You did not run this command correctly :( " +
+                                "\n" +
+                                "Do you want to learn how to do it correctly?");
+                        eb.setFooter("presented by " + config.get("bot_name"));
+                        event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(yes_noBT()).queue();
                         return false;
                     }
-
-                    try (final Connection connection = SQLiteDataSource.getConnection();
-                         final PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO voicehub(voicehubid,categoryid,guildid,name,userlimit) VALUES(?,?,?,?,?)")) {
-                        insertStatement.setLong(1, Long.parseLong(ch_id[0]));
-                        insertStatement.setLong(2,cat_id);
-                        insertStatement.setLong(3,guild_id);
-                        insertStatement.setString(4,"Talk #{index}");
-                        insertStatement.setLong(5,69);
-                        insertStatement.execute();
-
-                        log.logger.info("New Voicehub has been set. (Server: " + event.getGuild().getName() + ", Channel: " + Objects.requireNonNull(event.getGuild().getGuildChannelById(Long.parseLong(ch_id[0]))).getName() + ")");
+                    if(isVoiceHub(channelid)) {
+                        try (final Connection connection = SQLiteDataSource.getConnection();
+                             final PreparedStatement insertStatement = connection.prepareStatement("UPDATE voicehub SET userlimit = ? WHERE voicehubid = ?")) {
+                            insertStatement.setLong(1, userlimit);
+                            insertStatement.setLong(2, channelid);
+                            insertStatement.executeUpdate();
+                        } catch (SQLException e) {
+                            log.logger.warning(e.toString());
+                            return false;
+                        }
+                        log.logger.info("New Voicehub-Userlimit has been set. (Server: " + event.getGuild().getName() + ", Voicehub: " + event.getGuild().getVoiceChannelById(channelid).getName()  + "Limit: " + userlimit + ")");
                         EmbedBuilder e = new EmbedBuilder();
                         e.setColor(Color.green);
-                        e.setTitle("Voicehub successfully set to '" + Objects.requireNonNull(event.getGuild().getGuildChannelById(Long.parseLong(ch_id[0]))).getName() + "'", null);
+                        e.setTitle("Voicehub-Limit successfully set to '" + userlimit + "'", null);
                         e.setDescription(" ");
                         e.setFooter("presented by " + config.get("bot_name"));
                         event.getChannel().sendMessageEmbeds(e.build()).queue();
-
-                    } catch (SQLException e) {
-                        log.logger.warning(e.toString());
+                    }else{
+                        EmbedBuilder eb = new EmbedBuilder();
+                        eb.setColor(Color.red);
+                        eb.setTitle("Something went wrong...", null);
+                        eb.setDescription("Tagged channel is no Voicehub :( " +
+                                "\n" +
+                                "Do you want to learn how to do it correctly?");
+                        eb.setFooter("presented by " + config.get("bot_name"));
+                        event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(yes_noBT()).queue();
+                        return false;
                     }
-                } else {
+                }
+                else {
                     EmbedBuilder e = new EmbedBuilder();
                     e.setColor(Color.red);
                     e.setTitle("Something went wrong...", null);
@@ -82,44 +85,55 @@ public class setVoicehub extends Command {
                     event.getChannel().sendMessageEmbeds(e.build()).setActionRow(yes_noBT()).queue();
 
                     return false;
-
                 }
-
-                return false;
-            } else {
+            }else {
                 EmbedBuilder e = new EmbedBuilder();
                 e.setColor(Color.red);
                 e.setTitle("Something went wrong...", null);
                 e.setDescription("You don't have enough permissions :( " +
                         "\n" +
-                        "In order to be able to create Voicehubs, you need the permission to manage channels on this " +
+                        "In order to be able to edit Voicehubs, you need the permission to manage channels on this " +
                         "Server");
                 e.setFooter("presented by " + config.get("bot_name"));
                 event.getChannel().sendMessageEmbeds(e.build()).queue();
             }
 
-
-            return false;
         }else {
             EmbedBuilder e = new EmbedBuilder();
             e.setColor(Color.red);
             e.setTitle("Something went wrong...", null);
             e.setDescription("Voicehubs can not be set through DM's :( " +
                     "\n" +
-                    "Please use a Server-TextChannel to set a Voicehub");
+                    "Please use a Server-TextChannel to edit a Voicehub");
             e.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(e.build()).queue();
         }
         return false;
     }
+    private static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> yes_noBT () {
+        java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.success("help_yesUserlimit", "Yes"));
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("help_noUserlimit", "No"));
 
-        private static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> yes_noBT () {
-            java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
-            buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.success("help_yes", "Yes"));
-            buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("help_no", "No"));
+        return buttons;
+    }
+    private boolean isVoiceHub(long id) throws SQLException {
+        try (final Connection connection = SQLiteDataSource.getConnection();
+             final PreparedStatement preparedStatement =
+                     connection.prepareStatement("SELECT voicehubid FROM voicehub WHERE voicehubid = ?")) {
+            preparedStatement.setLong(1, id);
 
-            return buttons;
+            try (final ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+
+                    return true;
+                }
+            }
+        } catch (SQLDataException e) {
+            log.logger.warning(e.toString());
         }
+        return false;
+    }
 
 
     public static class ButtonClick extends ListenerAdapter {
@@ -135,19 +149,19 @@ public class setVoicehub extends Command {
                 log.logger.warning(ex.toString());
             }
             switch (Objects.requireNonNull(e.getButton().getId())) {
-                case "help_yes" -> {
+                case "help_yesUserlimit" -> {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.decode(config.get("color")));
                     eb.setTitle("How to set a VoiceHub", null);
-                    eb.setDescription("To set a VoiceHub you need to execute: \n" +
-                            "'" + prefix + "setVoicehub <#channelid>' " +
+                    eb.setDescription("To set a Userlimit for created Voice-Channels you need to execute: \n" +
+                            "'" + prefix + "setUserlimit <#channelid> 'userlimit'' " +
                             "\n \n" +
-                            "Replace the 'channelid' with the ID of the desired channel"
+                            "Replace 'channelid' with the ID of the desired channel and 'userlimit with your wished userlimit'"
                     );
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(more_helpBT()).queue();
                 }
-                case "help_no" -> e.getMessage().delete().queue();
+                case "help_noUserlimit" -> e.getMessage().delete().queue();
                 default -> {
                 }
             }
@@ -180,8 +194,6 @@ public class setVoicehub extends Command {
             }
 
         }
+
     }
-
-
 }
-

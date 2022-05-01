@@ -1,0 +1,3 @@
+[2022-05-01 19:30:02] [INFORMATION] Start to log 
+[2022-05-01 19:30:03] [INFORMATION] API is ready 
+[2022-05-01 19:30:08] [WARNUNG] org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "limit": syntax error) 
