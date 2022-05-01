@@ -1,0 +1,3 @@
+[2022-04-30 23:53:57] [INFORMATION] Start to log 
+[2022-04-30 23:53:59] [WARNUNG] java.sql.SQLException: no such column: 'nameonline' 
+[2022-04-30 23:53:59] [INFORMATION] API is ready 

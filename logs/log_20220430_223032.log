@@ -1,0 +1,5 @@
+[2022-04-30 22:30:32] [INFORMATION] Start to log 
+[2022-04-30 22:30:34] [WARNUNG] java.sql.SQLException: no such column: 'categoryid' 
+[2022-04-30 22:30:34] [INFORMATION] API is ready 
+[2022-04-30 22:31:34] [WARNUNG] java.sql.SQLException: no such column: 'categoryid' 
+[2022-04-30 22:32:34] [WARNUNG] java.sql.SQLException: no such column: 'categoryid' 

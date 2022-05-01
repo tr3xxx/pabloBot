@@ -16,6 +16,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -51,11 +52,11 @@ public class setVoicehub extends Command {
                     }
 
                     try (final Connection connection = SQLiteDataSource.getConnection();
-                         final PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO voicehub(voicehubid,categoryid,guildid) VALUES(?,?,?)")) {
-
+                         final PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO voicehub(voicehubid,categoryid,guildid,name) VALUES(?,?,?,?)")) {
                         insertStatement.setLong(1, Long.parseLong(ch_id[0]));
                         insertStatement.setLong(2,cat_id);
                         insertStatement.setLong(3,guild_id);
+                        insertStatement.setString(4,"Talk #{index}");
                         insertStatement.execute();
 
                         log.logger.info("New Voicehub has been set. (Server: " + event.getGuild().getName() + ", Channel: " + Objects.requireNonNull(event.getGuild().getGuildChannelById(Long.parseLong(ch_id[0]))).getName() + ")");
@@ -121,17 +122,24 @@ public class setVoicehub extends Command {
 
 
     public static class ButtonClick extends ListenerAdapter {
+        ButtonInteractionEvent e;
+        String prefix;
 
         public void onButtonInteraction(ButtonInteractionEvent e) {
             e.deferEdit().queue();
-
+            this.e = e;
+            try {
+                getPrefix();
+            } catch (SQLException ex) {
+                log.logger.warning(ex.toString());
+            }
             switch (Objects.requireNonNull(e.getButton().getId())) {
                 case "help_yes" -> {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.decode(config.get("color")));
                     eb.setTitle("How to set a VoiceHub", null);
                     eb.setDescription("To set a VoiceHub you need to execute: \n" +
-                            "'" + config.get("prefix") + "setVoicehub <#channelid>' " +
+                            "'" + prefix + "setVoicehub <#channelid>' " +
                             "\n \n" +
                             "Replace the 'channelid' with the ID of the desired channel"
                     );
@@ -151,6 +159,25 @@ public class setVoicehub extends Command {
                     "How to get the Channel-ID"));
 
             return buttons;
+        }
+        public void getPrefix() throws SQLException{
+            String temp = null;
+
+            try (final Connection connection = SQLiteDataSource.getConnection();
+                 final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
+                preparedStatement.setLong(1, e.getGuild().getIdLong());
+                try(final ResultSet resultSet = preparedStatement.executeQuery()){
+                    if(resultSet.next()){
+                        //return resultSet.getString("prefix");
+                        temp = resultSet.getString("prefix");
+                        this.prefix = temp;
+
+                    }
+                }
+            } catch (SQLException e) {
+                log.logger.warning(e.toString());
+            }
+
         }
     }
 

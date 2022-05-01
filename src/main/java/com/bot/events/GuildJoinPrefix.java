@@ -3,16 +3,14 @@ package com.bot.events;
 import com.bot.core.config;
 import com.bot.core.sql.SQLiteDataSource;
 import com.bot.log.log;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class GuildJoin extends ListenerAdapter {
+public class GuildJoinPrefix extends ListenerAdapter {
 
     public void onGuildJoin(GuildJoinEvent event){
         action(event);

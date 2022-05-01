@@ -1,0 +1,4 @@
+[2022-04-30 22:32:48] [INFORMATION] Start to log 
+[2022-04-30 22:32:49] [WARNUNG] java.sql.SQLException: no such column: 'memberid' 
+[2022-04-30 22:32:50] [INFORMATION] API is ready 
+[2022-04-30 22:33:49] [WARNUNG] java.sql.SQLException: no such column: 'memberid' 

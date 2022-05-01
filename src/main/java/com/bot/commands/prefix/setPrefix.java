@@ -13,6 +13,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -125,17 +126,23 @@ public class setPrefix extends Command {
 
 
     public static class ButtonClick extends ListenerAdapter {
-
+        ButtonInteractionEvent e;
+        String prefix;
         public void onButtonInteraction(ButtonInteractionEvent e) {
             //e.deferEdit().queue();
-
+            this.e = e;
+            try {
+                getPrefix();
+            } catch (SQLException ex) {
+                log.logger.warning(ex.toString());
+            }
             switch (Objects.requireNonNull(e.getButton().getId())) {
                 case "help_yesPrefix" -> {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.decode(config.get("color")));
                     eb.setTitle("How to set a Prefix", null);
                     eb.setDescription("To set a Prefix you need to execute: \n" +
-                            "'" + config.get("prefix") + "setPrefix _character_' " +
+                            "'" + prefix + "setPrefix _character_' " +
                             "\n \n" +
                             "Replace the _character_ with whatever you wish to be your new Prefix"
                     );
@@ -145,6 +152,25 @@ public class setPrefix extends Command {
                 case "help_noPrefix" -> e.getMessage().delete().queue();
                 default -> {
                 }
+            }
+
+        }
+        public void getPrefix() throws SQLException{
+            String temp = null;
+
+            try (final Connection connection = SQLiteDataSource.getConnection();
+                 final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
+                preparedStatement.setLong(1, e.getGuild().getIdLong());
+                try(final ResultSet resultSet = preparedStatement.executeQuery()){
+                    if(resultSet.next()){
+                        //return resultSet.getString("prefix");
+                        temp = resultSet.getString("prefix");
+                        this.prefix = temp;
+
+                    }
+                }
+            } catch (SQLException e) {
+                log.logger.warning(e.toString());
             }
 
         }

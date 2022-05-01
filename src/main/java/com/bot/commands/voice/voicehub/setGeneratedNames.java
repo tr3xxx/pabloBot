@@ -141,7 +141,7 @@ public static class MakeSelection extends ListenerAdapter {
 
 
     public void onButtonInteraction(ButtonInteractionEvent e) {
-        //e.deferEdit().queue();
+        e.deferEdit().queue();
         this.event = e;
         try {
             getPrefix();
@@ -155,7 +155,7 @@ public static class MakeSelection extends ListenerAdapter {
                 eb.setColor(Color.decode(config.get("color")));
                 eb.setTitle("How to change Voicehub Names", null);
                 eb.setDescription("To change a Voicehub Name you need to execute: \n" +
-                        "'" + prefix + "setVoiceNames <#channelid>' " +
+                        "'" + prefix + "setVoiceNames <#channelid> " +
                         "\n \n" +
                         "Replace the 'channelid' with the ID of the desired channel");
                 eb.setFooter("presented by " + config.get("bot_name"));
@@ -189,7 +189,6 @@ public static class MakeSelection extends ListenerAdapter {
     public void casesMenu(SelectMenuInteraction event) throws SQLException {
         if (Objects.equals(event.getComponent().getId(), "names")) {
             for (int i = 0; i < event.getValues().size(); i++) {
-                System.out.println(event.getValues().get(i));
                 switch (event.getValues().get(i)) {
 
                     case "talki":
@@ -217,7 +216,6 @@ public static class MakeSelection extends ListenerAdapter {
                         break;
 
                     case "voicei":
-                        System.out.println(1);
                         try (final Connection connection = SQLiteDataSource.getConnection();
                              final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE voicehub SET name = ? WHERE voicehubid = ?")) {
                             preparedStatement.setString(1, "Voice #{index}");
