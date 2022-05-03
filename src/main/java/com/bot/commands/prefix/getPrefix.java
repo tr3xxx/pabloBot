@@ -39,6 +39,7 @@ public class getPrefix extends Command {
                                 " reset the Prefix to " + config.get("prefix"));
                         e.setFooter("presented by " + config.get("bot_name"));
                         event.getChannel().sendMessageEmbeds(e.build()).queue();
+                        return false;
 
                     }
                 }

@@ -37,6 +37,7 @@ public class bot {
                     .enableIntents(GatewayIntent.GUILD_MEMBERS)
                     .enableCache(CacheFlag.ONLINE_STATUS)
                     .enableCache(CacheFlag.ACTIVITY)
+                    .enableCache(CacheFlag.VOICE_STATE)
                     .setChunkingFilter(ChunkingFilter.ALL)
                     .setMemberCachePolicy(MemberCachePolicy.ALL)
                     .build();

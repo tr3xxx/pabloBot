@@ -25,14 +25,9 @@ public class updateStats {
         Timer timer = new Timer();
         timer.schedule( new TimerTask() {
             public void run() {
-                if(firstRun){
-                    firstRun = false;
-                }
-                else{
                     update();
-                }
             }
-        }, 0, 30000); // 30000 = 5min, < 2x Request in 10min would end in being rate limited
+        }, 0, 30000); // 30000 = 5min, more than 2x Request in 10min would end in being rate limited
     }
     public boolean update(){
         try (final Connection connection = SQLiteDataSource.getConnection();
