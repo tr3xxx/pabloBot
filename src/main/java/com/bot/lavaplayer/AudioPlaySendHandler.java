@@ -1,4 +1,4 @@
-package com.bot.commands.lavaplayer;
+package com.bot.lavaplayer;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.playback.MutableAudioFrame;

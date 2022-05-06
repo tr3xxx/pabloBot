@@ -1,18 +1,19 @@
 package com.bot.commands.music;
 
 import com.bot.commands.core.Command;
-import com.bot.commands.lavaplayer.PlayerManager;
+import com.bot.lavaplayer.PlayerManager;
 import com.bot.core.config;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
 
-import javax.print.URIException;
 import java.awt.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class play extends Command {
     @Override
@@ -23,14 +24,14 @@ public class play extends Command {
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
         if(!event.getMember().getVoiceState().inAudioChannel()){
-
-            EmbedBuilder e = new EmbedBuilder();
-            e.setColor(Color.red);
-            e.setTitle("You have to be in a VoiceChannel to do this", null);
-            e.setFooter("presented by " + config.get("bot_name"));
-            event.getChannel().sendMessageEmbeds(e.build()).queue();
+            EmbedBuilder eb= new EmbedBuilder();
+            eb.setColor(Color.red);
+            eb.setTitle("You have to be in a VoiceChannel to do this", null);
+            eb.setFooter("presented by " + config.get("bot_name"));
+            event.getChannel().sendMessageEmbeds(eb.build()).queue();
             return false;
         }
+
         if(!event.getGuild().getSelfMember().getVoiceState().inAudioChannel()) {
             final AudioManager audioManager = event.getGuild().getAudioManager();
             final VoiceChannel memberChannel = (VoiceChannel) event.getMember().getVoiceState().getChannel();
@@ -42,20 +43,21 @@ public class play extends Command {
         for (String arg : args) {
             link = arg + " ";
         }
-        if(!isUrl(link)){
+        String input = link;
+        if(!isURL(link)){
             link = "ytsearch:" + link + " audio";
         }
-        PlayerManager.getINSTANCE().loadAndPlay(event.getTextChannel(), link);
-
+        event.getMessage().delete().queue();
+        PlayerManager.getINSTANCE().loadAndPlay(event.getTextChannel(), link, input);
         return false;
     }
 
-    public boolean isUrl(String url){
-        try{
-            new URI(url);
+    public boolean isURL(String urlString) {
+        try {
+            URL url = new URL(urlString);
+            url.toURI();
             return true;
-        }
-        catch(URISyntaxException e){
+        } catch (Exception e) {
             return false;
         }
     }

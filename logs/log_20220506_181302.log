@@ -1,0 +1,3 @@
+[2022-05-06 18:13:02] [INFORMATION] Start to log 
+[2022-05-06 18:13:04] [INFORMATION] API is ready 
+[2022-05-06 18:13:27] [WARNUNG] java.lang.NullPointerException: Cannot invoke "com.sedmelluq.discord.lavaplayer.track.AudioTrack.getInfo()" because "track" is null 

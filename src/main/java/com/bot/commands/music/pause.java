@@ -15,10 +15,10 @@ import java.util.Objects;
 
 import static com.bot.lavaplayer.PlayerManager.*;
 
-public class stop extends Command {
+public class pause extends Command {
     @Override
     public String call() {
-        return "stop";
+        return "pause";
     }
 
     @Override
@@ -29,7 +29,7 @@ public class stop extends Command {
             eb.setTitle("You have to be in a VoiceChannel to do this", null);
             eb.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(eb.build()).queue();
-            return false;
+             return false;
         }
         else if(!Objects.requireNonNull(Objects.requireNonNull(event.getGuild()).getSelfMember().getVoiceState()).inAudioChannel() || !Objects.equals(event.getGuild().getSelfMember().getVoiceState().getChannel(), event.getMember().getVoiceState().getChannel())){
             EmbedBuilder eb= new EmbedBuilder();
@@ -43,23 +43,41 @@ public class stop extends Command {
         PlayerManager.getINSTANCE();
         final GuildMusicManager musicManager = getMusicManager(event.getGuild());
         final AudioManager audioManager = event.getGuild().getAudioManager();
-
-        musicManager.scheduler.audioPlayer.stopTrack();
-        musicManager.scheduler.queue.clear();
+        AudioTrack track = musicManager.audioPlayer.getPlayingTrack();
+        musicManager.scheduler.audioPlayer.setPaused(true);
         event.getMessage().delete().queue();
-        if(audioManager.isConnected()) {
-            audioManager.closeAudioConnection();
+        String title = track.getInfo().title;
+        String author = track.getInfo().author;
+        Boolean isStream = track.getInfo().isStream;
+        Long length = track.getDuration();
+
+        if(track.getSourceManager().getSourceName().equals("youtube")) {
+            String[] id = track.getInfo().uri.trim().split("=");
+            String thumb = "https://img.youtube.com/vi/<insert-youtube-video-id-here>/mqdefault.jpg".replace("<insert-youtube-video-id-here>",id[1]);
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setColor(Color.decode(config.get("color")));
+            eb.setTitle(":pause_button: **PAUSED**", null);
+            eb.setImage(thumb);
+            eb.setDescription("**"+title+"** \n("+(length/1000)/60+" min) \n by **"+author+"** \n\n "+track.getInfo().uri);
+            eb.setFooter("presented by " + config.get("bot_name"));
+
+            if(musicManager.scheduler.repeating){
+                event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(resumeORskipORstopLOOP()).queue();
+            }else{
+                event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(resumeORskipORstop()).queue();
+            }
         }
-        if( musicManager.scheduler.audioPlayer.isPaused()) {
-            musicManager.scheduler.audioPlayer.setPaused(false);
+        else{
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setColor(Color.decode(config.get("color")));
+            eb.setTitle(":pause_button: **PAUSED**", null);
+            eb.setDescription("**"+title+"** \n by **"+author+"** \n\n "+track.getInfo().uri);
+            eb.setFooter("presented by " + config.get("bot_name"));
+
+            event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(resumeORskipORstop()).queue();
         }
 
-        EmbedBuilder eb = new EmbedBuilder();
-        eb.setColor(Color.decode(config.get("color")));
-        eb.setTitle(":stop_button:   **MUSIK STOPPED**", null);
-        eb.setFooter("presented by " + config.get("bot_name"));
-        event.getChannel().sendMessageEmbeds(eb.build()).queue();
+
         return false;
-   }
-
+    }
 }

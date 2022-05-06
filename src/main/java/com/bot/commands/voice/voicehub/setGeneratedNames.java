@@ -141,7 +141,7 @@ public static class MakeSelection extends ListenerAdapter {
 
 
     public void onButtonInteraction(ButtonInteractionEvent e) {
-        e.deferEdit().queue();
+        //e.deferEdit().queue();
         this.event = e;
         try {
             getPrefix();

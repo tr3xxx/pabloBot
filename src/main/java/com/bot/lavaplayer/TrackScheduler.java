@@ -1,4 +1,4 @@
-package com.bot.commands.lavaplayer;
+package com.bot.lavaplayer;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
@@ -11,6 +11,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class TrackScheduler extends AudioEventAdapter {
     public final AudioPlayer audioPlayer;
     public final BlockingQueue<AudioTrack> queue;
+    public boolean repeating = false;
 
     public TrackScheduler(AudioPlayer audioPlayer) {
         this.audioPlayer = audioPlayer;
@@ -23,11 +24,19 @@ public class TrackScheduler extends AudioEventAdapter {
     }
 
     public void nextTrack(){
+        PlayerManager.nextInQueue((AudioTrack) this.queue.peek());
         this.audioPlayer.startTrack(this.queue.poll(), false);
+
+
     }
 
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason){
         if(endReason.mayStartNext){
+            if(this.repeating){
+                this.audioPlayer.startTrack(track.makeClone(), false);
+                PlayerManager.nextInQueue(track.makeClone());
+                return;
+            }
             nextTrack();
         }
     }
