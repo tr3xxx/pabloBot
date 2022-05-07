@@ -4,8 +4,10 @@ import com.bot.commands.core.Command;
 import com.bot.core.config;
 import com.bot.lavaplayer.GuildMusicManager;
 import com.bot.lavaplayer.PlayerManager;
+import com.bot.log.log;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
 
@@ -63,9 +65,45 @@ public class loop extends Command {
                 eb.setFooter("presented by " + config.get("bot_name"));
 
                 if (musicManager.scheduler.repeating) {
-                    event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(resumeORskipORstopLOOP()).queue();
+                    event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(resumeORskipORstopLOOP()).queue(message -> {
+                        message.getChannel().getHistory().retrievePast(30).queue(messages -> {
+                            messages.forEach(message1 -> {
+                                try {
+                                    if (!message1.getId().equals(message.getId())) {
+                                        System.out.println(message1.getId());
+                                        System.out.println(message.getId());
+                                        java.util.List<MessageEmbed> embeds = message1.getEmbeds();
+                                        embeds.forEach(messageEmbed -> {
+                                            if (messageEmbed.getDescription().contains(title)) {
+                                                message.delete().queue();
+                                            }
+                                        });
+                                    }
+                                } catch (Exception ignored) {
+                                }
+                            });
+                        });
+                    });
                 } else {
-                    event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(resumeORskipORstop()).queue();
+                    event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(resumeORskipORstop()).queue(message -> {
+                        message.getChannel().getHistory().retrievePast(30).queue(messages -> {
+                            messages.forEach(message1 -> {
+                                try {
+                                    if (!message1.getId().equals(message.getId())) {
+                                        System.out.println(message1.getId());
+                                        System.out.println(message.getId());
+                                        java.util.List<MessageEmbed> embeds = message1.getEmbeds();
+                                        embeds.forEach(messageEmbed -> {
+                                            if (messageEmbed.getDescription().contains(title)) {
+                                                message.delete().queue();
+                                            }
+                                        });
+                                    }
+                                } catch (Exception ignored) {
+                                }
+                            });
+                        });
+                    });
                 }
             } else {
                 EmbedBuilder eb = new EmbedBuilder();
@@ -75,12 +113,45 @@ public class loop extends Command {
                 eb.setFooter("presented by " + config.get("bot_name"));
 
                 if (musicManager.scheduler.repeating) {
-                    event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(resumeORskipORstopLOOP()).queue();
+                    event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(resumeORskipORstopLOOP()).queue(message -> {
+                        message.getChannel().getHistory().retrievePast(30).queue(messages -> {
+                            messages.forEach(message1 -> {
+                                try {
+                                    if (!message1.getId().equals(message.getId())) {
+                                        java.util.List<MessageEmbed> embeds = message1.getEmbeds();
+                                        embeds.forEach(messageEmbed -> {
+                                            if (messageEmbed.getDescription().contains(title)) {
+                                                message.delete().queue();
+                                            }
+                                        });
+                                    }
+                                } catch (Exception ignored) {
+                                }
+                            });
+                        });
+                    });
                 } else {
-                    event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(resumeORskipORstop()).queue();
+                    event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(resumeORskipORstop()).queue(message -> {
+                        message.getChannel().getHistory().retrievePast(30).queue(messages -> {
+                            messages.forEach(message1 -> {
+                                try {
+                                    if (!message1.getId().equals(message.getId())) {
+                                        java.util.List<MessageEmbed> embeds = message1.getEmbeds();
+                                        embeds.forEach(messageEmbed -> {
+                                            if (messageEmbed.getDescription().contains(title)) {
+                                                message.delete().queue();
+                                            }
+                                        });
+                                    }
+                                } catch (Exception ignored) {
+                                }
+                            });
+                        });
+                    });
                 }
             }
         }
+        log.logger.info("Started Loop for "+track.getInfo().uri+" on ("+event.getGuild().getName()+")");
         return false;
     }
 }

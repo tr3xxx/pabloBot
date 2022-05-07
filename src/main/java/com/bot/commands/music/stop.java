@@ -4,6 +4,7 @@ import com.bot.commands.core.Command;
 import com.bot.core.config;
 import com.bot.lavaplayer.GuildMusicManager;
 import com.bot.lavaplayer.PlayerManager;
+import com.bot.log.log;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -59,6 +60,7 @@ public class stop extends Command {
         eb.setTitle(":stop_button:   **MUSIK STOPPED**", null);
         eb.setFooter("presented by " + config.get("bot_name"));
         event.getChannel().sendMessageEmbeds(eb.build()).queue();
+        log.logger.info("Stopping Song on ("+event.getGuild().getName()+")");
         return false;
    }
 

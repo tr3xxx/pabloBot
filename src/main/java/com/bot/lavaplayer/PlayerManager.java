@@ -20,6 +20,7 @@ import net.dv8tion.jda.api.interactions.components.LayoutComponent;
 import net.dv8tion.jda.api.managers.AudioManager;
 import org.apache.commons.collections4.map.HashedMap;
 
+import javax.sound.sampled.AudioSystem;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,8 +34,8 @@ import java.util.concurrent.TimeUnit;
 public class PlayerManager {
 
     private static PlayerManager INSTANCE;
-    private static Map<Long, GuildMusicManager> musicManagers = null;
-    private static AudioPlayerManager audioPlayerManager = null;
+    private static Map<Long, GuildMusicManager> musicManagers;
+    private static AudioPlayerManager audioPlayerManager;
     private static final LinkedBlockingQueue<TextChannel> channels = new LinkedBlockingQueue<TextChannel>();;
 
     public PlayerManager() {
@@ -101,7 +102,7 @@ public class PlayerManager {
         final AudioManager audioManager = textChannel.getGuild().getAudioManager();
         AudioPlayer audioPlayer = musicManager.audioPlayer;
 
-        audioPlayerManager.loadItemOrdered(musicManager, trackURL, new AudioLoadResultHandler() {
+        audioPlayerManager.loadItemOrdered(musicManager, trackURL,new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack audioTrack) {
                 musicManager.scheduler.queue(audioTrack);
@@ -109,7 +110,6 @@ public class PlayerManager {
                 musicManager.scheduler.queue(audioTrack);
                 String title = audioTrack.getInfo().title;
                 String author = audioTrack.getInfo().author;
-                Boolean isStream = audioTrack.getInfo().isStream;
                 long length = audioTrack.getDuration();
                 if (musicManager.scheduler.audioPlayer.getPlayingTrack() != audioTrack) {
                     channels.add(textChannel);
@@ -170,7 +170,9 @@ public class PlayerManager {
             public void playlistLoaded(AudioPlaylist audioPlaylist) {
                 final List<AudioTrack> tracks = audioPlaylist.getTracks();
                 if(!tracks.isEmpty()){
-                    AudioTrack track = tracks.get(0);
+                    Random rand = new Random();
+
+                    AudioTrack track = tracks.get(rand.nextInt(0,10));
                     musicManager.scheduler.queue(track);
                     String title = track.getInfo().title;
                     String author = track.getInfo().author;
@@ -180,7 +182,7 @@ public class PlayerManager {
                         channels.add(textChannel);
                         if(track.getSourceManager().getSourceName().equals("youtube")) {
                             String[] id = track.getInfo().uri.trim().split("=");
-                            String thumb = "https://img.youtube.com/vi/<insert-youtube-video-id-here>/mqdefault.jpg".replace("<insert-youtube-video-id-here>",id[1]);
+                            String thumb = "https://img.youtube.com/vi/<vidid>/mqdefault.jpg".replace("<vidid>",id[1]);
                             EmbedBuilder e = new EmbedBuilder();
                             e.setColor(Color.decode(config.get("color")));
                             e.setTitle(":white_check_mark:  **QUEUED**", null);
@@ -250,7 +252,7 @@ public class PlayerManager {
                     }
                 }
             }
-            @Override
+           @Override
             public void noMatches() {
 
                 EmbedBuilder e = new EmbedBuilder();
@@ -259,12 +261,9 @@ public class PlayerManager {
                 e.setDescription(input + " was not found");
                 e.setFooter("presented by " + config.get("bot_name"));
 
-                textChannel.sendMessageEmbeds(e.build()).queue(m -> m.delete().queueAfter(120, TimeUnit.SECONDS));
-                log.logger.info("No matches ("+input+") on ("+textChannel.getGuild().getName()+")");
+                textChannel.sendMessageEmbeds(e.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                log.logger.info("No matches ("+input+") ("+trackURL+") on ("+textChannel.getGuild().getName()+")");
 
-                if (audioManager.isConnected()) {
-                    audioManager.closeAudioConnection();
-                }
             }
 
             @Override
@@ -293,6 +292,7 @@ public class PlayerManager {
                 if(audioManager.isConnected()) {
                     audioManager.closeAudioConnection();
                 }
+                System.out.println(e.toString());
 
 
             }

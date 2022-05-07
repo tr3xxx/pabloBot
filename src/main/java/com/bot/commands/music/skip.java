@@ -62,6 +62,7 @@ public class skip extends Command {
             return false;
         }
         event.getMessage().delete().queue();
+        log.logger.info("Skipped Song on ("+event.getGuild().getName()+")");
         return false;
 
     }

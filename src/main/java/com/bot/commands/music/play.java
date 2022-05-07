@@ -41,14 +41,18 @@ public class play extends Command {
         String link = null;
 
         for (String arg : args) {
-            link = arg + " ";
+            link = arg+" " ;
         }
+        StringBuilder sb = new StringBuilder(link);
+        sb.deleteCharAt(link.length() - 1);
+        link = sb.toString();
         String input = link;
         if(!isURL(link)){
             link = "ytsearch:" + link + " audio";
         }
         event.getMessage().delete().queue();
-        PlayerManager.getINSTANCE().loadAndPlay(event.getTextChannel(), link, input);
+
+        PlayerManager.getINSTANCE().loadAndPlay(event.getTextChannel(), link,input);
         return false;
     }
 
@@ -61,4 +65,5 @@ public class play extends Command {
             return false;
         }
     }
+
 }
