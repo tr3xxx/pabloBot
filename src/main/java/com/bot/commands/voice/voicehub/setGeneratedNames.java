@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
+
 public class setGeneratedNames extends Command{
     public static long id = 0;
     @Override
@@ -161,7 +162,11 @@ public static class MakeSelection extends ListenerAdapter {
                 eb.setFooter("presented by " + config.get("bot_name"));
                 e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(more_helpBT()).queue();
             }
-            case "help_noNames" -> e.getMessage().delete().queue();
+            case "help_noNames" -> {
+                try{
+                    e.getMessage().delete().queue();
+                }catch(NullPointerException ignored){}
+            }
             default -> {
             }
         }

@@ -1,3 +1,0 @@
-[2022-05-06 18:04:48] [INFORMATION] Start to log 
-[2022-05-06 18:04:50] [INFORMATION] API is ready 
-[2022-05-06 18:05:19] [WARNUNG] java.lang.NullPointerException: Cannot invoke "net.dv8tion.jda.api.entities.TextChannel.getGuild()" because "textChannel" is null 

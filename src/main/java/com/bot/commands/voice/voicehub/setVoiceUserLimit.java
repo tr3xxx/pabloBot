@@ -161,7 +161,11 @@ public class setVoiceUserLimit extends Command {
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(more_helpBT()).queue();
                 }
-                case "help_noUserlimit" -> e.getMessage().delete().queue();
+                case "help_noUserlimit" -> {
+                    try{
+                        e.getMessage().delete().queue();
+                    }catch(NullPointerException ignored){}
+                }
                 default -> {
                 }
             }

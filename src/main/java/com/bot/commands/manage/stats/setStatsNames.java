@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.awt.*;
@@ -250,7 +251,13 @@ public class setStatsNames extends Command {
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(more_helpBT()).queue();
                 }
-                case "help_noCustomStatNames" -> e.getMessage().delete().queue();
+                case "help_noCustomStatNames" -> {
+                    try{
+                        e.getMessage().delete().queue();
+                    }
+                    catch(NullPointerException ignored){}
+                }
+
                 default -> {
                 }
             }

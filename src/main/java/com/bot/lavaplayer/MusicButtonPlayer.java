@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.bot.lavaplayer.PlayerManager.*;
 
+
 public class MusicButtonPlayer extends ListenerAdapter {
     ButtonInteractionEvent e;
     String prefix;
@@ -28,7 +29,12 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     eb.setColor(Color.red);
                     eb.setTitle("You have to be in a VoiceChannel to do this", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
-                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                        try{
+                            m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        }catch(NullPointerException ignored){}
+
+                    });
                     return;
                 }
                 else if(!Objects.requireNonNull(Objects.requireNonNull(e.getGuild()).getSelfMember().getVoiceState()).inAudioChannel() || !Objects.equals(e.getGuild().getSelfMember().getVoiceState().getChannel(), e.getMember().getVoiceState().getChannel())){
@@ -36,7 +42,12 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     eb.setColor(Color.red);
                     eb.setTitle("I have to be in your VoiceChannel to do this", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
-                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                        try{
+                            m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        }catch(NullPointerException ignored){}
+
+                    });
                     return;
                 }
 
@@ -45,7 +56,9 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 final AudioManager audioManager = e.getGuild().getAudioManager();
                 AudioTrack track = musicManager.audioPlayer.getPlayingTrack();
                 musicManager.scheduler.audioPlayer.setPaused(true);
-                e.getMessage().delete().queue();
+                try{
+                    e.getMessage().delete().queue();
+                }catch(NullPointerException ignored){}
                 String title = track.getInfo().title;
                 String author = track.getInfo().author;
                 Boolean isStream = track.getInfo().isStream;
@@ -89,7 +102,12 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     eb.setColor(Color.red);
                     eb.setTitle("You have to be in a VoiceChannel to do this", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
-                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                        try{
+                            m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        }catch(NullPointerException ignored){}
+
+                    });
                     return;
                 }
                 else if(!Objects.requireNonNull(Objects.requireNonNull(e.getGuild()).getSelfMember().getVoiceState()).inAudioChannel() || !Objects.equals(e.getGuild().getSelfMember().getVoiceState().getChannel(), e.getMember().getVoiceState().getChannel())){
@@ -97,7 +115,12 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     eb.setColor(Color.red);
                     eb.setTitle("I have to be in your VoiceChannel to do this", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
-                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                        try{
+                            m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        }catch(NullPointerException ignored){}
+
+                    });
                     return;
                 }
 
@@ -107,7 +130,9 @@ public class MusicButtonPlayer extends ListenerAdapter {
 
                 musicManager.scheduler.audioPlayer.stopTrack();
                 musicManager.scheduler.queue.clear();
-                e.getMessage().delete().queue();
+                try{
+                    e.getMessage().delete().queue();
+                }catch(NullPointerException ignored){}
                 if(audioManager.isConnected()) {
                     audioManager.closeAudioConnection();
                 }
@@ -119,7 +144,12 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 eb.setColor(Color.decode(config.get("color")));
                 eb.setTitle(":stop_button:   **MUSIK STOPPED**", null);
                 eb.setFooter("presented by " + config.get("bot_name"));
-                e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                    try{
+                        m.delete().queueAfter(20, TimeUnit.SECONDS);
+                    }catch(NullPointerException ignored){}
+
+                });
                 log.logger.info("Stopping Song on ("+e.getGuild().getName()+")");
             }
             case "skip" -> {
@@ -129,7 +159,15 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     eb.setColor(Color.red);
                     eb.setTitle("You have to be in a VoiceChannel to do this", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
-                    e.getMessage().delete().queue(); e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                    try{
+                        e.getMessage().delete().queue();
+                    }catch(NullPointerException ignored){}
+                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                        try{
+                            m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        }catch(NullPointerException ignored){}
+
+                    });
                     return;
                 }
                 else if(!Objects.requireNonNull(Objects.requireNonNull(e.getGuild()).getSelfMember().getVoiceState()).inAudioChannel() || !Objects.equals(e.getGuild().getSelfMember().getVoiceState().getChannel(), e.getMember().getVoiceState().getChannel())){
@@ -137,8 +175,15 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     eb.setColor(Color.red);
                     eb.setTitle("I have to be in your VoiceChannel to do this", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
-                    e.getMessage().delete().queue();
-                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                    try{
+                        e.getMessage().delete().queue();
+                    }catch(NullPointerException ignored){}
+                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                        try{
+                            m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        }catch(NullPointerException ignored){}
+
+                    });
                     return;
                 }
                 PlayerManager.getINSTANCE();
@@ -155,7 +200,12 @@ public class MusicButtonPlayer extends ListenerAdapter {
                         eb.setColor(Color.decode(config.get("color")));
                         eb.setTitle("There are no Songs in the Queue currently", null);
                         eb.setFooter("presented by " + config.get("bot_name"));
-                        e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                        e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                            try{
+                                m.delete().queueAfter(20, TimeUnit.SECONDS);
+                            }catch(NullPointerException ignored){}
+
+                        });
                         log.logger.info("Tried to skip, but queue is empty on ("+e.getGuild().getName()+")");
                         return;
                     }
@@ -164,7 +214,9 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     log.logger.warning(err.toString());
                     return;
                 }
-                e.getMessage().delete().queue();
+                try{
+                    e.getMessage().delete().queue();
+                }catch(NullPointerException ignored){}
             }
             case "resume" -> {
                 if(!Objects.requireNonNull(Objects.requireNonNull(e.getMember()).getVoiceState()).inAudioChannel()){
@@ -172,7 +224,12 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     eb.setColor(Color.red);
                     eb.setTitle("You have to be in a VoiceChannel to do this", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
-                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                        try{
+                            m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        }catch(NullPointerException ignored){}
+
+                    });
                     return;
                 }
                 else if(!Objects.requireNonNull(Objects.requireNonNull(e.getGuild()).getSelfMember().getVoiceState()).inAudioChannel() || !Objects.equals(e.getGuild().getSelfMember().getVoiceState().getChannel(), e.getMember().getVoiceState().getChannel())){
@@ -180,7 +237,12 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     eb.setColor(Color.red);
                     eb.setTitle("I have to be in your VoiceChannel to do this", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
-                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                        try{
+                            m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        }catch(NullPointerException ignored){}
+
+                    });
                     return;
                 }
 
@@ -205,18 +267,20 @@ public class MusicButtonPlayer extends ListenerAdapter {
                         eb.setDescription("**"+title+"** \n("+(length/1000)/60+" min) \n by **"+author+"** \n\n "+track.getInfo().uri);
                         eb.setFooter("presented by " + config.get("bot_name"));
 
-                        e.getMessage().delete().queue();
+                        try{
+                            e.getMessage().delete().queue();
+                        }catch(NullPointerException ignored){}
                         if(musicManager.scheduler.repeating){
                             e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(pause0RstopLOOP()).queue(m -> {
                                 try{
                                     m.delete().queueAfter(length, TimeUnit.SECONDS);
-                                }catch(Exception ignored){}
+                                }catch(NullPointerException ignored){}
                             });
                         }else{
                             e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(pause0Rstop()).queue(m -> {
                                 try{
                                     m.delete().queueAfter(length, TimeUnit.SECONDS);
-                                }catch(Exception ignored){}
+                                }catch(NullPointerException ignored){}
                             });
                         }
                         log.logger.info("Resuming "+track.getInfo().uri+" on ("+e.getGuild().getName()+")");
@@ -229,18 +293,20 @@ public class MusicButtonPlayer extends ListenerAdapter {
                         eb.setDescription("**"+title+"** \n by **"+author+"** \n\n "+track.getInfo().uri);
                         eb.setFooter("presented by " + config.get("bot_name"));
 
-                        e.getMessage().delete().queue();
+                        try{
+                            e.getMessage().delete().queue();
+                        }catch(NullPointerException ignored){}
                         if(musicManager.scheduler.repeating){
                             e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(pause0RstopLOOP()).queue(m -> {
                                 try{
                                     m.delete().queueAfter(length, TimeUnit.SECONDS);
-                                }catch(Exception ignored){}
+                                }catch(NullPointerException ignored){}
                             });
                         }else{
                             e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(pause0Rstop()).queue(m -> {
                                 try{
                                     m.delete().queueAfter(length, TimeUnit.SECONDS);
-                                }catch(Exception ignored){}
+                                }catch(NullPointerException ignored){}
                             });
                         }
                         log.logger.info("Resuming "+track.getInfo().uri+" on ("+e.getGuild().getName()+")");
@@ -253,7 +319,11 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     eb.setColor(Color.red);
                     eb.setTitle("You have to be in a VoiceChannel to do this", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
-                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                        try{
+                            m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        }catch(NullPointerException ignored){}
+                    });
                     return;
                 }
                 else if(!Objects.requireNonNull(Objects.requireNonNull(e.getGuild()).getSelfMember().getVoiceState()).inAudioChannel() || !Objects.equals(e.getGuild().getSelfMember().getVoiceState().getChannel(), e.getMember().getVoiceState().getChannel())){
@@ -261,7 +331,11 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     eb.setColor(Color.red);
                     eb.setTitle("I have to be in your VoiceChannel to do this", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
-                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                        try{
+                            m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        }catch(NullPointerException ignored){}
+                    });
                     return;
                 }
                 PlayerManager.getINSTANCE();
@@ -274,8 +348,9 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 String author = track.getInfo().author;
                 Boolean isStream = track.getInfo().isStream;
                 Long length = track.getDuration();
-                e.getMessage().delete().queue();
-
+                try{
+                    e.getMessage().delete().queue();
+                }catch(NullPointerException ignored){}
                 if(musicManager.audioPlayer.isPaused()){
                     if(track.getSourceManager().getSourceName().equals("youtube")) {
                         String[] id = track.getInfo().uri.trim().split("=");
@@ -324,13 +399,13 @@ public class MusicButtonPlayer extends ListenerAdapter {
                             e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(pause0RstopLOOP()).queue(m -> {
                                 try{
                                     m.delete().queueAfter(length, TimeUnit.SECONDS);
-                                }catch(Exception ignored){}
+                                }catch(NullPointerException ignored){}
                             });
                         } else {
                             e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(pause0Rstop()).queue(m -> {
                                 try{
                                     m.delete().queueAfter(length, TimeUnit.SECONDS);
-                                }catch(Exception ignored){}
+                                }catch(NullPointerException ignored){}
                             });
                         }
                         log.logger.info("Started Loop for "+track.getInfo().uri+" on ("+e.getGuild().getName()+")");
@@ -344,13 +419,13 @@ public class MusicButtonPlayer extends ListenerAdapter {
                             e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(pause0RstopLOOP()).queue(m -> {
                                 try{
                                     m.delete().queueAfter(length, TimeUnit.SECONDS);
-                                }catch(Exception ignored){}
+                                }catch(NullPointerException ignored){}
                             });
                         } else {
                             e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(pause0Rstop()).queue(m -> {
                                 try{
                                     m.delete().queueAfter(length, TimeUnit.SECONDS);
-                                }catch(Exception ignored){}
+                                }catch(NullPointerException ignored){}
                                 }
                             );
                         }

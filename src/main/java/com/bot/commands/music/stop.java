@@ -7,7 +7,9 @@ import com.bot.lavaplayer.PlayerManager;
 import com.bot.log.log;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
 import net.dv8tion.jda.api.managers.AudioManager;
 
 import java.awt.*;
@@ -44,10 +46,18 @@ public class stop extends Command {
         PlayerManager.getINSTANCE();
         final GuildMusicManager musicManager = getMusicManager(event.getGuild());
         final AudioManager audioManager = event.getGuild().getAudioManager();
+        AudioTrack track = musicManager.audioPlayer.getPlayingTrack();
+        String title = track.getInfo().title;
+        String author = track.getInfo().author;
+        Boolean isStream = track.getInfo().isStream;
+        Long length = track.getDuration();
+
 
         musicManager.scheduler.audioPlayer.stopTrack();
         musicManager.scheduler.queue.clear();
-        event.getMessage().delete().queue();
+        try{
+            event.getMessage().delete().queue();
+        }catch(NullPointerException ignored){}
         if(audioManager.isConnected()) {
             audioManager.closeAudioConnection();
         }
@@ -59,7 +69,27 @@ public class stop extends Command {
         eb.setColor(Color.decode(config.get("color")));
         eb.setTitle(":stop_button:   **MUSIK STOPPED**", null);
         eb.setFooter("presented by " + config.get("bot_name"));
-        event.getChannel().sendMessageEmbeds(eb.build()).queue();
+        event.getChannel().sendMessageEmbeds(eb.build()).queue(message -> {
+            message.getChannel().getHistory().retrievePast(30).queue(messages -> {
+                messages.forEach(message1 -> {
+                    try {
+                        if (!message1.getId().equals(message.getId())) {
+                            System.out.println(message1.getId());
+                            System.out.println(message.getId());
+                            java.util.List<MessageEmbed> embeds = message1.getEmbeds();
+                            embeds.forEach(messageEmbed -> {
+                                if (messageEmbed.getDescription().contains(title)) {
+                                    try{
+                                        message.delete().queue();
+                                    }catch(NullPointerException ignored){}
+                                }
+                            });
+                        }
+                    } catch (Exception ignored) {
+                    }
+                });
+            });
+        });
         log.logger.info("Stopping Song on ("+event.getGuild().getName()+")");
         return false;
    }

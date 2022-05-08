@@ -15,8 +15,6 @@ public class log {
         File f_lck = new File(file_name+".lck");
         if(!f.exists()){
            f.createNewFile();
-
-
         }
 
         fh = new FileHandler(file_name, true);
@@ -33,6 +31,5 @@ public class log {
         else{
             logger.warning(".LCK FILE COULD NOT BE FOUND ("+f_lck.getName()+")");
         }
-        logger.info("Start to log");
     }
 }

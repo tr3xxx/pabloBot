@@ -1,3 +1,0 @@
-[2022-04-27 20:26:25] [INFORMATION] Start to log 
-[2022-04-27 20:26:26] [INFORMATION] API is ready 
-[2022-04-27 20:26:35] [WARNUNG] org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "INSER": syntax error) 

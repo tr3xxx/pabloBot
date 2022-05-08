@@ -6,6 +6,7 @@ import com.bot.core.config;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
 import net.dv8tion.jda.api.managers.AudioManager;
 
 import java.awt.*;
@@ -50,7 +51,9 @@ public class play extends Command {
         if(!isURL(link)){
             link = "ytsearch:" + link + " audio";
         }
-        event.getMessage().delete().queue();
+        try{
+            event.getMessage().delete().queue();
+        }catch(NullPointerException ignored){}
 
         PlayerManager.getINSTANCE().loadAndPlay(event.getTextChannel(), link,input);
         return false;

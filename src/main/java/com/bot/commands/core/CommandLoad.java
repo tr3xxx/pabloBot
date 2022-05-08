@@ -43,6 +43,7 @@ public class CommandLoad {
         CommandManager.addCommand(new resume());
         CommandManager.addCommand(new skip());
         CommandManager.addCommand(new loop());
+        CommandManager.addCommand(new search());
 
     }
 }

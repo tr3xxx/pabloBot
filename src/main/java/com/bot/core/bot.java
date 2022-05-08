@@ -3,6 +3,7 @@ package com.bot.core;
 import com.bot.commands.core.CommandLoad;
 import com.bot.commands.core.CommandManager;
 import com.bot.core.sql.SQLiteDataSource;
+import com.bot.events.Activity;
 import com.bot.events.updateStats;
 import com.bot.log.log;
 import net.dv8tion.jda.api.JDA;
@@ -17,7 +18,9 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 import javax.security.auth.login.LoginException;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +31,11 @@ public class bot {
     public static JDA jda;
     public static void main(String[] args) throws LoginException, IOException, SQLException {
 
-        new log("./logs/"+"log_"+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date(System.currentTimeMillis())) +".log");
+        try {
+            new log("./logs/" + "log_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date(System.currentTimeMillis())) + ".log");
+        }catch(Exception e){
+            throw e;
+        }
         SQLiteDataSource.getConnection();
 
         try {
@@ -47,11 +54,11 @@ public class bot {
             new CommandLoad(jda);
             new updateStats();
             new console(jda);
-            new com.bot.events.Activity(jda);
+            new Activity(jda);
 
 
         } catch (LoginException  e) {
-            com.bot.log.log.logger.warning(e.toString());
+            log.logger.warning(e.toString());
         }
 
 

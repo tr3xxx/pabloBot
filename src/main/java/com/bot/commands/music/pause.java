@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.MessageHistory;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
 import net.dv8tion.jda.api.managers.AudioManager;
 
 import java.awt.*;
@@ -51,7 +52,9 @@ public class pause extends Command {
         final AudioManager audioManager = event.getGuild().getAudioManager();
         AudioTrack track = musicManager.audioPlayer.getPlayingTrack();
         musicManager.scheduler.audioPlayer.setPaused(true);
-        event.getMessage().delete().queue();
+        try{
+            event.getMessage().delete().queue();
+        }catch(NullPointerException ignored){}
         String title = track.getInfo().title;
         String author = track.getInfo().author;
         Boolean isStream = track.getInfo().isStream;
@@ -79,7 +82,9 @@ public class pause extends Command {
                                     java.util.List<MessageEmbed> embeds = message1.getEmbeds();
                                     embeds.forEach(messageEmbed -> {
                                         if (messageEmbed.getDescription().contains(title)) {
-                                            message.delete().queue();
+                                            try{
+                                                message.delete().queue();
+                                            }catch(NullPointerException ignored){}
                                         }
                                     });
                                 }
@@ -99,9 +104,9 @@ public class pause extends Command {
                                     List<MessageEmbed> embeds = message1.getEmbeds();
                                     embeds.forEach(messageEmbed -> {
                                         if (messageEmbed.getDescription().contains(title)) {
-                                            System.out.println(message1.getId());
-                                            System.out.println(message.getId());
-                                            message1.delete().queue();
+                                            try{
+                                                message1.delete().queue();
+                                            }catch(NullPointerException ignored){}
                                         }
                                     });
                                 }

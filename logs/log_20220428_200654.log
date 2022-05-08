@@ -1,4 +1,0 @@
-[2022-04-28 20:06:54] [INFORMATION] Start to log 
-[2022-04-28 20:06:56] [INFORMATION] API is ready 
-[2022-04-28 20:07:05] [INFORMATION] New Server-Prefix has been set  (Server: JAVA BOT SERVER, Prefix: g, User: tr3x#2735 
-[2022-04-28 20:07:35] [WARNUNG] java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30007ms. 

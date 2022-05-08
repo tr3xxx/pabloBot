@@ -15,6 +15,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
+
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.LayoutComponent;
 import net.dv8tion.jda.api.managers.AudioManager;
@@ -33,9 +34,9 @@ import java.util.concurrent.TimeUnit;
 
 public class PlayerManager {
 
-    private static PlayerManager INSTANCE;
-    private static Map<Long, GuildMusicManager> musicManagers;
-    private static AudioPlayerManager audioPlayerManager;
+    public static PlayerManager INSTANCE;
+    public static Map<Long, GuildMusicManager> musicManagers;
+    public static AudioPlayerManager audioPlayerManager;
     private static final LinkedBlockingQueue<TextChannel> channels = new LinkedBlockingQueue<TextChannel>();;
 
     public PlayerManager() {
@@ -88,11 +89,11 @@ public class PlayerManager {
 
         }
         else{
-            if(track == null){
-                log.logger.warning("Track is null in nextInQueue()");
-            }
             if(channels.peek() == null){
                 log.logger.warning("Channel is null in nextInQueue()");
+            }
+            else{
+                log.logger.warning("Track is null in nextInQueue()");
             }
         }
     }
@@ -122,7 +123,11 @@ public class PlayerManager {
                         e.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + audioTrack.getInfo().uri);
                         e.setFooter("presented by " + config.get("bot_name"));
 
-                        textChannel.sendMessageEmbeds(e.build()).setActionRow(playNow()).queue(m -> m.delete().queueAfter(10, TimeUnit.SECONDS));
+                        textChannel.sendMessageEmbeds(e.build()).setActionRow(playNow()).queue(m -> {
+                                try{
+                                    m.delete().queueAfter(10, TimeUnit.SECONDS);
+                                }catch(NullPointerException ignored){}
+                        });
                     } else {
                         EmbedBuilder e = new EmbedBuilder();
                         e.setColor(Color.decode(config.get("color")));
@@ -130,7 +135,11 @@ public class PlayerManager {
                         e.setDescription("**" + title + "** \n by **" + author + "** \n\n " + audioTrack.getInfo().uri);
                         e.setFooter("presented by " + config.get("bot_name"));
 
-                        textChannel.sendMessageEmbeds(e.build()).setActionRow(playNow()).queue(m -> m.delete().queueAfter(10, TimeUnit.SECONDS));
+                        textChannel.sendMessageEmbeds(e.build()).setActionRow(playNow()).queue(m -> {
+                            try{
+                                m.delete().queueAfter(10, TimeUnit.SECONDS);
+                            }catch(NullPointerException ignored){}
+                        });
                     }
                     log.logger.info("Playing Song ("+audioTrack.getInfo().uri+") on ("+textChannel.getGuild().getName()+ ")");
                 } else {
@@ -189,7 +198,11 @@ public class PlayerManager {
                             e.setDescription("**"+title+"** \n("+(length/1000)/60+" min) \n by **"+author+"** \n\n "+track.getInfo().uri);
                             e.setFooter("presented by " + config.get("bot_name"));
 
-                            textChannel.sendMessageEmbeds(e.build()).setActionRow(playNow()).queue(m -> m.delete().queueAfter(10, TimeUnit.SECONDS));
+                            textChannel.sendMessageEmbeds(e.build()).setActionRow(playNow()).queue(m -> {
+                                try{
+                                    m.delete().queueAfter(10, TimeUnit.SECONDS);
+                                }catch(NullPointerException ignored){}
+                            });
                         }
                         else{
                             EmbedBuilder e = new EmbedBuilder();
@@ -198,7 +211,11 @@ public class PlayerManager {
                             e.setDescription("**"+title+"** \n by **"+author+"** \n\n "+track.getInfo().uri);
                             e.setFooter("presented by " + config.get("bot_name"));
 
-                            textChannel.sendMessageEmbeds(e.build()).setActionRow(playNow()).queue(m -> m.delete().queueAfter(10, TimeUnit.SECONDS));
+                            textChannel.sendMessageEmbeds(e.build()).setActionRow(playNow()).queue(m -> {
+                                try{
+                                    m.delete().queueAfter(10, TimeUnit.SECONDS);
+                                }catch(NullPointerException ignored){}
+                            });
                         }
                         log.logger.info("Queued Song ("+track.getInfo().uri+") on ("+textChannel.getGuild().getName()+")");
                     }
@@ -217,13 +234,13 @@ public class PlayerManager {
                                 textChannel.sendMessageEmbeds(e.build()).setActionRow(pause0RstopLOOP()).queue(m -> {
                                     try{
                                         m.delete().queueAfter(length, TimeUnit.SECONDS);
-                                    }catch(Exception ignored){}
+                                    }catch(NullPointerException ignored){}
                                 });
                             }else{
                                 textChannel.sendMessageEmbeds(e.build()).setActionRow(pause0Rstop()).queue(m -> {
                                     try{
                                         m.delete().queueAfter(length, TimeUnit.SECONDS);
-                                    }catch(Exception ignored){}
+                                    }catch(NullPointerException ignored){}
                                 });
                             }
                         }
@@ -238,13 +255,13 @@ public class PlayerManager {
                                 textChannel.sendMessageEmbeds(e.build()).setActionRow(pause0RstopLOOP()).queue(m -> {
                                     try{
                                         m.delete().queueAfter(length, TimeUnit.SECONDS);
-                                    }catch(Exception ignored){}
+                                    }catch(NullPointerException ignored){}
                                 });
                             }else{
                                 textChannel.sendMessageEmbeds(e.build()).setActionRow(pause0Rstop()).queue(m -> {
                                     try{
                                         m.delete().queueAfter(length, TimeUnit.SECONDS);
-                                    }catch(Exception ignored){}
+                                    }catch(NullPointerException ignored){}
                                 });
                             }
                         }
@@ -261,7 +278,11 @@ public class PlayerManager {
                 e.setDescription(input + " was not found");
                 e.setFooter("presented by " + config.get("bot_name"));
 
-                textChannel.sendMessageEmbeds(e.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                textChannel.sendMessageEmbeds(e.build()).queue(m -> {
+                    try{
+                        m.delete().queueAfter(20, TimeUnit.SECONDS);
+                    }catch(NullPointerException ignored){}
+                });
                 log.logger.info("No matches ("+input+") ("+trackURL+") on ("+textChannel.getGuild().getName()+")");
 
             }
@@ -276,7 +297,11 @@ public class PlayerManager {
                     eb.setDescription("Due to Spotifys Copyright regulations no Spotify Songs can be played");
                     eb.setFooter("presented by " + config.get("bot_name"));
 
-                    textChannel.sendMessageEmbeds(eb.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                    textChannel.sendMessageEmbeds(eb.build()).queue(m -> {
+                        try{
+                            m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        }catch(NullPointerException ignored){}
+                    });
                     log.logger.info("Tried to play Spotify on ("+textChannel.getGuild().getName()+")");
                 }
                 else{
@@ -286,7 +311,11 @@ public class PlayerManager {
                     eb.setDescription("Error: "+e.toString());
                     eb.setFooter("presented by " + config.get("bot_name"));
 
-                    textChannel.sendMessageEmbeds(eb.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
+                    textChannel.sendMessageEmbeds(eb.build()).queue(m -> {
+                        try{
+                            m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        }catch(NullPointerException ignored){}
+                    });
                     log.logger.info("Unexpected ("+e.toString()+") on ("+textChannel.getGuild().getName()+")");
                 }
                 if(audioManager.isConnected()) {

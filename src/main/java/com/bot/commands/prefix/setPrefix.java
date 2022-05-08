@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.awt.*;
@@ -149,7 +150,11 @@ public class setPrefix extends Command {
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue();
                 }
-                case "help_noPrefix" -> e.getMessage().delete().queue();
+                case "help_noPrefix" -> {
+                    try{
+                        e.getMessage().delete().queue();
+                    }catch(NullPointerException ignored){}
+                }
                 default -> {
                 }
             }

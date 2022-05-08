@@ -9,6 +9,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
 import net.dv8tion.jda.api.managers.AudioManager;
 
 import java.awt.*;
@@ -51,7 +52,9 @@ public class loop extends Command {
         String author = track.getInfo().author;
         Boolean isStream = track.getInfo().isStream;
         Long length = track.getDuration();
-        event.getMessage().delete().queue();
+        try{
+            event.getMessage().delete().queue();
+        }catch(NullPointerException ignored){}
 
         if(musicManager.audioPlayer.isPaused()) {
             if (track.getSourceManager().getSourceName().equals("youtube")) {
@@ -75,7 +78,9 @@ public class loop extends Command {
                                         java.util.List<MessageEmbed> embeds = message1.getEmbeds();
                                         embeds.forEach(messageEmbed -> {
                                             if (messageEmbed.getDescription().contains(title)) {
-                                                message.delete().queue();
+                                                try{
+                                                    message.delete().queue();
+                                                }catch(NullPointerException ignored){}
                                             }
                                         });
                                     }
@@ -95,7 +100,9 @@ public class loop extends Command {
                                         java.util.List<MessageEmbed> embeds = message1.getEmbeds();
                                         embeds.forEach(messageEmbed -> {
                                             if (messageEmbed.getDescription().contains(title)) {
-                                                message.delete().queue();
+                                                try{
+                                                    message.delete().queue();
+                                                }catch(NullPointerException ignored){}
                                             }
                                         });
                                     }
@@ -121,7 +128,9 @@ public class loop extends Command {
                                         java.util.List<MessageEmbed> embeds = message1.getEmbeds();
                                         embeds.forEach(messageEmbed -> {
                                             if (messageEmbed.getDescription().contains(title)) {
-                                                message.delete().queue();
+                                                try{
+                                                    message.delete().queue();
+                                                }catch(NullPointerException ignored){}
                                             }
                                         });
                                     }
@@ -139,7 +148,9 @@ public class loop extends Command {
                                         java.util.List<MessageEmbed> embeds = message1.getEmbeds();
                                         embeds.forEach(messageEmbed -> {
                                             if (messageEmbed.getDescription().contains(title)) {
-                                                message.delete().queue();
+                                                try{
+                                                    message.delete().queue();
+                                                }catch(NullPointerException ignored){}
                                             }
                                         });
                                     }

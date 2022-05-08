@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
 public class setVoicehub extends Command {
     String[] ch_id;
     long cat_id;
@@ -147,7 +148,11 @@ public class setVoicehub extends Command {
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(more_helpBT()).queue();
                 }
-                case "help_no" -> e.getMessage().delete().queue();
+                case "help_no" -> {
+                    try{
+                        e.getMessage().delete().queue();
+                    }catch(NullPointerException ignored){}
+                }
                 default -> {
                 }
             }

@@ -9,6 +9,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
 import net.dv8tion.jda.api.managers.AudioManager;
 
 import java.awt.*;
@@ -62,7 +63,9 @@ public class resume extends Command {
                 eb.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + track.getInfo().uri);
                 eb.setFooter("presented by " + config.get("bot_name"));
 
-                event.getMessage().delete().queue();
+                try{
+                    event.getMessage().delete().queue();
+                }catch(NullPointerException ignored){}
                 if (musicManager.scheduler.repeating) {
                     event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(pause0RstopLOOP()).queue(message -> {
                         message.getChannel().getHistory().retrievePast(30).queue(messages -> {
@@ -74,7 +77,9 @@ public class resume extends Command {
                                         java.util.List<MessageEmbed> embeds = message1.getEmbeds();
                                         embeds.forEach(messageEmbed -> {
                                             if (messageEmbed.getDescription().contains(title)) {
-                                                message.delete().queue();
+                                                try{
+                                                 message.delete().queue();
+                                                }catch(NullPointerException ignored){}
                                             }
                                         });
                                     }
@@ -94,7 +99,9 @@ public class resume extends Command {
                                         java.util.List<MessageEmbed> embeds = message1.getEmbeds();
                                         embeds.forEach(messageEmbed -> {
                                             if (messageEmbed.getDescription().contains(title)) {
-                                                message.delete().queue();
+                                                try{
+                                                    message.delete().queue();
+                                                }catch(NullPointerException ignored){}
                                             }
                                         });
                                     }
@@ -112,7 +119,9 @@ public class resume extends Command {
                 eb.setDescription("**" + title + "** \n by **" + author + "** \n\n " + track.getInfo().uri);
                 eb.setFooter("presented by " + config.get("bot_name"));
 
-                event.getMessage().delete().queue();
+                try{
+                    event.getMessage().delete().queue();
+                }catch(NullPointerException ignored){}
                 if (musicManager.scheduler.repeating) {
                     event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(pause0RstopLOOP()).queue(message -> {
                         message.getChannel().getHistory().retrievePast(30).queue(messages -> {
@@ -122,7 +131,9 @@ public class resume extends Command {
                                         java.util.List<MessageEmbed> embeds = message1.getEmbeds();
                                         embeds.forEach(messageEmbed -> {
                                             if (messageEmbed.getDescription().contains(title)) {
-                                                message.delete().queue();
+                                                try{
+                                                    message.delete().queue();
+                                                }catch(NullPointerException ignored){}
                                             }
                                         });
                                     }
@@ -140,7 +151,9 @@ public class resume extends Command {
                                         java.util.List<MessageEmbed> embeds = message1.getEmbeds();
                                         embeds.forEach(messageEmbed -> {
                                             if (messageEmbed.getDescription().contains(title)) {
-                                                message.delete().queue();
+                                                try{
+                                                    message.delete().queue();
+                                                }catch(NullPointerException ignored){}
                                             }
                                         });
                                     }

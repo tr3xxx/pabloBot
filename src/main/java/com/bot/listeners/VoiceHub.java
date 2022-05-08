@@ -6,6 +6,7 @@ import com.bot.log.log;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
+
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.sql.*;
@@ -70,7 +71,9 @@ public class VoiceHub extends ListenerAdapter {
                 try{
                     if(isValidCategory(channel.getParentCategoryIdLong())){
                         if(channel.getMembers().size() == 0){
-                            channel.delete().queue();
+                            try{
+                                channel.delete().queue();
+                            }catch(NullPointerException ignored){}
                             log.logger.info("Voice Channel got deleted ("+
                                     e.getGuild().getName()+")");
                         }

@@ -1,5 +1,0 @@
-[2022-04-29 22:35:49] [INFORMATION] Start to log 
-[2022-04-29 22:35:51] [INFORMATION] API is ready 
-[2022-04-29 22:35:57] [INFORMATION] VoiceChannel got created through an Voicehub (JAVA BOT SERVER,tr3x#2735) 
-[2022-04-29 22:36:00] [INFORMATION] Voice Channel got deleted (JAVA BOT SERVER) 
-[2022-04-29 22:36:43] [WARNUNG] java.lang.NumberFormatException: For input string: "[968575485019824169]" 

@@ -1,6 +1,0 @@
-[2022-04-30 22:18:52] [INFORMATION] Start to log 
-[2022-04-30 22:18:54] [INFORMATION] API is ready 
-[2022-04-30 22:18:57] [WARNUNG] org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (table stats has no column named categoryid) 
-[2022-04-30 22:18:57] [WARNUNG] org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such column: categoryid) 
-[2022-04-30 22:18:57] [WARNUNG] org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such column: categoryid) 
-[2022-04-30 22:18:57] [WARNUNG] org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such column: categoryid) 

@@ -1,9 +1,0 @@
-[2022-04-28 19:56:14] [INFORMATION] Start to log 
-[2022-04-28 19:56:16] [INFORMATION] API is ready 
-[2022-04-28 19:56:29] [INFORMATION] [com.bot.commands.basic.testCommand] was executed by tr3x#2735 on 'JAVA BOT SERVER' 
-[2022-04-28 19:56:59] [WARNUNG] java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30004ms. 
-[2022-04-28 19:57:29] [WARNUNG] java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30011ms. 
-[2022-04-28 19:57:59] [WARNUNG] java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30006ms. 
-[2022-04-28 19:58:19] [WARNUNG] java.sql.SQLException: HikariPool-1 - Interrupted during connection acquisition 
-[2022-04-28 20:02:15] [WARNUNG] java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30015ms. 
-[2022-04-28 20:02:45] [WARNUNG] java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30012ms. 
