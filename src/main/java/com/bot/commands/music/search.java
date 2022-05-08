@@ -40,9 +40,9 @@ public class search extends Command {
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
 
-        String input = null;
-        for (String arg : args) {
-            input = arg+" " ;
+        String input = args[1];
+        for (int i = 2; i < args.length ; i++) {
+            input = input +" "+args[i];
         }
         String finalInput = input;
         if(isURL(input)){

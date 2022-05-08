@@ -35,6 +35,7 @@ public class Boot implements EventListener
     {
 
         if (event instanceof ReadyEvent) {
+            System.out.println(1);
             boolean CONN = false;
             String HOSTNAME = null;
             String IP=null;

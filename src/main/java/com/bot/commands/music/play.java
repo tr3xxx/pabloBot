@@ -37,16 +37,11 @@ public class play extends Command {
 
             audioManager.openAudioConnection(memberChannel);
         }
-        String link = null;
-
-        for (String arg : args) {
-            link = arg+" " ;
+        String link = args[1];
+        for (int i = 2; i < args.length ; i++) {
+            link = link +" "+args[i];
         }
-        StringBuilder sb = new StringBuilder(link);
-        sb.deleteCharAt(link.length() - 1);
-        link = sb.toString();
         String input = link;
-        System.out.println(input);
         if(!isURL(link)){
             link = "ytsearch:" + link + " audio";
         }
