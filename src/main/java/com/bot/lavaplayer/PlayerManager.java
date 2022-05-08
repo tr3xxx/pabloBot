@@ -154,9 +154,17 @@ public class PlayerManager {
                         e.setFooter("presented by " + config.get("bot_name"));
 
                         if(musicManager.scheduler.repeating){
-                            textChannel.sendMessageEmbeds(e.build()).setActionRow(pause0RstopLOOP()).queue();
+                            textChannel.sendMessageEmbeds(e.build()).setActionRow(pause0RstopLOOP()).queue(m -> {
+                                try{
+                                    m.delete().queueAfter(1, TimeUnit.HOURS);
+                                }catch(NullPointerException ignored){}
+                            });
                         }else{
-                            textChannel.sendMessageEmbeds(e.build()).setActionRow(pause0Rstop()).queue();
+                            textChannel.sendMessageEmbeds(e.build()).setActionRow(pause0Rstop()).queue(m -> {
+                                try{
+                                    m.delete().queueAfter(1, TimeUnit.HOURS);
+                                }catch(NullPointerException ignored){}
+                            });
                         }
                     } else {
                         EmbedBuilder e = new EmbedBuilder();

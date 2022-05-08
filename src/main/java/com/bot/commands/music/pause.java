@@ -24,8 +24,8 @@ import static com.bot.lavaplayer.PlayerManager.*;
 
 public class pause extends Command {
     @Override
-    public String call() {
-        return "pause";
+    public String[] call() {
+        return new String[] {"pause"};
     }
 
     @Override

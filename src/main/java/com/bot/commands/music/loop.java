@@ -20,8 +20,8 @@ import static com.bot.lavaplayer.PlayerManager.*;
 
 public class loop extends Command {
     @Override
-    public String call() {
-        return "loop";
+    public String[] call() {
+        return new String[] {"loop","repeat"};
     }
 
     @Override

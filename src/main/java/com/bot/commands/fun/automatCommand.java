@@ -5,8 +5,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class automatCommand extends Command {
     @Override
-    public String call() {
-        return "Automat";
+    public String[] call() {
+        return new String[] {"Automat"};
     }
 
 

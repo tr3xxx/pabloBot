@@ -21,8 +21,8 @@ import java.util.Objects;
 
 public class setPrefix extends Command {
     @Override
-    public String call() {
-        return "setPrefix";
+    public String[] call() {
+        return new String[] {"setPrefix","sP"};
     }
 
     @Override

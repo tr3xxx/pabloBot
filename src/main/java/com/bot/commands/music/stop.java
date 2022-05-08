@@ -19,9 +19,8 @@ import java.util.Objects;
 import static com.bot.lavaplayer.PlayerManager.*;
 
 public class stop extends Command {
-    @Override
-    public String call() {
-        return "stop";
+    public String[] call() {
+        return new String[] {"stop"};
     }
 
     @Override

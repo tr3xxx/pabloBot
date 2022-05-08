@@ -17,8 +17,8 @@ import java.util.Objects;
 public class deletePrefix extends Command
 {
     @Override
-    public String call() {
-        return "deletePrefix";
+    public String[] call() {
+        return new String[] {"deletePrefix","dP"};
     }
 
     @Override

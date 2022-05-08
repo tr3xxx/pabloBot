@@ -10,17 +10,15 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
 
 import java.awt.*;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Objects;
 
 public class play extends Command {
     @Override
-    public String call() {
-        return "play";
+    public String[] call() {
+        return new String[] {"play","p"};
     }
+
 
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
@@ -48,6 +46,7 @@ public class play extends Command {
         sb.deleteCharAt(link.length() - 1);
         link = sb.toString();
         String input = link;
+        System.out.println(input);
         if(!isURL(link)){
             link = "ytsearch:" + link + " audio";
         }

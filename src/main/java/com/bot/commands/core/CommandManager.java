@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CommandManager extends ListenerAdapter {
     MessageReceivedEvent event;
@@ -51,22 +52,28 @@ public class CommandManager extends ListenerAdapter {
 
 
         commands.forEach(cmd -> {
-            if(invoke.startsWith(prefix) && cmd.call().equalsIgnoreCase(call) && !event.getAuthor().isBot()) {
-                try {
-                    cmd.execute(msg, event);
-                } catch (SQLException e) {
-                    log.logger.warning(e.toString());
+            String [] aliases = cmd.call();
+            for (String alias : aliases) {
+                if(invoke.startsWith(prefix) && alias.equalsIgnoreCase(call) && !event.getAuthor().isBot()) {
+                    try {
+                        cmd.execute(msg, event);
+                    } catch (SQLException e) {
+                        log.logger.warning(e.toString());
+                    }
                 }
             }
+
         });
         always.forEach(cmd ->{
-            if(invoke.startsWith(config.get("prefix")) && cmd.call().equalsIgnoreCase(invoke.replace(config.get("prefix"), "")) && !event.getAuthor().isBot()){
-                try {
-                    cmd.execute(msg, event);
-                } catch (SQLException e) {
-                    log.logger.warning(e.toString());
+            String [] aliases = cmd.call();
+            for (String alias : aliases) {
+                if(invoke.startsWith(config.get("prefix")) && alias.equalsIgnoreCase(invoke.replace(config.get("prefix"), "")) && !event.getAuthor().isBot()){
+                    try {
+                        cmd.execute(msg, event);
+                    } catch (SQLException e) {
+                        log.logger.warning(e.toString());
+                    }
                 }
-
             }});
 
     }

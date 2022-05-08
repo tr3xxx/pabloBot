@@ -25,8 +25,8 @@ public class setStatsNames extends Command {
     long channelid;
     long online;
     @Override
-    public String call() {
-        return "customizeStatsNames";
+    public String[] call() {
+        return new String[] {"customizeStatsName","cSN"};
     }
 
     @Override

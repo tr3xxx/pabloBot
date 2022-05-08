@@ -20,8 +20,8 @@ public class Blackjack extends Command {
     EmbedBuilder game = new EmbedBuilder();
 
     @Override
-    public String call() {
-        return "blackjack";
+    public String[] call() {
+        return new String[] {"blackjack"};
     }
 
     @Override

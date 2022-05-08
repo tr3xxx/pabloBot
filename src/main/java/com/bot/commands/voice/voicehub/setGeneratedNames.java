@@ -27,8 +27,8 @@ import java.util.Objects;
 public class setGeneratedNames extends Command{
     public static long id = 0;
     @Override
-    public String call() {
-        return "setVoiceNames";
+    public String[] call() {
+        return new String[] {"setVoiceNames","sVN"};
     }
 
     @Override

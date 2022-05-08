@@ -2,7 +2,6 @@ package com.bot.listeners;
 
 import com.bot.core.bot;
 import com.bot.log.log;
-import com.google.common.reflect.ClassPath;
 import com.sun.management.OperatingSystemMXBean;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
@@ -13,6 +12,8 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.StatusChangeEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
 import org.jetbrains.annotations.NotNull;
+import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
 
 import javax.management.MBeanServer;
 import java.lang.management.ManagementFactory;
@@ -20,10 +21,7 @@ import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryPoolMXBean;
 import java.lang.reflect.Field;
 import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Vector;
+import java.util.*;
 
 public class Boot implements EventListener
 {
@@ -85,6 +83,7 @@ public class Boot implements EventListener
             log.logger.info("PUBLIC: "+info.isBotPublic());
             log.logger.info("VERIFIED: "+bot.jda.getSelfUser().isVerified());
             log.logger.info("---------------------");
+
 
 
         }

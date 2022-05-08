@@ -33,8 +33,8 @@ import static com.bot.lavaplayer.PlayerManager.getMusicManager;
 public class search extends Command {
     public static HashMap<Integer, AudioTrack> trackMap = new HashMap<Integer,AudioTrack>();
     @Override
-    public String call() {
-        return "search";
+    public String[] call() {
+        return new String[] {"search","searchfor"};
     }
 
     @Override

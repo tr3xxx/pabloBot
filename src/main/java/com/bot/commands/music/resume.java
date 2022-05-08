@@ -20,8 +20,8 @@ import static com.bot.lavaplayer.PlayerManager.*;
 
 public class resume extends Command {
     @Override
-    public String call() {
-        return "resume";
+    public String[] call() {
+        return new String[] {"resume"};
     }
 
     @Override

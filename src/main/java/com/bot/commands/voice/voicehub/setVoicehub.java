@@ -28,8 +28,8 @@ public class setVoicehub extends Command {
     long guild_id;
 
     @Override
-    public String call() {
-        return "setVoicehub";
+    public String[] call() {
+        return new String[] {"setVoicehub","sV"};
     }
 
     @Override

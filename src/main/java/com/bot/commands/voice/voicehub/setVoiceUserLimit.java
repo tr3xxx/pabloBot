@@ -20,8 +20,8 @@ public class setVoiceUserLimit extends Command {
     long channelid;
     int userlimit;
     @Override
-    public String call() {
-        return "setUserlimit";
+    public String[] call() {
+        return new String[] {"setUserlimit","sU"};
     }
 
     @Override

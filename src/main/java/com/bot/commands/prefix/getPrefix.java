@@ -15,8 +15,8 @@ import java.sql.SQLException;
 
 public class getPrefix extends Command {
     @Override
-    public String call() {
-        return "getPrefix";
+    public String[] call() {
+        return new String[] {"getPrefix","gP"};
     }
 
     @Override

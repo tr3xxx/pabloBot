@@ -13,8 +13,8 @@ import java.util.List;
 
 public class testCommand extends Command {
     @Override
-    public String call() {
-        return "test";
+    public String[] call() {
+        return new String[] {"test","testanomi"};
     }
 
     @Override

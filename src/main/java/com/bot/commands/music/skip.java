@@ -23,8 +23,8 @@ import static com.bot.lavaplayer.PlayerManager.*;
 
 public class skip extends Command {
     @Override
-    public String call() {
-        return "skip";
+    public String[] call() {
+        return new String[] {"skip","next"};
     }
 
     @Override

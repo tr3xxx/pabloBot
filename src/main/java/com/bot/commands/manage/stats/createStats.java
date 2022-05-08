@@ -32,8 +32,8 @@ public class createStats extends Command {
     long boostid;
 
     @Override
-    public String call() {
-        return "createStats";
+    public String[] call() {
+        return new String[] {"createStats","cS"};
     }
 
     @Override
