@@ -140,46 +140,99 @@ public class search extends Command {
 
 
         public void onButtonInteraction(ButtonInteractionEvent event) {
-            if (!event.getMember().getVoiceState().inAudioChannel()) {
-                EmbedBuilder eb = new EmbedBuilder();
-                eb.setColor(Color.red);
-                eb.setTitle("You have to be in a VoiceChannel to do this", null);
-                eb.setFooter("presented by " + config.get("bot_name"));
-                event.getChannel().sendMessageEmbeds(eb.build()).queue();
-                return;
-            }
-            if (!event.getGuild().getSelfMember().getVoiceState().inAudioChannel()) {
-                final AudioManager audioManager = event.getGuild().getAudioManager();
-                final VoiceChannel memberChannel = (VoiceChannel) event.getMember().getVoiceState().getChannel();
-                audioManager.openAudioConnection(memberChannel);
-            }
+
 
             switch (Objects.requireNonNull(event.getButton().getId())) {
                 case "1choose" -> {
+                    if (!event.getMember().getVoiceState().inAudioChannel()) {
+                        EmbedBuilder eb = new EmbedBuilder();
+                        eb.setColor(Color.red);
+                        eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                        eb.setFooter("presented by " + config.get("bot_name"));
+                        event.getChannel().sendMessageEmbeds(eb.build()).queue();
+                        return;
+                    }
+                    if (!event.getGuild().getSelfMember().getVoiceState().inAudioChannel()) {
+                        final AudioManager audioManager = event.getGuild().getAudioManager();
+                        final VoiceChannel memberChannel = (VoiceChannel) event.getMember().getVoiceState().getChannel();
+                        audioManager.openAudioConnection(memberChannel);
+                    }
                     PlayerManager.getINSTANCE().loadAndPlay(event.getTextChannel(), trackMap.get(1).getInfo().uri, null);
                     try {
                         event.getMessage().delete().queue();
                     }catch(NullPointerException ignored){}
                 }
                 case "2choose" -> {
+                    if (!event.getMember().getVoiceState().inAudioChannel()) {
+                        EmbedBuilder eb = new EmbedBuilder();
+                        eb.setColor(Color.red);
+                        eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                        eb.setFooter("presented by " + config.get("bot_name"));
+                        event.getChannel().sendMessageEmbeds(eb.build()).queue();
+                        return;
+                    }
+                    if (!event.getGuild().getSelfMember().getVoiceState().inAudioChannel()) {
+                        final AudioManager audioManager = event.getGuild().getAudioManager();
+                        final VoiceChannel memberChannel = (VoiceChannel) event.getMember().getVoiceState().getChannel();
+                        audioManager.openAudioConnection(memberChannel);
+                    }
                     PlayerManager.getINSTANCE().loadAndPlay(event.getTextChannel(), trackMap.get(2).getInfo().uri, null);
                     try {
                         event.getMessage().delete().queue();
                     }catch(NullPointerException ignored){}
                 }
                 case "3choose" -> {
+                    if (!event.getMember().getVoiceState().inAudioChannel()) {
+                        EmbedBuilder eb = new EmbedBuilder();
+                        eb.setColor(Color.red);
+                        eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                        eb.setFooter("presented by " + config.get("bot_name"));
+                        event.getChannel().sendMessageEmbeds(eb.build()).queue();
+                        return;
+                    }
+                    if (!event.getGuild().getSelfMember().getVoiceState().inAudioChannel()) {
+                        final AudioManager audioManager = event.getGuild().getAudioManager();
+                        final VoiceChannel memberChannel = (VoiceChannel) event.getMember().getVoiceState().getChannel();
+                        audioManager.openAudioConnection(memberChannel);
+                    }
                     PlayerManager.getINSTANCE().loadAndPlay(event.getTextChannel(), trackMap.get(3).getInfo().uri, null);
                     try {
                         event.getMessage().delete().queue();
                     }catch(NullPointerException ignored){}
                 }
                 case "4choose" -> {
+                    if (!event.getMember().getVoiceState().inAudioChannel()) {
+                        EmbedBuilder eb = new EmbedBuilder();
+                        eb.setColor(Color.red);
+                        eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                        eb.setFooter("presented by " + config.get("bot_name"));
+                        event.getChannel().sendMessageEmbeds(eb.build()).queue();
+                        return;
+                    }
+                    if (!event.getGuild().getSelfMember().getVoiceState().inAudioChannel()) {
+                        final AudioManager audioManager = event.getGuild().getAudioManager();
+                        final VoiceChannel memberChannel = (VoiceChannel) event.getMember().getVoiceState().getChannel();
+                        audioManager.openAudioConnection(memberChannel);
+                    }
                     PlayerManager.getINSTANCE().loadAndPlay(event.getTextChannel(), trackMap.get(4).getInfo().uri, null);
                     try {
                         event.getMessage().delete().queue();
                     }catch(NullPointerException ignored){}
                 }
                 case "5choose" -> {
+                    if (!event.getMember().getVoiceState().inAudioChannel()) {
+                        EmbedBuilder eb = new EmbedBuilder();
+                        eb.setColor(Color.red);
+                        eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                        eb.setFooter("presented by " + config.get("bot_name"));
+                        event.getChannel().sendMessageEmbeds(eb.build()).queue();
+                        return;
+                    }
+                    if (!event.getGuild().getSelfMember().getVoiceState().inAudioChannel()) {
+                        final AudioManager audioManager = event.getGuild().getAudioManager();
+                        final VoiceChannel memberChannel = (VoiceChannel) event.getMember().getVoiceState().getChannel();
+                        audioManager.openAudioConnection(memberChannel);
+                    }
                     PlayerManager.getINSTANCE().loadAndPlay(event.getTextChannel(), trackMap.get(5).getInfo().uri, null);
                     try {
                         event.getMessage().delete().queue();

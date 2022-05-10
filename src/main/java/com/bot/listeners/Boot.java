@@ -28,6 +28,7 @@ public class Boot implements EventListener
     public static JDA.Status Status;
     public static long Ping;
     public static long lastUpdate;
+    public static boolean bootLogged = false;
 
 
     @Override
@@ -35,7 +36,6 @@ public class Boot implements EventListener
     {
 
         if (event instanceof ReadyEvent) {
-            System.out.println(1);
             boolean CONN = false;
             String HOSTNAME = null;
             String IP=null;
@@ -84,7 +84,7 @@ public class Boot implements EventListener
             log.logger.info("PUBLIC: "+info.isBotPublic());
             log.logger.info("VERIFIED: "+bot.jda.getSelfUser().isVerified());
             log.logger.info("---------------------");
-
+            bootLogged = true;
 
 
         }
@@ -104,7 +104,15 @@ public class Boot implements EventListener
             else if(((StatusChangeEvent) event).getNewStatus().equals(JDA.Status.AWAITING_LOGIN_CONFIRMATION)){log.logger.info("LOGGING INTO DISCORD...");}
             else if(((StatusChangeEvent) event).getNewStatus().equals(JDA.Status.LOGGING_IN)){log.logger.info("LOGGED IN DISCORD SUCCESSFULLY");}
             else if(((StatusChangeEvent) event).getNewStatus().equals(JDA.Status.LOADING_SUBSYSTEMS)){log.logger.info("LOADING...");}
-            else if(((StatusChangeEvent) event).getNewStatus().equals(JDA.Status.CONNECTED)){log.logger.info("CONFIRM ONLINE");}
+            else if(((StatusChangeEvent) event).getNewStatus().equals(JDA.Status.CONNECTED)){
+                if(!Boot.bootLogged) {
+                    log.logger.warning("BOOT FAILED");
+                    bot.jda.shutdownNow();
+                    System.exit(0);
+                }else{
+                    log.logger.info("CONFIRM ONLINE");
+                }
+            }
             else if(((StatusChangeEvent) event).getNewStatus().equals(JDA.Status.SHUTTING_DOWN)){log.logger.info("SHUTTING DOWN...");}
             else if(((StatusChangeEvent) event).getNewStatus().equals(JDA.Status.SHUTDOWN)){log.logger.info("CONFIRM OFFLINE");}
             else if(((StatusChangeEvent) event).getNewStatus().equals(JDA.Status.DISCONNECTED)){log.logger.info("DISCONNECTED FROM WEBSOCKET");}

@@ -33,7 +33,6 @@ public class automatCommand extends Command {
     }
 
 
-
     private class Automat{
 
         private int zustand;

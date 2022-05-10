@@ -5,6 +5,7 @@ import com.bot.commands.core.CommandManager;
 import com.bot.core.sql.SQLiteDataSource;
 import com.bot.events.Activity;
 import com.bot.events.updateStats;
+import com.bot.listeners.Boot;
 import com.bot.log.log;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;

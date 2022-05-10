@@ -123,7 +123,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     });
                     return;
                 }
-
+                System.out.println(2);
                 PlayerManager.getINSTANCE();
                 final GuildMusicManager musicManager = getMusicManager(e.getGuild());
                 final AudioManager audioManager = e.getGuild().getAudioManager();
@@ -150,7 +150,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     }catch(NullPointerException ignored){}
 
                 });
-                log.logger.info("Stopping Song on ("+e.getGuild().getName()+")");
+                log.logger.info("Stopped Song on ("+e.getGuild().getName()+")");
             }
             case "skip" -> {
                 final GuildMusicManager musicManager = getMusicManager(e.getGuild());

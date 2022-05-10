@@ -326,10 +326,6 @@ public class PlayerManager {
                     });
                     log.logger.info("Unexpected ("+e.toString()+") on ("+textChannel.getGuild().getName()+")");
                 }
-                if(audioManager.isConnected()) {
-                    audioManager.closeAudioConnection();
-                }
-                System.out.println(e.toString());
 
 
             }
@@ -349,7 +345,7 @@ public class PlayerManager {
     public static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> pause0RstopLOOP() {
         java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("pause","Pause"));
-        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("stop","Stop"));
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("stop","Stop & Leave"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("skip","Next"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.success("loop","Repeat"));
 
@@ -363,7 +359,7 @@ public class PlayerManager {
     public static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> resumeORskipORstop() {
         java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("resume","Pause"));
-        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("stop","Stop"));
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("stop","Stop & Leave"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("skip","Next"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("loop","Repeat"));
         return buttons;
@@ -371,7 +367,7 @@ public class PlayerManager {
     public static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> resumeORskipORstopLOOP() {
         java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("resume","Pause"));
-        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("stop","Stop"));
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("stop","Stop & Leave"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("skip","Next"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.success("loop","Repeat"));
         return buttons;
