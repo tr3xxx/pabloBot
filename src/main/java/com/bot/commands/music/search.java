@@ -50,7 +50,12 @@ public class search extends Command {
             eb.setColor(Color.red);
             eb.setTitle("You cannot search for a link, please use keywords", null);
             eb.setFooter("presented by " + config.get("bot_name"));
-            event.getChannel().sendMessageEmbeds(eb.build()).queue();
+            event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                try{
+                    m.delete().queueAfter(30, TimeUnit.SECONDS);
+                }catch(NullPointerException ignored){}
+
+            });
             try{
                 event.getMessage().delete().queue();
             }catch(NullPointerException ignored){}

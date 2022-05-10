@@ -15,6 +15,7 @@ import net.dv8tion.jda.api.managers.AudioManager;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import static com.bot.lavaplayer.PlayerManager.*;
 
@@ -31,7 +32,12 @@ public class loop extends Command {
             eb.setColor(Color.red);
             eb.setTitle("You have to be in a VoiceChannel to do this", null);
             eb.setFooter("presented by " + config.get("bot_name"));
-            event.getChannel().sendMessageEmbeds(eb.build()).queue();
+            event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                try{
+                    m.delete().queueAfter(30, TimeUnit.SECONDS);
+                }catch(NullPointerException ignored){}
+
+            });
             return false;
         }
         else if(!Objects.requireNonNull(Objects.requireNonNull(event.getGuild()).getSelfMember().getVoiceState()).inAudioChannel() || !Objects.equals(event.getGuild().getSelfMember().getVoiceState().getChannel(), event.getMember().getVoiceState().getChannel())){
@@ -39,7 +45,12 @@ public class loop extends Command {
             eb.setColor(Color.red);
             eb.setTitle("I have to be in your VoiceChannel to do this", null);
             eb.setFooter("presented by " + config.get("bot_name"));
-            event.getChannel().sendMessageEmbeds(eb.build()).queue();
+            event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                try{
+                    m.delete().queueAfter(30, TimeUnit.SECONDS);
+                }catch(NullPointerException ignored){}
+
+            });
             return false;
         }
         PlayerManager.getINSTANCE();

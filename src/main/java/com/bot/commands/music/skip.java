@@ -38,7 +38,12 @@ public class skip extends Command {
             try{
                 event.getMessage().delete().queue();
             }catch(NullPointerException ignored){}
-            event.getChannel().sendMessageEmbeds(eb.build()).queue();
+            event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                try{
+                    m.delete().queueAfter(30, TimeUnit.SECONDS);
+                }catch(NullPointerException ignored){}
+
+            });
             return false;
         } else if (!Objects.requireNonNull(Objects.requireNonNull(event.getGuild()).getSelfMember().getVoiceState()).inAudioChannel() || !Objects.equals(event.getGuild().getSelfMember().getVoiceState().getChannel(), event.getMember().getVoiceState().getChannel())) {
             EmbedBuilder eb = new EmbedBuilder();
@@ -48,7 +53,12 @@ public class skip extends Command {
             try {
                 event.getMessage().delete().queue();
             }catch(NullPointerException ignored){}
-            event.getChannel().sendMessageEmbeds(eb.build()).queue();
+            event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                try{
+                    m.delete().queueAfter(30, TimeUnit.SECONDS);
+                }catch(NullPointerException ignored){}
+
+            });
 
             return false;
         }

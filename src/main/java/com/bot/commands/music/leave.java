@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.managers.AudioManager;
 
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 
 import static com.bot.lavaplayer.PlayerManager.getMusicManager;
 
@@ -29,7 +30,12 @@ public class leave extends Command {
             eb.setColor(Color.red);
             eb.setTitle("You have to be in a VoiceChannel to do this", null);
             eb.setFooter("presented by " + config.get("bot_name"));
-            event.getChannel().sendMessageEmbeds(eb.build()).queue();
+            event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                try{
+                    m.delete().queueAfter(30, TimeUnit.SECONDS);
+                }catch(NullPointerException ignored){}
+
+            });
             return false;
         }
 

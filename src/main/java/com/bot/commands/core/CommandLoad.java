@@ -36,6 +36,9 @@ public class CommandLoad {
         CommandManager.addCommand(new loop());
         CommandManager.addCommand(new search());
         CommandManager.addCommand(new BjMain());
+        CommandManager.addCommand(new leave());
+        CommandManager.addCommand(new join());
+        CommandManager.addCommand(new queue());
 
 
         // Always with getPrefix callable on any server
