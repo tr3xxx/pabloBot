@@ -136,6 +136,7 @@ public class pause extends Command {
             eb.setFooter("presented by " + config.get("bot_name"));
 
             event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(resumeORskipORstop()).queue();
+            event.getMessage().delete().queue();
         }
         log.logger.info("Pausing Song ("+track.getInfo().uri+") on ("+event.getGuild().getName()+")");
 

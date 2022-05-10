@@ -41,6 +41,7 @@ public class skip extends Command {
             event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                 try{
                     m.delete().queueAfter(30, TimeUnit.SECONDS);
+                    event.getMessage().delete().queue();
                 }catch(NullPointerException ignored){}
 
             });
@@ -56,6 +57,7 @@ public class skip extends Command {
             event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                 try{
                     m.delete().queueAfter(30, TimeUnit.SECONDS);
+                    event.getMessage().delete().queue();
                 }catch(NullPointerException ignored){}
 
             });
@@ -103,6 +105,7 @@ public class skip extends Command {
                 event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                     try{
                         m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        event.getMessage().delete().queue();
                     }catch(NullPointerException ignored){}
                 });
                 log.logger.info("Tried to skip, but queue is empty on ("+event.getGuild().getName()+")");

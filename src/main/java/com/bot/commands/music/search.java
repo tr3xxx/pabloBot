@@ -95,6 +95,7 @@ public class search extends Command {
                         trackMap.put(4,tracks.get(3));
                         trackMap.put(5,tracks.get(4));
                         event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(choose()).queue(m -> m.delete().queueAfter(60, TimeUnit.SECONDS));
+                        event.getMessage().delete().queue();
 
                     }
 

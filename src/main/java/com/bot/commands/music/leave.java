@@ -33,6 +33,7 @@ public class leave extends Command {
             event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                 try{
                     m.delete().queueAfter(30, TimeUnit.SECONDS);
+                    event.getMessage().delete().queue();
                 }catch(NullPointerException ignored){}
 
             });
@@ -61,11 +62,18 @@ public class leave extends Command {
 
         } else {
 
+            event.getMessage().delete().queue();
             EmbedBuilder eb = new EmbedBuilder();
             eb.setColor(Color.red);
             eb.setTitle("I am already in a VoiceChannel", null);
             eb.setFooter("presented by " + config.get("bot_name"));
-            event.getChannel().sendMessageEmbeds(eb.build()).queue();
+            event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                try{
+                    m.delete().queueAfter(30, TimeUnit.SECONDS);
+                    event.getMessage().delete().queue();
+                }catch(NullPointerException ignored){}
+
+            });
             return false;
         }
 

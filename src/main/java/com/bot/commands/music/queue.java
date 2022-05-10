@@ -39,6 +39,7 @@ public class queue extends Command {
             event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                 try{
                     m.delete().queueAfter(30, TimeUnit.SECONDS);
+                    event.getMessage().delete().queue();
                 }catch(NullPointerException ignored){}
 
             });
@@ -66,12 +67,14 @@ public class queue extends Command {
             event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                 try{
                     m.delete().queueAfter(30, TimeUnit.SECONDS);
+                    event.getMessage().delete().queue();
                 }catch(NullPointerException ignored){}
 
             });
 
         }else{
 
+            event.getMessage().delete().queue();
             EmbedBuilder eb= new EmbedBuilder();
             eb.setColor(Color.red);
             eb.setTitle("There are no Songs in the Queue currently", null);

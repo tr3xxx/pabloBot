@@ -35,6 +35,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{
                             m.delete().queueAfter(20, TimeUnit.SECONDS);
+                            e.getMessage().delete().queue();
                         }catch(NullPointerException ignored){}
 
                     });
@@ -48,6 +49,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{
                             m.delete().queueAfter(20, TimeUnit.SECONDS);
+                            e.getMessage().delete().queue();
                         }catch(NullPointerException ignored){}
 
                     });
@@ -108,6 +110,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{
                             m.delete().queueAfter(20, TimeUnit.SECONDS);
+                            e.getMessage().delete().queue();
                         }catch(NullPointerException ignored){}
 
                     });
@@ -121,6 +124,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{
                             m.delete().queueAfter(20, TimeUnit.SECONDS);
+                            e.getMessage().delete().queue();
                         }catch(NullPointerException ignored){}
 
                     });
@@ -149,6 +153,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                     try{
                         m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        e.getMessage().delete().queue();
                     }catch(NullPointerException ignored){}
 
                 });
@@ -167,6 +172,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{
                             m.delete().queueAfter(20, TimeUnit.SECONDS);
+                            e.getMessage().delete().queue();
                         }catch(NullPointerException ignored){}
 
                     });
@@ -183,6 +189,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{
                             m.delete().queueAfter(20, TimeUnit.SECONDS);
+                            e.getMessage().delete().queue();
                         }catch(NullPointerException ignored){}
 
                     });

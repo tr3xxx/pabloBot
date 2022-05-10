@@ -50,6 +50,7 @@ public class join extends Command {
         final GuildMusicManager musicManager = getMusicManager(event.getGuild());
         final AudioManager audioManager = event.getGuild().getAudioManager();
         if (audioManager.isConnected()) {
+            event.getMessage().delete().queue();
             EmbedBuilder eb = new EmbedBuilder();
             eb.setColor(Color.red);
             eb.setTitle("I am already in a VoiceChannel", null);

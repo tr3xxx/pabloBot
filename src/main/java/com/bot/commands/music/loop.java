@@ -48,6 +48,7 @@ public class loop extends Command {
             event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                 try{
                     m.delete().queueAfter(30, TimeUnit.SECONDS);
+                    event.getMessage().delete().queue();
                 }catch(NullPointerException ignored){}
 
             });
