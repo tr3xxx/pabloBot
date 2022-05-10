@@ -4,13 +4,16 @@ import com.bot.core.config;
 import com.bot.log.log;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.managers.AudioManager;
 
 import java.awt.*;
 import java.util.Objects;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.bot.lavaplayer.PlayerManager.*;
 
@@ -123,7 +126,6 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     });
                     return;
                 }
-                System.out.println(2);
                 PlayerManager.getINSTANCE();
                 final GuildMusicManager musicManager = getMusicManager(e.getGuild());
                 final AudioManager audioManager = e.getGuild().getAudioManager();
@@ -264,7 +266,12 @@ public class MusicButtonPlayer extends ListenerAdapter {
                         eb.setColor(Color.decode(config.get("color")));
                         eb.setTitle(":arrow_forward: **NOW PLAYING**", null);
                         eb.setImage(thumb);
-                        eb.setDescription("**"+title+"** \n("+(length/1000)/60+" min) \n by **"+author+"** \n\n "+track.getInfo().uri);
+                        if((length/1000/60)==0){
+                            eb.setDescription("**" + title + "** \n(" + ((length / 1000) -1)+ " sec) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                        }
+                        else{
+                            eb.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                        }
                         eb.setFooter("presented by " + config.get("bot_name"));
 
                         try{
@@ -392,7 +399,12 @@ public class MusicButtonPlayer extends ListenerAdapter {
                         eb.setColor(Color.decode(config.get("color")));
                         eb.setTitle(":arrow_forward: **NOW PLAYING**", null);
                         eb.setImage(thumb);
-                        eb.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                        if((length/1000/60)==0){
+                            eb.setDescription("**" + title + "** \n(" + ((length / 1000) -1)+ " sec) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                        }
+                        else{
+                            eb.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                        }
                         eb.setFooter("presented by " + config.get("bot_name"));
 
                         if (musicManager.scheduler.repeating) {
@@ -413,7 +425,12 @@ public class MusicButtonPlayer extends ListenerAdapter {
                         EmbedBuilder eb = new EmbedBuilder();
                         eb.setColor(Color.decode(config.get("color")));
                         eb.setTitle(":arrow_forward: **NOW PLAYING**", null);
-                        eb.setDescription("**" + title + "** \n by **" + author + "** \n\n " + track.getInfo().uri);
+                        if((length/1000/60)==0){
+                            eb.setDescription("**" + title + "** \n(" + ((length / 1000) -1)+ " sec) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                        }
+                        else{
+                            eb.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                        }
                         eb.setFooter("presented by " + config.get("bot_name"));
                         if (musicManager.scheduler.repeating) {
                             e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(pause0RstopLOOP()).queue(m -> {
@@ -432,6 +449,59 @@ public class MusicButtonPlayer extends ListenerAdapter {
                         log.logger.info("Started Loop for "+track.getInfo().uri+" on ("+e.getGuild().getName()+")");
                     }
                 }
+            }
+            case "listqueue" ->{
+                PlayerManager.getINSTANCE();
+                final GuildMusicManager musicManager = getMusicManager(e.getGuild());
+                final AudioManager audioManager = e.getGuild().getAudioManager();
+                if (!e.getMember().getVoiceState().inAudioChannel()) {
+                    EmbedBuilder eb = new EmbedBuilder();
+                    eb.setColor(Color.red);
+                    eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                    eb.setFooter("presented by " + config.get("bot_name"));
+                    e.getChannel().sendMessageEmbeds(eb.build()).queue();
+                    return;
+                }
+
+                if (!e.getGuild().getSelfMember().getVoiceState().inAudioChannel()) {
+                    final VoiceChannel memberChannel = (VoiceChannel) e.getMember().getVoiceState().getChannel();
+
+                    audioManager.openAudioConnection(memberChannel);
+                }
+                if(musicManager.scheduler.queue.size() != 0){
+                    BlockingQueue<AudioTrack> tracks = musicManager.scheduler.queue;
+                    EmbedBuilder eb= new EmbedBuilder();
+                    eb.setColor(Color.decode(config.get("color")));
+                    eb.setTitle(":notes: QUEUE", null);
+                    AtomicInteger i = new AtomicInteger(1);
+                    tracks.forEach(track -> {
+                        eb.addField( i+"."+track.getInfo().title, " **by** "+track.getInfo().author,false);
+                        i.set(i.get() + 1);
+
+                    });
+                    eb.setFooter("presented by " + config.get("bot_name"));
+                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                        try{
+                            m.delete().queueAfter(30, TimeUnit.SECONDS);
+                        }catch(NullPointerException ignored){}
+
+                    });
+
+                }else{
+
+                    EmbedBuilder eb= new EmbedBuilder();
+                    eb.setColor(Color.red);
+                    eb.setTitle("There are no Songs in the Queue currently", null);
+                    eb.setFooter("presented by " + config.get("bot_name"));
+                    e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
+                        try{
+                            m.delete().queueAfter(20, TimeUnit.SECONDS);
+                        }catch(NullPointerException ignored){}
+                    });
+                    log.logger.info("Tried to skip, but queue is empty on ("+e.getGuild().getName()+")");
+                    return;
+                }
+
             }
         }
     }

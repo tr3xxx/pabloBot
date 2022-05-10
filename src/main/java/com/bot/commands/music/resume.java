@@ -72,8 +72,6 @@ public class resume extends Command {
                             messages.forEach(message1 -> {
                                 try {
                                     if (!message1.getId().equals(message.getId())) {
-                                        System.out.println(message1.getId());
-                                        System.out.println(message.getId());
                                         java.util.List<MessageEmbed> embeds = message1.getEmbeds();
                                         embeds.forEach(messageEmbed -> {
                                             if (messageEmbed.getDescription().contains(title)) {
@@ -94,8 +92,7 @@ public class resume extends Command {
                             messages.forEach(message1 -> {
                                 try {
                                     if (!message1.getId().equals(message.getId())) {
-                                        System.out.println(message1.getId());
-                                        System.out.println(message.getId());
+
                                         java.util.List<MessageEmbed> embeds = message1.getEmbeds();
                                         embeds.forEach(messageEmbed -> {
                                             if (messageEmbed.getDescription().contains(title)) {

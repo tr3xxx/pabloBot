@@ -1,0 +1,181 @@
+[2022-05-09 21:44:29] [INFORMATION] LOGGING INTO DISCORD... 
+[2022-05-09 21:44:29] [INFORMATION] PING SPIKE DETECTED FROM -1ms TO 121 ms 
+[2022-05-09 21:44:30] [INFORMATION] LOADING... 
+[2022-05-09 21:44:30] [INFORMATION] API STATUS: READY 
+[2022-05-09 21:44:30] [INFORMATION] APPLICATION STATUS: LOADING_SUBSYSTEMS 
+[2022-05-09 21:44:30] [INFORMATION] --------------------- 
+[2022-05-09 21:44:30] [INFORMATION] SYSTEM: DESKTOP-V03JMPS 
+[2022-05-09 21:44:30] [INFORMATION] OS: Windows 10 (Version 10.0) amd64 
+[2022-05-09 21:44:30] [INFORMATION] DIRECTORY: C:\Users\Leon\Documents\GitHub\discord-bot-java 
+[2022-05-09 21:44:30] [INFORMATION] MEMORY-USAGE ALL(JAVA): 10007MB (2282MB) / 17107MB 
+[2022-05-09 21:44:30] [INFORMATION] CPU-USAGE JAVA: 4.49% 
+[2022-05-09 21:44:30] [INFORMATION] JAVA: 18+36-2087 (C:\Users\Leon\.jdks\openjdk-18) 
+[2022-05-09 21:44:30] [INFORMATION] JDK: OpenJDK 64-Bit Server VM 
+[2022-05-09 21:44:30] [INFORMATION] NETWORK: true 
+[2022-05-09 21:44:30] [INFORMATION] IP: 192.168.179.28 
+[2022-05-09 21:44:30] [INFORMATION] --------------------- 
+[2022-05-09 21:44:30] [INFORMATION] NAME: ercan can#9080 
+[2022-05-09 21:44:30] [INFORMATION] INVITE: https://discord.com/oauth2/authorize?client_id=968181644123045998&scope=bot&permissions=8 
+[2022-05-09 21:44:30] [INFORMATION] GATEWAY PING: 121ms 
+[2022-05-09 21:44:30] [INFORMATION] CACHE-FLAGS: [ACTIVITY, VOICE_STATE, EMOTE, MEMBER_OVERRIDES, ROLE_TAGS, ONLINE_STATUS] 
+[2022-05-09 21:44:30] [INFORMATION] INTENTS: [GUILD_MEMBERS, GUILD_BANS, GUILD_EMOJIS, GUILD_INVITES, GUILD_VOICE_STATES, GUILD_PRESENCES, GUILD_MESSAGES, GUILD_MESSAGE_REACTIONS, DIRECT_MESSAGES, DIRECT_MESSAGE_REACTIONS] 
+[2022-05-09 21:44:30] [INFORMATION] ACC-ID: 968181644123045998 
+[2022-05-09 21:44:30] [INFORMATION] CREATED: 2022-04-25T16:08:11.904Z 
+[2022-05-09 21:44:30] [INFORMATION] OWNER: tr3x#2735 
+[2022-05-09 21:44:30] [INFORMATION] DEV-TEAM: [InnereKlasse#6798, Kylx#7843, tr3x#2735] 
+[2022-05-09 21:44:30] [INFORMATION] PUBLIC: true 
+[2022-05-09 21:44:30] [INFORMATION] VERIFIED: true 
+[2022-05-09 21:44:30] [INFORMATION] --------------------- 
+[2022-05-09 21:44:30] [INFORMATION] CONFIRM ONLINE 
+[2022-05-09 21:44:32] [INFORMATION] VoiceChannel got created through an Voicehub (JAVA BOT SERVER,tr3x#2735) 
+[2022-05-09 21:45:19] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=k30tMU5XdTw) on (JAVA BOT SERVER) 
+[2022-05-09 21:45:33] [INFORMATION] Stopped Song on (JAVA BOT SERVER) 
+[2022-05-09 21:46:04] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=9hhMUT2U2L4) on (JAVA BOT SERVER) 
+[2022-05-09 21:46:26] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=AD_TWloJ310) on (JAVA BOT SERVER) 
+[2022-05-09 21:46:28] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=9hhMUT2U2L4) on (JAVA BOT SERVER) 
+[2022-05-09 21:46:28] [WARNUNG] java.lang.IllegalStateException: Cannot play the same instance of a track twice, use track.makeClone(). 
+[2022-05-09 21:46:32] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=AD_TWloJ310) on (JAVA BOT SERVER) 
+[2022-05-09 21:46:32] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 21:47:03] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=HowW6aUB5hU) on (JAVA BOT SERVER) 
+[2022-05-09 21:47:05] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=AD_TWloJ310) on (JAVA BOT SERVER) 
+[2022-05-09 21:47:05] [WARNUNG] java.lang.IllegalStateException: Cannot play the same instance of a track twice, use track.makeClone(). 
+[2022-05-09 21:47:08] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=HowW6aUB5hU) on (JAVA BOT SERVER) 
+[2022-05-09 21:47:08] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 21:47:19] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=OLpeX4RRo28) on (JAVA BOT SERVER) 
+[2022-05-09 21:50:12] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=HowW6aUB5hU) on (JAVA BOT SERVER) 
+[2022-05-09 21:50:21] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=OLpeX4RRo28) on (JAVA BOT SERVER) 
+[2022-05-09 21:50:21] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 21:51:22] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=t3VxyZARKB8) on (JAVA BOT SERVER) 
+[2022-05-09 21:51:30] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=t3VxyZARKB8) on (JAVA BOT SERVER) 
+[2022-05-09 21:51:30] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 21:51:49] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=qyAuo2KewV8) on (JAVA BOT SERVER) 
+[2022-05-09 21:51:53] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=t3VxyZARKB8) on (JAVA BOT SERVER) 
+[2022-05-09 21:51:53] [WARNUNG] java.lang.IllegalStateException: Cannot play the same instance of a track twice, use track.makeClone(). 
+[2022-05-09 21:52:01] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=qyAuo2KewV8) on (JAVA BOT SERVER) 
+[2022-05-09 21:52:01] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 21:52:49] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=NeREfxdDPwI) on (JAVA BOT SERVER) 
+[2022-05-09 21:52:50] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=NeREfxdDPwI) on (JAVA BOT SERVER) 
+[2022-05-09 21:52:50] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 21:56:10] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=NeREfxdDPwI) on (JAVA BOT SERVER) 
+[2022-05-09 21:56:18] [INFORMATION] Tried to skip, but queue is empty on (JAVA BOT SERVER) 
+[2022-05-09 21:56:20] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=hAmvuW0Ct3E) on (JAVA BOT SERVER) 
+[2022-05-09 21:56:22] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=hAmvuW0Ct3E) on (JAVA BOT SERVER) 
+[2022-05-09 21:56:22] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 21:56:28] [INFORMATION] Pausing Song (https://www.youtube.com/watch?v=hAmvuW0Ct3E) on (JAVA BOT SERVER) 
+[2022-05-09 21:56:31] [INFORMATION] Stopped Song on (JAVA BOT SERVER) 
+[2022-05-09 21:56:45] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=ebjkvEHqRDc) on (JAVA BOT SERVER) 
+[2022-05-09 21:58:51] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=tfxb34NDnF8) on (JAVA BOT SERVER) 
+[2022-05-09 22:00:56] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=ebjkvEHqRDc) on (JAVA BOT SERVER) 
+[2022-05-09 22:01:02] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=tfxb34NDnF8) on (JAVA BOT SERVER) 
+[2022-05-09 22:01:02] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:01:29] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=vC2xJ3JDokk) on (JAVA BOT SERVER) 
+[2022-05-09 22:03:25] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=vC2xJ3JDokk) on (JAVA BOT SERVER) 
+[2022-05-09 22:03:25] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:03:55] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=U2dSqPDtbIs) on (JAVA BOT SERVER) 
+[2022-05-09 22:03:56] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=U2dSqPDtbIs) on (JAVA BOT SERVER) 
+[2022-05-09 22:03:56] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:05:33] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=50KV4vbti9c) on (JAVA BOT SERVER) 
+[2022-05-09 22:05:34] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=U2dSqPDtbIs) on (JAVA BOT SERVER) 
+[2022-05-09 22:05:34] [WARNUNG] java.lang.IllegalStateException: Cannot play the same instance of a track twice, use track.makeClone(). 
+[2022-05-09 22:05:37] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=50KV4vbti9c) on (JAVA BOT SERVER) 
+[2022-05-09 22:05:37] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:06:07] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=wbgInLJ81eY) on (JAVA BOT SERVER) 
+[2022-05-09 22:06:10] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=50KV4vbti9c) on (JAVA BOT SERVER) 
+[2022-05-09 22:06:10] [WARNUNG] java.lang.IllegalStateException: Cannot play the same instance of a track twice, use track.makeClone(). 
+[2022-05-09 22:06:14] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=wbgInLJ81eY) on (JAVA BOT SERVER) 
+[2022-05-09 22:06:14] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:09:13] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=2gqET_Erc0E) on (JAVA BOT SERVER) 
+[2022-05-09 22:09:16] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=2gqET_Erc0E) on (JAVA BOT SERVER) 
+[2022-05-09 22:09:16] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:09:18] [INFORMATION] Tried to skip, but queue is empty on (JAVA BOT SERVER) 
+[2022-05-09 22:09:44] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=_BqjFOXuCpU) on (JAVA BOT SERVER) 
+[2022-05-09 22:09:46] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=_BqjFOXuCpU) on (JAVA BOT SERVER) 
+[2022-05-09 22:09:46] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:11:11] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=62lCxn-3xwk) on (JAVA BOT SERVER) 
+[2022-05-09 22:11:12] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=62lCxn-3xwk) on (JAVA BOT SERVER) 
+[2022-05-09 22:11:12] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:12:03] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=vvBHnSvFd4E) on (JAVA BOT SERVER) 
+[2022-05-09 22:12:45] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=bPFJpKHT6UY) on (JAVA BOT SERVER) 
+[2022-05-09 22:12:47] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=vvBHnSvFd4E) on (JAVA BOT SERVER) 
+[2022-05-09 22:12:47] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:12:49] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=bPFJpKHT6UY) on (JAVA BOT SERVER) 
+[2022-05-09 22:12:49] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:14:22] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=kGmZFXk6-WI) on (JAVA BOT SERVER) 
+[2022-05-09 22:15:23] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=RT16CDKbS3U) on (JAVA BOT SERVER) 
+[2022-05-09 22:15:25] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=kGmZFXk6-WI) on (JAVA BOT SERVER) 
+[2022-05-09 22:15:25] [WARNUNG] java.lang.IllegalStateException: Cannot play the same instance of a track twice, use track.makeClone(). 
+[2022-05-09 22:15:26] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=RT16CDKbS3U) on (JAVA BOT SERVER) 
+[2022-05-09 22:15:26] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:17:21] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=SyZQVJiARTQ) on (JAVA BOT SERVER) 
+[2022-05-09 22:17:59] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=SyZQVJiARTQ) on (JAVA BOT SERVER) 
+[2022-05-09 22:18:05] [INFORMATION] Stopped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:18:28] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=jTVwKiK1uv0) on (JAVA BOT SERVER) 
+[2022-05-09 22:21:13] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=zt-PAFGZMBU) on (JAVA BOT SERVER) 
+[2022-05-09 22:21:15] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=jTVwKiK1uv0) on (JAVA BOT SERVER) 
+[2022-05-09 22:21:15] [WARNUNG] java.lang.IllegalStateException: Cannot play the same instance of a track twice, use track.makeClone(). 
+[2022-05-09 22:21:19] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=zt-PAFGZMBU) on (JAVA BOT SERVER) 
+[2022-05-09 22:21:19] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:25:03] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=4vUtXdXmnRE) on (JAVA BOT SERVER) 
+[2022-05-09 22:25:08] [INFORMATION] Pausing Song (https://www.youtube.com/watch?v=4vUtXdXmnRE) on (JAVA BOT SERVER) 
+[2022-05-09 22:25:11] [INFORMATION] Stopped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:25:26] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=9-yHEhKWh7w) on (JAVA BOT SERVER) 
+[2022-05-09 22:26:05] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=IPKbVUa3zvE) on (JAVA BOT SERVER) 
+[2022-05-09 22:26:07] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=IPKbVUa3zvE) on (JAVA BOT SERVER) 
+[2022-05-09 22:26:07] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:26:47] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=T-0g1ObcHbg) on (JAVA BOT SERVER) 
+[2022-05-09 22:26:50] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=T-0g1ObcHbg) on (JAVA BOT SERVER) 
+[2022-05-09 22:26:50] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:27:31] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=hnyok84vYIE) on (JAVA BOT SERVER) 
+[2022-05-09 22:27:48] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=hnyok84vYIE) on (JAVA BOT SERVER) 
+[2022-05-09 22:27:48] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:27:52] [INFORMATION] Tried to skip, but queue is empty on (JAVA BOT SERVER) 
+[2022-05-09 22:29:23] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=R4Lqs1y4vXw) on (JAVA BOT SERVER) 
+[2022-05-09 22:29:25] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=R4Lqs1y4vXw) on (JAVA BOT SERVER) 
+[2022-05-09 22:29:25] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:29:26] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=R4Lqs1y4vXw) on (JAVA BOT SERVER) 
+[2022-05-09 22:29:26] [WARNUNG] java.lang.IllegalStateException: Cannot play the same instance of a track twice, use track.makeClone(). 
+[2022-05-09 22:29:30] [INFORMATION] Pausing Song (https://www.youtube.com/watch?v=R4Lqs1y4vXw) on (JAVA BOT SERVER) 
+[2022-05-09 22:29:31] [INFORMATION] Resuming https://www.youtube.com/watch?v=R4Lqs1y4vXw on (JAVA BOT SERVER) 
+[2022-05-09 22:29:32] [INFORMATION] Tried to skip, but queue is empty on (JAVA BOT SERVER) 
+[2022-05-09 22:29:47] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=iPtJtIwUD5I) on (JAVA BOT SERVER) 
+[2022-05-09 22:29:50] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=iPtJtIwUD5I) on (JAVA BOT SERVER) 
+[2022-05-09 22:29:50] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:31:30] [INFORMATION] Pausing Song (https://www.youtube.com/watch?v=iPtJtIwUD5I) on (JAVA BOT SERVER) 
+[2022-05-09 22:31:32] [INFORMATION] Unexpected (com.sedmelluq.discord.lavaplayer.tools.FriendlyException: Unknown file format.) on (JAVA BOT SERVER) 
+[2022-05-09 22:31:36] [INFORMATION] Resuming https://www.youtube.com/watch?v=iPtJtIwUD5I on (JAVA BOT SERVER) 
+[2022-05-09 22:31:51] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=jGeeiUj1zXk) on (JAVA BOT SERVER) 
+[2022-05-09 22:31:55] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=jGeeiUj1zXk) on (JAVA BOT SERVER) 
+[2022-05-09 22:31:55] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:32:00] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=RT16CDKbS3U) on (JAVA BOT SERVER) 
+[2022-05-09 22:32:01] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=RT16CDKbS3U) on (JAVA BOT SERVER) 
+[2022-05-09 22:32:01] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:32:24] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=HdHvpaOB8pc) on (JAVA BOT SERVER) 
+[2022-05-09 22:32:42] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=-L5JaLp9d4E) on (JAVA BOT SERVER) 
+[2022-05-09 22:32:44] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=RT16CDKbS3U) on (JAVA BOT SERVER) 
+[2022-05-09 22:32:44] [WARNUNG] java.lang.IllegalStateException: Cannot play the same instance of a track twice, use track.makeClone(). 
+[2022-05-09 22:32:44] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=HdHvpaOB8pc) on (JAVA BOT SERVER) 
+[2022-05-09 22:32:44] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:32:45] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=-L5JaLp9d4E) on (JAVA BOT SERVER) 
+[2022-05-09 22:32:54] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=dc2tJqnkLLA) on (JAVA BOT SERVER) 
+[2022-05-09 22:34:28] [INFORMATION] Stopped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:34:31] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=NTvq_nObY6o) on (JAVA BOT SERVER) 
+[2022-05-09 22:34:32] [INFORMATION] Tried to skip, but queue is empty on (JAVA BOT SERVER) 
+[2022-05-09 22:34:36] [INFORMATION] Stopped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:35:03] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=6NopE5IXVNE) on (JAVA BOT SERVER) 
+[2022-05-09 22:35:54] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=zQXWqQLOrKU) on (JAVA BOT SERVER) 
+[2022-05-09 22:36:00] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=6NopE5IXVNE) on (JAVA BOT SERVER) 
+[2022-05-09 22:36:00] [WARNUNG] java.lang.IllegalStateException: Cannot play the same instance of a track twice, use track.makeClone(). 
+[2022-05-09 22:36:02] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=zQXWqQLOrKU) on (JAVA BOT SERVER) 
+[2022-05-09 22:36:02] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:37:39] [INFORMATION] Stopped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:38:04] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=MnIvJoPEgm0) on (JAVA BOT SERVER) 
+[2022-05-09 22:39:10] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=4cZUSx8ykIM) on (JAVA BOT SERVER) 
+[2022-05-09 22:39:12] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=4cZUSx8ykIM) on (JAVA BOT SERVER) 
+[2022-05-09 22:39:12] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:39:18] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=t-wFKNy0MZQ) on (JAVA BOT SERVER) 
+[2022-05-09 22:39:19] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=t-wFKNy0MZQ) on (JAVA BOT SERVER) 
+[2022-05-09 22:39:19] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:40:42] [INFORMATION] Queued Song (https://www.youtube.com/watch?v=0eCM38omTGU) on (JAVA BOT SERVER) 
+[2022-05-09 22:40:44] [INFORMATION] Playing Song (https://www.youtube.com/watch?v=0eCM38omTGU) on (JAVA BOT SERVER) 
+[2022-05-09 22:40:44] [INFORMATION] Skipped Song on (JAVA BOT SERVER) 
+[2022-05-09 22:42:54] [INFORMATION] Stopped Song on (JAVA BOT SERVER) 

@@ -72,7 +72,12 @@ public class PlayerManager {
                 e.setColor(Color.decode(config.get("color")));
                 e.setTitle(":arrow_forward: **NOW PLAYING**", null);
                 e.setImage(thumb);
-                e.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                if((length/1000/60)==0){
+                    e.setDescription("**" + title + "** \n(" + ((length / 1000) -1)+ " sec) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                }
+                else{
+                    e.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                }
                 e.setFooter("presented by " + config.get("bot_name"));
 
                 textChannel.sendMessageEmbeds(e.build()).setActionRow(pause0Rstop()).queue();
@@ -80,7 +85,12 @@ public class PlayerManager {
                 EmbedBuilder e = new EmbedBuilder();
                 e.setColor(Color.decode(config.get("color")));
                 e.setTitle(":arrow_forward: **NOW PLAYING**", null);
-                e.setDescription("**" + title + "** \n by **" + author + "** \n\n " + track.getInfo().uri);
+                if((length/1000/60)==0){
+                    e.setDescription("**" + title + "** \n(" + ((length / 1000) -1)+ " sec) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                }
+                else{
+                    e.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                }
                 e.setFooter("presented by " + config.get("bot_name"));
 
                 textChannel.sendMessageEmbeds(e.build()).setActionRow(pause0Rstop()).queue();
@@ -120,10 +130,17 @@ public class PlayerManager {
                         EmbedBuilder e = new EmbedBuilder();
                         e.setColor(Color.decode(config.get("color")));
                         e.setTitle(":white_check_mark:  **QUEUED**", null);
-                        e.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + audioTrack.getInfo().uri);
+                        if((length/1000/60)==0){
+                            e.setDescription("**" + title + "** \n(" + (length / 1000) + " sec) \n by **" + author +
+                                    "** \n\n " + audioTrack.getInfo().uri);
+                        }
+                        else{
+                            e.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + audioTrack.getInfo().uri);
+                        }
+
                         e.setFooter("presented by " + config.get("bot_name"));
 
-                        textChannel.sendMessageEmbeds(e.build()).setActionRow(playNow()).queue(m -> {
+                        textChannel.sendMessageEmbeds(e.build()).setActionRow(watchQueue()).queue(m -> {
                                 try{
                                     m.delete().queueAfter(10, TimeUnit.SECONDS);
                                 }catch(NullPointerException ignored){}
@@ -135,7 +152,7 @@ public class PlayerManager {
                         e.setDescription("**" + title + "** \n by **" + author + "** \n\n " + audioTrack.getInfo().uri);
                         e.setFooter("presented by " + config.get("bot_name"));
 
-                        textChannel.sendMessageEmbeds(e.build()).setActionRow(playNow()).queue(m -> {
+                        textChannel.sendMessageEmbeds(e.build()).setActionRow(watchQueue()).queue(m -> {
                             try{
                                 m.delete().queueAfter(10, TimeUnit.SECONDS);
                             }catch(NullPointerException ignored){}
@@ -206,7 +223,7 @@ public class PlayerManager {
                             e.setDescription("**"+title+"** \n("+(length/1000)/60+" min) \n by **"+author+"** \n\n "+track.getInfo().uri);
                             e.setFooter("presented by " + config.get("bot_name"));
 
-                            textChannel.sendMessageEmbeds(e.build()).setActionRow(playNow()).queue(m -> {
+                            textChannel.sendMessageEmbeds(e.build()).setActionRow(watchQueue()).queue(m -> {
                                 try{
                                     m.delete().queueAfter(10, TimeUnit.SECONDS);
                                 }catch(NullPointerException ignored){}
@@ -219,7 +236,7 @@ public class PlayerManager {
                             e.setDescription("**"+title+"** \n by **"+author+"** \n\n "+track.getInfo().uri);
                             e.setFooter("presented by " + config.get("bot_name"));
 
-                            textChannel.sendMessageEmbeds(e.build()).setActionRow(playNow()).queue(m -> {
+                            textChannel.sendMessageEmbeds(e.build()).setActionRow(watchQueue()).queue(m -> {
                                 try{
                                     m.delete().queueAfter(10, TimeUnit.SECONDS);
                                 }catch(NullPointerException ignored){}
@@ -235,7 +252,12 @@ public class PlayerManager {
                             e.setColor(Color.decode(config.get("color")));
                             e.setTitle(":arrow_forward: **NOW PLAYING**", null);
                             e.setImage(thumb);
-                            e.setDescription("**"+title+"** \n("+(length/1000)/60+" min) \n by **"+author+"** \n\n "+track.getInfo().uri);
+                            if((length/1000/60)==0){
+                                e.setDescription("**" + title + "** \n(" + ((length / 1000) -1)+ " sec) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                            }
+                            else{
+                                e.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                            }
                             e.setFooter("presented by " + config.get("bot_name"));
 
                             if(musicManager.scheduler.repeating){
@@ -256,7 +278,12 @@ public class PlayerManager {
                             EmbedBuilder e = new EmbedBuilder();
                             e.setColor(Color.decode(config.get("color")));
                             e.setTitle(":arrow_forward: **NOW PLAYING**", null);
-                            e.setDescription("**"+title+"** \n by **"+author+"** \n\n "+track.getInfo().uri);
+                            if((length/1000/60)==0){
+                                e.setDescription("**" + title + "** \n(" + ((length / 1000) -1)+ " sec) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                            }
+                            else{
+                                e.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                            }
                             e.setFooter("presented by " + config.get("bot_name"));
 
                             if(musicManager.scheduler.repeating){
@@ -333,12 +360,19 @@ public class PlayerManager {
 
 
     }
+    public static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> watchQueue() {
+        java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("listqueue","Queue"));
+
+        return buttons;
+    }
     public static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> pause0Rstop() {
         java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("pause","Pause"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("stop","Stop"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("skip","Next"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("loop","Repeat"));
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("listqueue","Queue"));
 
         return buttons;
     }
@@ -348,12 +382,8 @@ public class PlayerManager {
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("stop","Stop & Leave"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("skip","Next"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.success("loop","Repeat"));
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("listqueue","Queue"));
 
-        return buttons;
-    }
-    private static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> playNow() {
-        java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
-        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("skip","Play Now"));
         return buttons;
     }
     public static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> resumeORskipORstop() {
@@ -362,6 +392,7 @@ public class PlayerManager {
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("stop","Stop & Leave"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("skip","Next"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("loop","Repeat"));
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("listqueue","Queue"));
         return buttons;
     }
     public static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> resumeORskipORstopLOOP() {
@@ -370,6 +401,7 @@ public class PlayerManager {
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("stop","Stop & Leave"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("skip","Next"));
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.success("loop","Repeat"));
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("listqueue","Queue"));
         return buttons;
     }
 

@@ -36,7 +36,9 @@ public class CommandLoad {
         CommandManager.addCommand(new skip());
         CommandManager.addCommand(new loop());
         CommandManager.addCommand(new search());
-
+        CommandManager.addCommand(new join());
+        CommandManager.addCommand(new leave());
+        CommandManager.addCommand(new queue());
 
         // Always with getPrefix callable on any server
         CommandManager.addAlwaysCommand(new deletePrefix());
