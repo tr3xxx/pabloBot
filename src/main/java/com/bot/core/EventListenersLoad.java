@@ -1,5 +1,6 @@
 package com.bot.core;
 
+import com.bot.commands.games.blackjack.BjGame;
 import com.bot.commands.manage.stats.setStatsNames;
 import com.bot.commands.music.search;
 import com.bot.commands.prefix.setPrefix;
@@ -15,16 +16,17 @@ import net.dv8tion.jda.api.JDA;
 public class EventListenersLoad {
 
     public void load(JDA jda){
-                jda.addEventListener(new Boot());
-                jda.addEventListener(new setVoicehub.ButtonClick());
-                jda.addEventListener(new setPrefix.ButtonClick());
-                jda.addEventListener(new VoiceHub());
-                jda.addEventListener(new GuildJoinPrefix());
-                jda.addEventListener(new setGeneratedNames.MakeSelection());
-                jda.addEventListener(new setStatsNames.ButtonClick());
-                jda.addEventListener(new setVoiceUserLimit.ButtonClick());
-                jda.addEventListener(new MusicButtonPlayer());
-                jda.addEventListener(new search.SearchChoose());
+        jda.addEventListener(new Boot());
+        jda.addEventListener(new setVoicehub.ButtonClick());
+        jda.addEventListener(new setPrefix.ButtonClick());
+        jda.addEventListener(new VoiceHub());
+        jda.addEventListener(new GuildJoinPrefix());
+        jda.addEventListener(new setGeneratedNames.MakeSelection());
+        jda.addEventListener(new setStatsNames.ButtonClick());
+        jda.addEventListener(new setVoiceUserLimit.ButtonClick());
+        jda.addEventListener(new MusicButtonPlayer());
+        jda.addEventListener(new search.SearchChoose());
+        jda.addEventListener(new BjGame.BjListener());
 
     }
 }

@@ -3,7 +3,7 @@ package com.bot.commands.core;
 
 import com.bot.commands.basic.testCommand;
 import com.bot.commands.fun.automatCommand;
-import com.bot.commands.games.Blackjack;
+import com.bot.commands.games.blackjack.BjMain;
 import com.bot.commands.manage.stats.createStats;
 import com.bot.commands.manage.stats.setStatsNames;
 import com.bot.commands.music.*;
@@ -24,7 +24,6 @@ public class CommandLoad {
         CommandManager.addCommand(new automatCommand());
         CommandManager.addCommand(new setVoicehub());
         CommandManager.addCommand(new setPrefix());
-        CommandManager.addCommand(new Blackjack());
         CommandManager.addCommand(new createStats());
         CommandManager.addCommand(new setStatsNames());
         CommandManager.addCommand(new setGeneratedNames());
@@ -36,9 +35,8 @@ public class CommandLoad {
         CommandManager.addCommand(new skip());
         CommandManager.addCommand(new loop());
         CommandManager.addCommand(new search());
-        CommandManager.addCommand(new join());
-        CommandManager.addCommand(new leave());
-        CommandManager.addCommand(new queue());
+        CommandManager.addCommand(new BjMain());
+
 
         // Always with getPrefix callable on any server
         CommandManager.addAlwaysCommand(new deletePrefix());

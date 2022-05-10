@@ -6,9 +6,7 @@ import com.sun.management.OperatingSystemMXBean;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.events.Event;
-import net.dv8tion.jda.api.events.StatusChangeEvent;
-import org.apache.logging.log4j.core.util.SystemClock;
+
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
