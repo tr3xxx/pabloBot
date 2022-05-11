@@ -74,9 +74,14 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     String thumb = "https://img.youtube.com/vi/<insert-youtube-video-id-here>/mqdefault.jpg".replace("<insert-youtube-video-id-here>",id[1]);
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.decode(config.get("color")));
-                    eb.setTitle(":pause_button: **PAUSED**", null);
+                    eb.setTitle(":pause_button: **PAUSED** ", null);
                     eb.setImage(thumb);
-                    eb.setDescription("**"+title+"** \n("+(length/1000)/60+" min) \n by **"+author+"** \n\n "+track.getInfo().uri);
+                    if((length/1000/60)==0){
+                        eb.setDescription("**" + title + "** \n(" + ((length / 1000) -1)+ " sec) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                    }
+                    else{
+                        eb.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                    }
                     eb.setFooter("presented by " + config.get("bot_name"));
 
                     if(musicManager.scheduler.repeating){
@@ -90,7 +95,12 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.decode(config.get("color")));
                     eb.setTitle(":pause_button: **PAUSED**", null);
-                    eb.setDescription("**"+title+"** \n by **"+author+"** \n\n "+track.getInfo().uri);
+                    if((length/1000/60)==0){
+                        eb.setDescription("**" + title + "** \n(" + ((length / 1000) -1)+ " sec) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                    }
+                    else{
+                        eb.setDescription("**" + title + "** \n(" + (length / 1000) / 60 + " min) \n by **" + author + "** \n\n " + track.getInfo().uri);
+                    }
                     eb.setFooter("presented by " + config.get("bot_name"));
 
                     if(musicManager.scheduler.repeating){

@@ -2,6 +2,7 @@ package com.bot.commands.games.blackjack;
 
 import com.bot.commands.core.Command;
 import com.bot.core.config;
+import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -14,16 +15,15 @@ public class BjMain extends Command {
 
     @Override
     public String[] call() {
-        return new String[] {"blackjack"};
+        return new String[] {"blackjack","bj"};
     }
 
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
 
         event.getMessage().delete().queue();
-
-        if(!BjDraw.gameInProgress) {
-
+        log.logger.info(getClass().getName()+" was executed");
+        if(!BjDraw.gameInProgress){
             EmbedBuilder start = new EmbedBuilder();
             start.setColor(Color.decode(config.get("color")));
             start.setTitle("Blackjack", null);

@@ -116,7 +116,8 @@ public class BjGame implements Runnable {
 
                 e.getChannel().editMessageEmbedsById(messageID,em.build()).queue();
 
-                turn(pos++);
+                pos++;
+                turn(pos);
 
     }
 
