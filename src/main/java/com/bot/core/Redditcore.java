@@ -10,8 +10,6 @@ import net.dean.jraw.oauth.Credentials;
 import net.dean.jraw.oauth.OAuthHelper;
 
 import java.net.http.WebSocket;
-import java.rmi.server.UID;
-import java.util.UUID;
 
 public class Redditcore {
 
@@ -23,10 +21,8 @@ public class Redditcore {
 
     public Redditcore(){
 
-         UUID x = UUID.fromString("5c9e9d30-d22b-11ec-9d64-0242ac120002");
-
         userAgent = new UserAgent("bot","com.bot.core.Redditcore","0.0","JavaBot187");
-        credentials = Credentials.userless(config.get("CLIENTID"),config.get("REDDITCLIENTSECRET"),x);
+        credentials = Credentials.script(config.get("REDDITUSERNAME"),config.get("REDDITPASSWORD"),config.get("CLIENTID"),config.get("REDDITCLIENTSECRET"));
         adapter = new OkHttpNetworkAdapter(userAgent);
         reddit = OAuthHelper.automatic(adapter,credentials);
 
