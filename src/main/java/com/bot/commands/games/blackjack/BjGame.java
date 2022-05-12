@@ -1,6 +1,7 @@
 package com.bot.commands.games.blackjack;
 
 import com.bot.core.config;
+import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -79,7 +80,7 @@ public class BjGame implements Runnable {
 
             }
             catch (InterruptedException e){
-                e.printStackTrace();
+                log.logger.warning(e.toString());
             }
             BjDraw.buttonPushed = false;
 
