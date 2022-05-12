@@ -10,6 +10,7 @@ import com.bot.commands.music.*;
 import com.bot.commands.prefix.deletePrefix;
 import com.bot.commands.prefix.getPrefix;
 import com.bot.commands.prefix.setPrefix;
+import com.bot.commands.reddit.reddittest;
 import com.bot.commands.voice.voicehub.setGeneratedNames;
 import com.bot.commands.voice.voicehub.setVoiceUserLimit;
 import com.bot.commands.voice.voicehub.setVoicehub;
@@ -39,7 +40,7 @@ public class CommandLoad {
         CommandManager.addCommand(new leave());
         CommandManager.addCommand(new join());
         CommandManager.addCommand(new queue());
-
+        CommandManager.addCommand(new reddittest());
 
         // Always with getPrefix callable on any server
         CommandManager.addAlwaysCommand(new deletePrefix());

@@ -5,30 +5,19 @@ import com.bot.commands.core.CommandManager;
 import com.bot.core.sql.SQLiteDataSource;
 import com.bot.events.Activity;
 import com.bot.events.updateStats;
-import com.bot.listeners.Boot;
 import com.bot.log.log;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.GuildChannel;
-import net.dv8tion.jda.api.entities.Invite;
-import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import org.reflections.Reflections;
-import org.reflections.scanners.SubTypesScanner;
 
 import javax.security.auth.login.LoginException;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 
 public class bot {
@@ -59,9 +48,9 @@ public class bot {
             new updateStats();
             new console(jda);
             new Activity(jda);
+            new Redditcore();
 
-
-        } catch (LoginException  e) {
+        } catch (Exception  e) {
             log.logger.warning(e.toString());
         }
 
