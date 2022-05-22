@@ -11,7 +11,7 @@ import com.bot.commands.prefix.deletePrefix;
 import com.bot.commands.prefix.getPrefix;
 import com.bot.commands.prefix.setPrefix;
 import com.bot.commands.reddit.redditiwantevent;
-import com.bot.commands.reddit.reddittest;
+import com.bot.commands.reddit.redditcommand;
 import com.bot.commands.voice.voicehub.setGeneratedNames;
 import com.bot.commands.voice.voicehub.setVoiceUserLimit;
 import com.bot.commands.voice.voicehub.setVoicehub;
@@ -41,7 +41,7 @@ public class CommandLoad {
         CommandManager.addCommand(new leave());
         CommandManager.addCommand(new join());
         CommandManager.addCommand(new queue());
-        CommandManager.addCommand(new reddittest());
+        CommandManager.addCommand(new redditcommand());
         CommandManager.addCommand(new redditiwantevent());
 
         // Always with getPrefix callable on any server
