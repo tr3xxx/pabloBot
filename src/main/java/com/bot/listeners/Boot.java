@@ -1,5 +1,6 @@
 package com.bot.listeners;
 
+import com.bot.core.Redditcore;
 import com.bot.core.bot;
 import com.bot.log.log;
 import com.sun.management.OperatingSystemMXBean;
@@ -19,6 +20,7 @@ import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryPoolMXBean;
 import java.lang.reflect.Field;
 import java.net.InetAddress;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -111,6 +113,11 @@ public class Boot implements EventListener
                     bot.jda.shutdownNow();
                     System.exit(0);
                 }else{
+                    try {
+                        bot.loadComponents();
+                    } catch (SQLException e) {
+                        log.logger.warning(e.toString());
+                    }
                     log.logger.info("CONFIRM ONLINE");
                 }
             }

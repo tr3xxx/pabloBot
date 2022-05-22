@@ -5,6 +5,7 @@ import com.bot.commands.core.CommandManager;
 import com.bot.core.sql.SQLiteDataSource;
 import com.bot.events.Activity;
 import com.bot.events.updateStats;
+import com.bot.listeners.Boot;
 import com.bot.log.log;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -41,20 +42,24 @@ public class bot {
                     .setChunkingFilter(ChunkingFilter.ALL)
                     .setMemberCachePolicy(MemberCachePolicy.ALL)
                     .build();
+            jda.addEventListener(new Boot());
 
-            new EventListenersLoad().load(jda);
-            new CommandManager().load(jda);
-            new CommandLoad(jda);
-            new updateStats();
-            new console(jda);
-            new Activity(jda);
-            new Redditcore();
+
 
         } catch (Exception  e) {
             log.logger.warning(e.toString());
         }
 
 
+    }
+    public static void loadComponents() throws SQLException {
+        new EventListenersLoad().load(jda);
+        new CommandManager().load(jda);
+        new CommandLoad(jda);
+        new updateStats();
+        new console(jda);
+        new Activity(jda);
+        new Redditcore();
     }
 
 }

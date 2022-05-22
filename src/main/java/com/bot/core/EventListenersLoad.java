@@ -16,7 +16,7 @@ import net.dv8tion.jda.api.JDA;
 public class EventListenersLoad {
 
     public void load(JDA jda){
-        jda.addEventListener(new Boot());
+
         jda.addEventListener(new setVoicehub.ButtonClick());
         jda.addEventListener(new setPrefix.ButtonClick());
         jda.addEventListener(new VoiceHub());

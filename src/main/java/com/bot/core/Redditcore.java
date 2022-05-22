@@ -24,14 +24,11 @@ public class Redditcore {
 
     public Redditcore(){
 
-
-         UUID x = UUID.fromString("5c9e9d30-d22b-11ec-9d64-0242ac120002");
-         credentials = Credentials.userless(config.get("CLIENTID"),config.get("REDDITCLIENTSECRET"),x);
+         UUID uuid = UUID.fromString("060c43d0-d22d-11ec-9d64-0242ac120002");
+         credentials = Credentials.userless(config.get("CLIENTID"),config.get("REDDITCLIENTSECRET"),uuid);
          userAgent = new UserAgent("bot","com.bot.core.Redditcore","0.0","JavaBot187");
          adapter = new OkHttpNetworkAdapter(userAgent);
-         reddit = OAuthHelper.automatic(adapter,credentials);
-
+         reddit = OAuthHelper.automatic(adapter, credentials);
 
     }
-
 }
