@@ -91,9 +91,9 @@ public class reddittest extends Command {
         EmbeddedMedia embeddedMedia;
         String type;
 
-        DefaultPaginator<Submission> paginator = Redditcore.reddit.subreddit(redditUsed).posts().limit(68).build();
+        DefaultPaginator<Submission> paginator = Redditcore.reddit.subreddit(redditUsed).posts().limit(50).build();
 
-        int pos = ThreadLocalRandom.current().nextInt(68);
+        int pos = ThreadLocalRandom.current().nextInt(50);
 
         try {
             paginator.next();
@@ -102,11 +102,9 @@ public class reddittest extends Command {
             embeddedMedia =paginator.getCurrent().get(pos).getEmbeddedMedia();
 
             try {
-                type = embeddedMedia.getType();
-
-                if(embeddedMedia.getType().equals("youtube.com")){
-                    while (embeddedMedia.getType().equals("youtube.com")){
-                        pos = ThreadLocalRandom.current().nextInt(68);
+                if(embeddedMedia.getOEmbed().getType().equals("video")){
+                    while (embeddedMedia.getOEmbed().getType().equals("video")){
+                        pos = ThreadLocalRandom.current().nextInt(50);
                         url = paginator.getCurrent().get(pos).getUrl();
                         title = paginator.getCurrent().get(pos).getTitle();
                         embeddedMedia =paginator.getCurrent().get(pos).getEmbeddedMedia();
