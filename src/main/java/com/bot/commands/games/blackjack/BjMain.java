@@ -31,8 +31,9 @@ public class BjMain extends Command {
 
             event.getChannel().sendMessageEmbeds(start.build()).queue(message -> {
                 BjGame game = new BjGame(message.getIdLong(), event);
+                Thread gameThread = new Thread(game);
                 BjDraw.gameInProgress = true;
-                game.run();
+                gameThread.run();
                 BjDraw.gameInProgress = false;
                 try{
                     message.delete().queueAfter(3, TimeUnit.MINUTES);
