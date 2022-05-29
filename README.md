@@ -1,2 +1,1 @@
-# discord-bot-java
-java is shit
+# Readme wird überbewertet
