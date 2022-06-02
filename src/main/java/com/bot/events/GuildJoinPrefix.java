@@ -16,7 +16,7 @@ public class GuildJoinPrefix extends ListenerAdapter {
         action(event);
     }
 
-    public boolean action(GuildJoinEvent event){
+    public void action(GuildJoinEvent event){
         try (final Connection connection = SQLiteDataSource.getConnection();
              final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE prefix SET prefix = ? WHERE guildid = ?")) {
             preparedStatement.setString(1, config.get("prefix"));
@@ -24,7 +24,7 @@ public class GuildJoinPrefix extends ListenerAdapter {
             preparedStatement.executeUpdate();
 
             log.logger.info("New Server-Prefix has been set  (Server: " + event.getGuild().getName() + ", Prefix: " + config.get("prefix") + ", User: Bot");
-            return false;
+            return;
 
         } catch (SQLException e) {
             log.logger.warning(e.toString());
@@ -36,12 +36,10 @@ public class GuildJoinPrefix extends ListenerAdapter {
             preparedStatement.executeUpdate();
 
             log.logger.info("New Server-Prefix has been set  (Server: " + event.getGuild().getName() + ", Prefix: " + config.get("prefix") + ", User: Bot");
-            return false;
 
         } catch (SQLException e) {
             log.logger.warning(e.toString());
         }
-        return false;
     }
 
 }

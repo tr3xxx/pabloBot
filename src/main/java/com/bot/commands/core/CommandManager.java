@@ -5,14 +5,12 @@ import com.bot.core.config;
 import com.bot.core.sql.SQLiteDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.sqlite.SQLiteException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -45,11 +43,15 @@ public class CommandManager extends ListenerAdapter {
         String invoke = msg[0];
         try {
             getPrefix();
+            if(prefix == null){
+                registerPrefix();
+                getPrefix();
+            }
         } catch (SQLException e) {
             log.logger.warning(e.toString());
         }
-        String call = invoke.replace(prefix, "");
 
+        String call = invoke.replace(prefix, "");
 
         commands.forEach(cmd -> {
             String [] aliases = cmd.call();
@@ -96,6 +98,31 @@ public class CommandManager extends ListenerAdapter {
             log.logger.warning(e.toString());
         }
 
+    }
+
+    public void registerPrefix(){
+        try (final Connection connection = SQLiteDataSource.getConnection();
+             final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE prefix SET prefix = ? WHERE guildid = ?")) {
+            preparedStatement.setString(1, config.get("prefix"));
+            preparedStatement.setLong(2, event.getGuild().getIdLong());
+            preparedStatement.executeUpdate();
+
+            log.logger.info("New Server-Prefix has been set  (Server: " + event.getGuild().getName() + ", Prefix: " + config.get("prefix") + ", User: Bot");
+
+        } catch (SQLException e) {
+            log.logger.warning(e.toString());
+        }
+        try (final Connection connection = SQLiteDataSource.getConnection();
+             final PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO prefix(prefix,guildid) VALUES(?,?)")) {
+            preparedStatement.setString(1, config.get("prefix"));
+            preparedStatement.setLong(2, event.getGuild().getIdLong());
+            preparedStatement.executeUpdate();
+
+            log.logger.info("New Server-Prefix has been set  (Server: " + event.getGuild().getName() + ", Prefix: " + config.get("prefix") + ", User: Bot");
+
+        } catch (SQLException e) {
+            log.logger.warning(e.toString());
+        }
     }
 
 

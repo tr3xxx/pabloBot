@@ -12,14 +12,18 @@ import com.bot.commands.prefix.getPrefix;
 import com.bot.commands.prefix.setPrefix;
 import com.bot.commands.reddit.redditiwantevent;
 import com.bot.commands.reddit.redditcommand;
+import com.bot.commands.serverManage.clear;
 import com.bot.commands.voice.voicehub.setGeneratedNames;
 import com.bot.commands.voice.voicehub.setVoiceUserLimit;
 import com.bot.commands.voice.voicehub.setVoicehub;
 import net.dv8tion.jda.api.JDA;
 
+import java.util.ArrayList;
+
 
 public class CommandLoad {
     public CommandLoad(JDA jda) {
+
 
         // Normal Commands, call dependents on the servers prefix
         CommandManager.addCommand(new testCommand());
@@ -43,6 +47,7 @@ public class CommandLoad {
         CommandManager.addCommand(new queue());
         CommandManager.addCommand(new redditcommand());
         CommandManager.addCommand(new redditiwantevent());
+        CommandManager.addCommand(new clear());
 
         // Always with getPrefix callable on any server
         CommandManager.addAlwaysCommand(new deletePrefix());
