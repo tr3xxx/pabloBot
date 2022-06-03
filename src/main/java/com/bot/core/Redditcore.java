@@ -30,6 +30,6 @@ public class Redditcore {
          userAgent = new UserAgent("bot","com.bot.core.Redditcore","0.0","JavaBot187");
          adapter = new OkHttpNetworkAdapter(userAgent);
          reddit = OAuthHelper.automatic(adapter, credentials);
-         log.logger.info("Logged into Reddit");
+         log.logger.info("REDDIT STATUS: LOGGED IN AS "+config.get("CLIENTID"));
     }
 }

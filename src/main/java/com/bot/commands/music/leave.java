@@ -51,7 +51,7 @@ public class leave extends Command {
         final AudioManager audioManager = event.getGuild().getAudioManager();
         if (audioManager.isConnected()) {
             event.getMessage().delete().queue();
-            log.logger.info("Left VoiceChannel "+event.getGuild().getSelfMember().getVoiceState().getChannel()+" on "+event.getGuild().getName());
+            log.logger.info("Left VoiceChannel "+event.getGuild().getSelfMember().getVoiceState().getChannel().getName()+" on "+event.getGuild().getName());
             audioManager.closeAudioConnection();
             if( musicManager.scheduler.audioPlayer.isPaused()) {
                 musicManager.scheduler.audioPlayer.setPaused(false);

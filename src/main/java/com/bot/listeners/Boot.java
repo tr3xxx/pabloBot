@@ -15,6 +15,8 @@ import net.dv8tion.jda.api.hooks.EventListener;
 import org.jetbrains.annotations.NotNull;
 
 import javax.management.MBeanServer;
+import javax.security.auth.login.LoginException;
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryPoolMXBean;
@@ -111,7 +113,11 @@ public class Boot implements EventListener
                 if(!Boot.bootLogged) {
                     log.logger.warning("BOOT FAILED");
                     bot.jda.shutdownNow();
-                    System.exit(0);
+                    log.logger.warning("TRYING TO RESTART");
+                    try {
+                        bot.main(new String[] {});
+                    } catch (Exception ignored) {}
+                    //System.exit(0);
                 }else{
                     try {
                         bot.loadComponents();

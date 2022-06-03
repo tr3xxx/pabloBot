@@ -61,7 +61,7 @@ public class join extends Command {
             event.getMessage().delete().queue();
             final VoiceChannel memberChannel = (VoiceChannel) event.getMember().getVoiceState().getChannel();
             audioManager.openAudioConnection(memberChannel);
-            log.logger.info("Joined VoiceChannel "+event.getGuild().getSelfMember().getVoiceState().getChannel()+" on "+event.getGuild().getName());
+            log.logger.info("Joined VoiceChannel "+event.getGuild().getSelfMember().getVoiceState().getChannel().getName()+" on "+event.getGuild().getName());
         }
 
         return false;
