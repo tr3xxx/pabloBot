@@ -2,6 +2,7 @@ package com.bot.core;
 
 import com.bot.commands.core.CommandLoad;
 import com.bot.commands.core.CommandManager;
+import com.bot.commands.notifications.github.githubCore;
 import com.bot.core.sql.SQLiteDataSource;
 import com.bot.events.Activity;
 import com.bot.events.updateStats;
@@ -25,11 +26,7 @@ public class bot {
     public static JDA jda;
     public static void main(String[] args) throws LoginException, IOException, SQLException {
 
-        try {
-            new log("./logs/" + "log_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date(System.currentTimeMillis())) + ".log");
-        }catch(Exception e){
-            throw e;
-        }
+        new log("./logs/" + "log_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date(System.currentTimeMillis())) + ".log");
         SQLiteDataSource.getConnection();
 
         try {
@@ -52,7 +49,7 @@ public class bot {
 
 
     }
-    public static void loadComponents() throws SQLException {
+    public static void loadComponents() throws SQLException, IOException {
         new EventListenersLoad().load(jda);
         new CommandManager().load(jda);
         new CommandLoad(jda);
@@ -60,6 +57,7 @@ public class bot {
         new console(jda);
         new Activity(jda);
         new Redditcore();
+        new githubCore();
     }
 
 }

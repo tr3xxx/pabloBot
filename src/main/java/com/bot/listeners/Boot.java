@@ -121,7 +121,7 @@ public class Boot implements EventListener
                 }else{
                     try {
                         bot.loadComponents();
-                    } catch (SQLException e) {
+                    } catch (SQLException | IOException e) {
                         log.logger.warning(e.toString());
                     }
                     log.logger.info("CONFIRM ONLINE");
