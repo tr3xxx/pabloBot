@@ -6,10 +6,12 @@ import com.bot.core.config;
 import com.bot.core.sql.SQLiteDataSource;
 import com.bot.log.log;
 import net.dean.jraw.models.EmbeddedMedia;
+import net.dean.jraw.models.Message;
 import net.dean.jraw.models.Submission;
 import net.dean.jraw.pagination.DefaultPaginator;
 import net.dean.jraw.pagination.Paginator;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
@@ -24,10 +26,7 @@ public class redditcommand extends Command {
     String [] reddits = new String[]{
             "waifusfortr3x/waifu/false",
             "memes/meme/false",
-            "videos/vid/false",
-            "EGirls/egirls/true",
-            "LegalTeens/teens/true",
-            "porn/porn/true"
+            "vid/vid/false",
 
     };
 
@@ -36,10 +35,7 @@ public class redditcommand extends Command {
         return new String[]{
                 "waifu",
                 "meme",
-                "egirls",
                 "vid",
-                "teens",
-                "porn"
         };
     }
 
@@ -89,47 +85,34 @@ public class redditcommand extends Command {
         EmbeddedMedia embeddedMedia ;
         String type;
         boolean notNull = false;
-        DefaultPaginator<Submission> paginator = Redditcore.reddit.subreddit(redditUsed).posts().limit(Paginator.RECOMMENDED_MAX_LIMIT).build();
+        int limit = 0;
+       // if (redditUsed.equals("nsfw"))
+        DefaultPaginator<Submission> paginator = Redditcore.reddit.subreddit(redditUsed).posts().limit(100).build();
 
-        int pos = ThreadLocalRandom.current().nextInt(Paginator.RECOMMENDED_MAX_LIMIT);
-
+        int pos = ThreadLocalRandom.current().nextInt(100);
+        paginator.next();
         try {
             while(!notNull) {
                 try {
-                    paginator.next();
-                    url = paginator.getCurrent().get(pos).getUrl();
-                    title = paginator.getCurrent().get(pos).getTitle();
 
+                    url = paginator.getCurrent().get(pos).getUrl();
+
+                    title = paginator.getCurrent().get(pos).getTitle();
                     notNull = true;
-                }catch (Exception ignored){
-                    pos = ThreadLocalRandom.current().nextInt(Paginator.RECOMMENDED_MAX_LIMIT);
+                }catch (Exception e){
+                    pos = ThreadLocalRandom.current().nextInt(100);
+                    log.logger.warning(e.toString());
                 }
             }
             embeddedMedia = paginator.getCurrent().get(pos).getEmbeddedMedia();
             try {
-                if(embeddedMedia.getOEmbed().getType().equals("video")){
-
-                    while (embeddedMedia.getOEmbed().getType().equals("video")){
-                        pos = ThreadLocalRandom.current().nextInt(Paginator.RECOMMENDED_MAX_LIMIT);
-
-                        url = paginator.getCurrent().get(pos).getUrl();
-                        title = paginator.getCurrent().get(pos).getTitle();
-                        embeddedMedia = paginator.getCurrent().get(pos).getEmbeddedMedia();
-
-                        try{
-                            embeddedMedia.getOEmbed().getType();
-                        }
-                        catch (NullPointerException e){
-                            url = paginator.getCurrent().get(pos).getThumbnail();
-                        }
-
-                    }
-                }
-            }catch (NullPointerException e){
-
-            }
+                embeddedMedia.getOEmbed().getType();
 
 
+                event.getChannel().sendMessage(paginator.getCurrent().get(0).getUrl()).queue();
+                return false;
+
+            }catch (NullPointerException e){}
         }catch (Exception e){
             log.logger.warning(e.toString());
             EmbedBuilder eb = new EmbedBuilder();
