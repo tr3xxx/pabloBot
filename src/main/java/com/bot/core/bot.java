@@ -2,6 +2,7 @@ package com.bot.core;
 
 import com.bot.commands.core.CommandLoad;
 import com.bot.commands.core.CommandManager;
+import com.bot.commands.notifications.github.GithubCommitNotifications;
 import com.bot.commands.notifications.github.githubCore;
 import com.bot.core.sql.SQLiteDataSource;
 import com.bot.events.Activity;
@@ -56,6 +57,8 @@ public class bot {
         new updateStats();
         new console(jda);
         new Activity(jda);
+        new githubCore();
+        new GithubCommitNotifications();
         new Redditcore();
         new githubCore();
     }

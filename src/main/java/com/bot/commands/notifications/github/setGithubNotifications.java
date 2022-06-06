@@ -1,4 +1,4 @@
-package com.bot.commands.voice.voicehub;
+package com.bot.commands.notifications.github;
 
 import com.bot.commands.core.Command;
 import com.bot.core.config;
@@ -6,9 +6,6 @@ import com.bot.core.sql.SQLiteDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.IPermissionHolder;
-import net.dv8tion.jda.api.entities.PermissionOverride;
-import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -21,32 +18,31 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-
-public class setVoicehub extends Command {
+public class setGithubNotifications extends Command {
     String[] ch_id;
-    long cat_id;
-    long guild_id;
-
+    long channelid;
+    String repo;
     @Override
     public String[] call() {
-        return new String[] {"setVoicehub","sV"};
+        return new String[]{"setGithubNotis", "setGithubNotifications", "sGN"};
     }
 
     @Override
-    public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
-
+    public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException { //!sGN tr3xxx/PabooBot <#979405505820770314>
+                                                                                            // 0    1               2
         if (event.getChannelType().isGuild()) {
-            if (Objects.requireNonNull(event.getMember()).hasPermission(Permission.MANAGE_CHANNEL)) {
-                if (args.length == 2) {
+            if (Objects.requireNonNull(event.getMember()).hasPermission(Permission.MANAGE_SERVER)) {
+                if (args.length == 3) {
                     try {
-                        String[] trimmed = args[1].trim().split("#");
+                        String[] trimmed = args[2].trim().split("#");
                         ch_id = trimmed[1].trim().split(">");
-                        cat_id = Objects.requireNonNull(event.getGuild().getVoiceChannelById(Long.parseLong(ch_id[0]))).getParentCategoryIdLong();
-                        guild_id = event.getGuild().getIdLong();
+                        channelid = Long.parseLong(ch_id[0]);
+                        event.getGuild().getTextChannelById(channelid);
+                        if(!githubCore.testRepo(args[1])) {
+                            throw new RuntimeException("Invalid repo");
 
-
-
-
+                        }
+                        repo = args[1];
                     } catch (Exception err) {
                         EmbedBuilder e = new EmbedBuilder();
                         e.setColor(Color.red);
@@ -60,26 +56,24 @@ public class setVoicehub extends Command {
                     }
 
                     try (final Connection connection = SQLiteDataSource.getConnection();
-                         final PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO voicehub(voicehubid,categoryid,guildid,name,userlimit) VALUES(?,?,?,?,?)")) {
-                        insertStatement.setLong(1, Long.parseLong(ch_id[0]));
-                        insertStatement.setLong(2,cat_id);
-                        insertStatement.setLong(3,guild_id);
-                        insertStatement.setString(4,"Talk #{index}");
-                        insertStatement.setLong(5,69);
-                        insertStatement.execute();
+                         final PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO githubNotifications(channelid,repo,lastsha) VALUES(?,?,?)")) {
+                            insertStatement.setLong(1,channelid);
+                            insertStatement.setString(2,repo);
+                            insertStatement.setString(3,"null");
+                            insertStatement.execute();
 
-                        log.logger.info("New Voicehub has been set. (Server: " + event.getGuild().getName() + ", Channel: " + Objects.requireNonNull(event.getGuild().getGuildChannelById(Long.parseLong(ch_id[0]))).getName() + ")");
-                        EmbedBuilder e = new EmbedBuilder();
-                        e.setColor(Color.green);
-                        e.setTitle("Voicehub successfully set to '" + Objects.requireNonNull(event.getGuild().getGuildChannelById(Long.parseLong(ch_id[0]))).getName() + "'", null);
-                        e.setDescription(" ");
-                        e.setFooter("presented by " + config.get("bot_name"));
-                        event.getChannel().sendMessageEmbeds(e.build()).queue();
+                            log.logger.info("New GithubNotifications Channel has been set  (Server: " + event.getGuild().getName() + ", Repository: " + args[1] + ", User: " + event.getAuthor().getAsTag());
 
-                    } catch (SQLException e) {
-                        log.logger.warning(e.toString());
-                    }
-                } else {
+                            EmbedBuilder e = new EmbedBuilder();
+                            e.setColor(Color.green);
+                            e.setTitle("Github Notifications were successfully set", null);
+                            e.setFooter("presented by " + config.get("bot_name"));
+                            event.getChannel().sendMessageEmbeds(e.build()).queue();
+
+                        } catch (SQLException e) {
+                            log.logger.warning(e.toString());
+                        }
+                    } else {
                     EmbedBuilder e = new EmbedBuilder();
                     e.setColor(Color.red);
                     e.setTitle("Something went wrong...", null);
@@ -88,6 +82,18 @@ public class setVoicehub extends Command {
                             "Do you want to learn how to do it correctly?");
                     e.setFooter("presented by " + config.get("bot_name"));
                     event.getChannel().sendMessageEmbeds(e.build()).setActionRow(yes_noBT()).queue();
+                    return false;
+                    }
+                } else {
+                EmbedBuilder e = new EmbedBuilder();
+                e.setColor(Color.red);
+                e.setTitle("Something went wrong...", null);
+                e.setDescription("You don't have enough permissions :( " +
+                        "\n" +
+                        "In order to be able to set up Github Notifications, you need the permission to manage channels on this " +
+                        "Server");
+                e.setFooter("presented by " + config.get("bot_name"));
+                event.getChannel().sendMessageEmbeds(e.build()).queue();
 
                     return false;
 
@@ -95,47 +101,37 @@ public class setVoicehub extends Command {
 
                 return false;
             } else {
-                EmbedBuilder e = new EmbedBuilder();
-                e.setColor(Color.red);
-                e.setTitle("Something went wrong...", null);
-                e.setDescription("You don't have enough permissions :( " +
-                        "\n" +
-                        "In order to be able to create Voicehubs, you need the permission to manage channels on this " +
-                        "Server");
-                e.setFooter("presented by " + config.get("bot_name"));
-                event.getChannel().sendMessageEmbeds(e.build()).queue();
-            }
-
-
-            return false;
-        }else {
             EmbedBuilder e = new EmbedBuilder();
             e.setColor(Color.red);
             e.setTitle("Something went wrong...", null);
-            e.setDescription("Voicehubs can not be set through DM's :( " +
+            e.setDescription("Github Notifications can not be set through DM's :( " +
                     "\n" +
-                    "Please use a Server-TextChannel to set a Voicehub");
+                    "Please use a Server-TextChannel to set up Github Notifications");
             e.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(e.build()).queue();
+
+            return false;
+            }
+
+
         }
-        return false;
+
+
+    private static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> yes_noBT() {
+        java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.success("help_yesGN", "Yes"));
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("help_noGN", "No"));
+
+        return buttons;
     }
 
-        private static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> yes_noBT () {
-            java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
-            buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.success("help_yes", "Yes"));
-            buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("help_no", "No"));
-
-            return buttons;
-        }
 
 
     public static class ButtonClick extends ListenerAdapter {
         ButtonInteractionEvent e;
         String prefix;
-
         public void onButtonInteraction(ButtonInteractionEvent e) {
-            e.deferEdit().queue();
+            //e.deferEdit().queue();
             this.e = e;
             try {
                 getPrefix();
@@ -143,19 +139,20 @@ public class setVoicehub extends Command {
                 log.logger.warning(ex.toString());
             }
             switch (Objects.requireNonNull(e.getButton().getId())) {
-                case "help_yes" -> {
+                case "help_yesGN" -> {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.decode(config.get("color")));
-                    eb.setTitle("How to set a VoiceHub", null);
-                    eb.setDescription("To set a VoiceHub you need to execute: \n" +
-                            "'" + prefix + "setVoicehub <#channelid>' " +
+                    eb.setTitle("How to set up Github Notifications", null);
+                    eb.setDescription("To set up Github Notifications you need to execute: \n" +
+                            "'" + prefix + "setGithubNotifications _repository_ #channel' " +
                             "\n \n" +
-                            "Replace the 'channelid' with the ID of the desired channel"
+                            "Replace the _repository_ with your Repository in the following structure: Githubusername/Repositoryname (eg. DV8FromTheWorld/JDA) \n"+
+                            "Replace the _channel_ with channel you wish to get your Notifications"
                     );
                     eb.setFooter("presented by " + config.get("bot_name"));
-                    e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(more_helpBT()).queue();
+                    e.getChannel().sendMessageEmbeds(eb.build()).queue();
                 }
-                case "help_no" -> {
+                case "help_noGN" -> {
                     try{
                         e.getMessage().delete().queue();
                     }catch(NullPointerException ignored){}
@@ -166,13 +163,7 @@ public class setVoicehub extends Command {
 
         }
 
-        private static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> more_helpBT() {
-            java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
-            buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.link("https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-",
-                    "How to get the Channel-ID"));
 
-            return buttons;
-        }
         public void getPrefix() throws SQLException{
             String temp = null;
 
@@ -193,7 +184,5 @@ public class setVoicehub extends Command {
 
         }
     }
-
-
 }
 

@@ -2,6 +2,8 @@ package com.bot.commands.notifications.github;
 
 import com.bot.core.bot;
 import com.bot.core.config;
+import com.bot.core.sql.SQLiteDataSource;
+import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Channel;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -13,19 +15,42 @@ import org.kohsuke.github.GitHubBuilder;
 import java.awt.*;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class githubCore {
-    public static GHCommit lastCommit;
     public static GitHub github;
-    String affectedFiles=null;
-    public githubCore() throws IOException {github = GitHubBuilder.fromPropertyFile(".github/github.properties").build();getLastCommit();}
+    static String affectedFiles=null;
+    public static String newsha = null;
+    public githubCore() throws IOException {github = GitHubBuilder.fromPropertyFile(".github/github.properties").build();}
 
-    public void getLastCommit() throws IOException {
-        GHRepository repo = github.getRepository("tr3xxx/pabloBot");
+    public static boolean testRepo(String repo) {
+        try{
+            GHRepository repository = github.getRepository(repo);
+            String fullName = repository.getFullName();
+            if(repo.equals(fullName)){
+                return true;
+            }
+        } catch (IOException e) {
+            return false;
+        }
+        return false;
+    }
+
+    public static boolean getLastCommit(String repoFullName, Long channelid, String lastsha) throws IOException, SQLException {
+       // GHRepository repo = github.getRepository("tr3xxx/pabloBot");
+
+        GHRepository repo = github.getRepository(repoFullName);
         List<GHCommit> commits = repo.listCommits().toList();
-        lastCommit = commits.get(0);
+        GHCommit lastCommit = commits.get(0);
+        if(lastsha != null){
+            if(lastsha.equals(lastCommit.getSHA1()) ){
+                return false;
+            }
+        }
         String CommiterURL = String.valueOf(lastCommit.getAuthor().getUrl());
         EmbedBuilder eb = new EmbedBuilder();
         List<GHCommit.File> files = lastCommit.getFiles();
@@ -42,7 +67,9 @@ public class githubCore {
         files.forEach(file -> {
             String[] fileParts = file.getFileName().trim().split("/");
             String fileName = fileParts[fileParts.length-1];
-            affectedFiles = affectedFiles + "\n" + fileName;
+            if(!affectedFiles.contains(fileName)){
+                affectedFiles = affectedFiles + "\n" + fileName;
+            }
             if(affectedFiles.length()>500){
                 affectedFiles = affectedFiles + "\n" + "...";
             }
@@ -64,7 +91,10 @@ public class githubCore {
         String repoUrl = "https://github.com/"+repo.getFullName();
         String commitUrl = repoUrl+"/commit/"+lastCommit.getSHA1();
 
-        bot.jda.getTextChannelById("979405429442478080").sendMessageEmbeds(eb.build()).setActionRow(repo_commit(repoUrl,commitUrl)).queue();
+        newsha = lastCommit.getSHA1();
+        bot.jda.getTextChannelById(channelid).sendMessageEmbeds(eb.build()).setActionRow(repo_commit(repoUrl,commitUrl)).queue();
+
+        return true;
     }
     private static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> repo_commit (String repo,String commit) {
         java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();

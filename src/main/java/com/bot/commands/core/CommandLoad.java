@@ -8,6 +8,7 @@ import com.bot.commands.games.russianRoulette.RussianRouletteMain;
 import com.bot.commands.manage.stats.createStats;
 import com.bot.commands.manage.stats.setStatsNames;
 import com.bot.commands.music.*;
+import com.bot.commands.notifications.github.setGithubNotifications;
 import com.bot.commands.prefix.deletePrefix;
 import com.bot.commands.prefix.getPrefix;
 import com.bot.commands.prefix.setPrefix;
@@ -48,6 +49,7 @@ public class CommandLoad {
         CommandManager.addCommand(new redditiwantevent());
         CommandManager.addCommand(new clear());
         CommandManager.addCommand(new RussianRouletteMain());
+        CommandManager.addCommand(new setGithubNotifications());
 
         // Always with getPrefix callable on any server
         CommandManager.addAlwaysCommand(new deletePrefix());

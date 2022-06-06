@@ -3,6 +3,7 @@ package com.bot.core;
 import com.bot.commands.games.blackjack.BjGame;
 import com.bot.commands.manage.stats.setStatsNames;
 import com.bot.commands.music.search;
+import com.bot.commands.notifications.github.setGithubNotifications;
 import com.bot.commands.prefix.setPrefix;
 import com.bot.commands.voice.voicehub.setGeneratedNames;
 import com.bot.commands.voice.voicehub.setVoiceUserLimit;
@@ -27,6 +28,7 @@ public class EventListenersLoad {
         jda.addEventListener(new MusicButtonPlayer());
         jda.addEventListener(new search.SearchChoose());
         jda.addEventListener(new BjGame.BjListener());
+        jda.addEventListener(new setGithubNotifications.ButtonClick());
 
     }
 }

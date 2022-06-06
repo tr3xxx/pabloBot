@@ -45,6 +45,7 @@ public class SQLiteDataSource {
             statement.execute("CREATE TABLE IF NOT EXISTS voicehub (voicehubid INTEGER, categoryid INTEGER, guildid INTEGER,name STRING, userlimit INTEGER)");
             statement.execute("CREATE TABLE IF NOT EXISTS prefix (prefix STRING, guildid INTEGER)");
             statement.execute("CREATE TABLE IF NOT EXISTS stats(namemember STRING,namebooster STRING,nameonline STRING, categoryid INTEGER, memberid INTEGER,onlineid INTEGER, boosterid INTEGER)");
+            statement.execute("CREATE TABLE IF NOT EXISTS githubNotifications(channel INTEGER,repo STRING,lastsha STRING)");
         } catch (SQLException e) {
             log.logger.warning(e.toString());
         }
