@@ -1,16 +1,15 @@
 package com.bot.core;
 
-import com.bot.commands.games.blackjack.BjGame;
-import com.bot.commands.manage.stats.setStatsNames;
-import com.bot.commands.music.search;
-import com.bot.commands.notifications.github.setGithubNotifications;
-import com.bot.commands.prefix.setPrefix;
-import com.bot.commands.voice.voicehub.setGeneratedNames;
-import com.bot.commands.voice.voicehub.setVoiceUserLimit;
-import com.bot.commands.voice.voicehub.setVoicehub;
+import com.bot.abilities.games.blackjack.BjGame;
+import com.bot.abilities.manage.stats.setStatsNames;
+import com.bot.abilities.music.search;
+import com.bot.abilities.notifications.github.setGithubNotifications;
+import com.bot.abilities.prefix.setPrefix;
+import com.bot.abilities.voice.voicehub.setGeneratedNames;
+import com.bot.abilities.voice.voicehub.setVoiceUserLimit;
+import com.bot.abilities.voice.voicehub.setVoicehub;
 import com.bot.events.GuildJoinPrefix;
 import com.bot.lavaplayer.MusicButtonPlayer;
-import com.bot.listeners.Boot;
 import com.bot.listeners.VoiceHub;
 import net.dv8tion.jda.api.JDA;
 

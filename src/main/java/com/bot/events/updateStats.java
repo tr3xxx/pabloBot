@@ -84,7 +84,7 @@ public class updateStats {
                 }
             }
         } catch (SQLException e) {
-            log.logger.warning(e.toString());
+            log.logger.warning(getClass()+": "+e.toString());
         }
         return false;
     }

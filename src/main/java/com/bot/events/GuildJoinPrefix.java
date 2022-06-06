@@ -27,7 +27,7 @@ public class GuildJoinPrefix extends ListenerAdapter {
             return;
 
         } catch (SQLException e) {
-            log.logger.warning(e.toString());
+            log.logger.warning(getClass()+": "+e.toString());
         }
         try (final Connection connection = SQLiteDataSource.getConnection();
              final PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO prefix(prefix,guildid) VALUES(?,?)")) {
@@ -38,7 +38,7 @@ public class GuildJoinPrefix extends ListenerAdapter {
             log.logger.info("New Server-Prefix has been set  (Server: " + event.getGuild().getName() + ", Prefix: " + config.get("prefix") + ", User: Bot");
 
         } catch (SQLException e) {
-            log.logger.warning(e.toString());
+            log.logger.warning(getClass()+": "+e.toString());
         }
     }
 

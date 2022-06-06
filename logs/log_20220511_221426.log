@@ -28,5 +28,5 @@
 [2022-05-11 22:14:28] [INFORMATION] VERIFIED: true 
 [2022-05-11 22:14:28] [INFORMATION] --------------------- 
 [2022-05-11 22:14:28] [INFORMATION] CONFIRM ONLINE 
-[2022-05-11 22:14:47] [INFORMATION] com.bot.commands.games.blackjack.BjMain was executed 
+[2022-05-11 22:14:47] [INFORMATION] com.bot.abilities.games.blackjack.BjMain was executed
 [2022-05-11 22:15:11] [INFORMATION] SHUTTING DOWN... 

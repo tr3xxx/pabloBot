@@ -1,9 +1,9 @@
 package com.bot.core;
 
-import com.bot.commands.core.CommandLoad;
-import com.bot.commands.core.CommandManager;
-import com.bot.commands.notifications.github.GithubCommitNotifications;
-import com.bot.commands.notifications.github.githubCore;
+import com.bot.abilities.core.CommandLoad;
+import com.bot.abilities.core.CommandManager;
+import com.bot.abilities.notifications.github.GithubCommitNotifications;
+import com.bot.abilities.notifications.github.githubCore;
 import com.bot.core.sql.SQLiteDataSource;
 import com.bot.events.Activity;
 import com.bot.events.updateStats;
@@ -45,7 +45,7 @@ public class bot {
 
 
         } catch (Exception  e) {
-            log.logger.warning(e.toString());
+            log.logger.warning(bot.class +": "+e.toString());
         }
 
 

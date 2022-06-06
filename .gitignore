@@ -89,3 +89,7 @@ hs_err_pid*
 /logs/log_20220508_120136.log
 /logs/log_20220508_121028.log
 .env
+*.log
+*.log
+*.log
+logs/log_20220508_143013.log

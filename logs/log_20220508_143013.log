@@ -28,5 +28,5 @@
 [2022-05-08 14:30:15] [INFORMATION] VERIFIED: true 
 [2022-05-08 14:30:15] [INFORMATION] --------------------- 
 [2022-05-08 14:30:15] [INFORMATION] CONFIRM ONLINE 
-[2022-05-08 14:30:53] [INFORMATION] [com.bot.commands.basic.testCommand] was executed by tr3x#2735 on 'JAVA BOT SERVER' 
+[2022-05-08 14:30:53] [INFORMATION] [com.bot.abilities.basic.testCommand] was executed by tr3x#2735 on 'JAVA BOT SERVER'
 [2022-05-08 14:32:24] [INFORMATION] SHUTTING DOWN... 

@@ -1,6 +1,5 @@
 package com.bot.listeners;
 
-import com.bot.commands.voice.voicehub.setGeneratedNames;
 import com.bot.core.sql.SQLiteDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.entities.*;
@@ -84,7 +83,7 @@ public class VoiceHub extends ListenerAdapter {
                 }
             }
         } catch (SQLException ex) {
-            log.logger.warning(e.toString());
+            log.logger.warning(getClass()+": "+e.toString());
         }
     }
 
@@ -100,7 +99,7 @@ public class VoiceHub extends ListenerAdapter {
                 }
             }
         } catch (SQLDataException e) {
-            log.logger.warning(e.toString());
+            log.logger.warning(getClass()+": "+e.toString());
         }
         return false;
     }
@@ -119,7 +118,7 @@ public class VoiceHub extends ListenerAdapter {
                 }
             }
         } catch (SQLDataException e) {
-            log.logger.warning(e.toString());
+            log.logger.warning(getClass()+": "+e.toString());
         }
         return false;
     }
@@ -143,7 +142,7 @@ public class VoiceHub extends ListenerAdapter {
                 }
             }
         } catch (SQLDataException e) {
-            log.logger.warning(e.toString());
+            log.logger.warning(getClass()+": "+e.toString());
         }
         return false;
 
@@ -161,7 +160,7 @@ public class VoiceHub extends ListenerAdapter {
                 }
             }
         } catch (SQLException e) {
-            log.logger.warning(e.toString());
+            log.logger.warning(getClass()+": "+e.toString());
         }
         return false;
     }
