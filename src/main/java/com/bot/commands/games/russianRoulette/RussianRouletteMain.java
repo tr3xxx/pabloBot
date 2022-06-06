@@ -2,6 +2,7 @@ package com.bot.commands.games.russianRoulette;
 
 import com.bot.commands.core.Command;
 import com.bot.core.config;
+import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -18,6 +19,8 @@ public class RussianRouletteMain extends Command {
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
 
+        log.logger.info(getClass().getName()+" was executed");
+        
         event.getMessage().delete().queue();
 
         boolean failed = false;
