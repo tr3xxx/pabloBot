@@ -4,6 +4,7 @@ package com.bot.commands.core;
 import com.bot.commands.basic.testCommand;
 import com.bot.commands.fun.automatCommand;
 import com.bot.commands.games.blackjack.BjMain;
+import com.bot.commands.games.russianRoulette.RussianRouletteMain;
 import com.bot.commands.manage.stats.createStats;
 import com.bot.commands.manage.stats.setStatsNames;
 import com.bot.commands.music.*;
@@ -17,8 +18,6 @@ import com.bot.commands.voice.voicehub.setGeneratedNames;
 import com.bot.commands.voice.voicehub.setVoiceUserLimit;
 import com.bot.commands.voice.voicehub.setVoicehub;
 import net.dv8tion.jda.api.JDA;
-
-import java.util.ArrayList;
 
 
 public class CommandLoad {
@@ -48,6 +47,7 @@ public class CommandLoad {
         CommandManager.addCommand(new redditcommand());
         CommandManager.addCommand(new redditiwantevent());
         CommandManager.addCommand(new clear());
+        CommandManager.addCommand(new RussianRouletteMain());
 
         // Always with getPrefix callable on any server
         CommandManager.addAlwaysCommand(new deletePrefix());
