@@ -6,8 +6,10 @@ import com.bot.core.sql.SQLiteDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageHistory;
+import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -17,30 +19,30 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class clear extends Command {
-    int value;
-
+public class timeout extends Command {
+    Member member;
+    String [] id;
     @Override
     public String[] call() {
-        return new String[]{"clear", "deleteLast"};
+        return new String[] {"timeout"};
     }
 
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
-
-        if(!(Objects.requireNonNull(event.getMember())).hasPermission(Permission.MESSAGE_MANAGE)){
+        if(!(Objects.requireNonNull(event.getMember())).hasPermission(Permission.MODERATE_MEMBERS)){
             EmbedBuilder e = new EmbedBuilder();
             e.setColor(Color.red);
             e.setTitle("Something went wrong...", null);
             e.setDescription("You don't have enough permissions :( " +
                     "\n" +
-                    "In order to be able to delete Messages, you need the permission to " +
-                    "manage Messages on this Server");
+                    "In order to be able to timeout Members, you need the permission to " +
+                    "moderate Members on this Server");
             e.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(e.build()).queue(m -> {
                 try{
@@ -49,8 +51,7 @@ public class clear extends Command {
 
             });
         }
-
-        if (args.length != 2) {
+        if (args.length > 4) {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setColor(Color.red);
             eb.setTitle("Something went wrong...", null);
@@ -67,7 +68,22 @@ public class clear extends Command {
             return false;
         }
         try {
-            value = Integer.parseInt(args[1]) + 1;
+            String[] trimmed = args[1].trim().split("@");
+            id = trimmed[1].trim().split(">");
+            long memberid = Long.parseLong(id[0]);
+            member = event.getGuild().getMemberById(memberid);
+            long amount = Long.parseLong(args[2]);
+
+            if(args[3].equalsIgnoreCase("d")){
+                    member.timeoutFor(Duration.ofDays(amount)).queue();
+            }
+            else if(args[3].equalsIgnoreCase("h")){
+                    member.timeoutFor(Duration.ofHours(amount)).queue();
+            }
+            else if(args[3].equalsIgnoreCase("m")){
+                    member.timeoutFor(Duration.ofMinutes(amount)).queue();
+            }
+
         } catch (Exception e) {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setColor(Color.red);
@@ -84,32 +100,14 @@ public class clear extends Command {
             });
             return false;
         }
-        MessageHistory history = event.getChannel().getHistory();
-
-        List<Message> retrievedHistory = history.retrievePast(value).complete();
-        if(history.getRetrievedHistory().size()<value){
-            value = history.getRetrievedHistory().size();
-        }
-        for (int i = 0; i < value; i++) {
-            retrievedHistory.get(i).delete().queue();
-        }
-        EmbedBuilder e = new EmbedBuilder();
-        e.setColor(Color.green);
-        e.setTitle(value-1 + " Messages got deleted", null);
-        e.setFooter("presented by " + config.get("bot_name"));
-        event.getChannel().sendMessageEmbeds(e.build()).queue(m -> {
-            try{
-                m.delete().queueAfter(10, TimeUnit.SECONDS);
-            }catch(NullPointerException ignored){}
-
-        });
+        event.getMessage().delete().queue();
         return false;
     }
 
     private static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> yes_noBT() {
         java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
-        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.success("help_yesClear", "Yes"));
-        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("help_noClear", "No"));
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.success("help_yestimeout", "Yes"));
+        buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("help_notimeout", "No"));
 
         return buttons;
     }
@@ -126,14 +124,16 @@ public class clear extends Command {
                 log.logger.warning(ex.toString());
             }
             switch (Objects.requireNonNull(e.getButton().getId())) {
-                case "help_yesClear" -> {
+                case "help_yestimeout" -> {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.decode(config.get("color")));
-                    eb.setTitle("How to delete Messages", null);
-                    eb.setDescription("To delete Messages you need to execute: \n" +
-                            "'" + prefix + "clear _amount_' " +
+                    eb.setTitle("How to timeout a Member", null);
+                    eb.setDescription("To timeout a Member you need to execute: \n" +
+                            "'" + prefix + "timeout _@member_ _amount_ _unit_' " +
                             "\n \n" +
-                            "Replace _amount_ with the amount of Messages you want to delete"
+                            "Replace _@member_ with the Member you want to kick \n"+
+                            "Replace _amount_ with the length of time\n"+
+                            "Replace _unit_ with \n_D_ for Days (max. 7 Days)\n _H_ for Hours (max. 167) \n _M_ for Minutes (max. 60)\n"
                     );
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
@@ -143,7 +143,7 @@ public class clear extends Command {
 
                     });
                 }
-                case "help_noClear" -> {
+                case "help_notimeout" -> {
                     try{
                         e.getMessage().delete().queue();
                     }catch(NullPointerException ignored){}
