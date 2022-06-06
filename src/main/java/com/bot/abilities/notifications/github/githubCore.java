@@ -66,10 +66,10 @@ public class githubCore {
             if(!affectedFiles.contains(fileName)){
                 affectedFiles = affectedFiles + "\n" + fileName;
             }
-            if(affectedFiles.length()>500){
-                affectedFiles = affectedFiles + "\n" + "...";
-            }
         });
+        if(affectedFiles.length()>500){
+            affectedFiles = affectedFiles.substring(1,500) + "\n" + "...";
+        }
         eb.setColor(Color.black);
         eb.setTitle("Commit "+sha+" ("+repo.getFullName()+")", null);
         eb.setThumbnail("https://logos-world.net/wp-content/uploads/2020/11/GitHub-Logo-700x394.png");
