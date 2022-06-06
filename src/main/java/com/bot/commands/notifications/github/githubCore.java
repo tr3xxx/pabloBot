@@ -98,6 +98,7 @@ public class githubCore {
         try {
             bot.jda.getTextChannelById(channelid).sendMessageEmbeds(eb.build()).setActionRow(repo_commit(repoUrl, commitUrl)).queue();
         }catch(Exception ignored){}
+        affectedFiles = null;
 
         return true;
     }
