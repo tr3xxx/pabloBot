@@ -53,6 +53,9 @@ public class githubCore {
         if(linesChanged>0){
             addedOrDeleted  = "added";
         }
+        else if(linesChanged==0){
+            addedOrDeleted = "added/deleted";
+        }
         else{
             addedOrDeleted = "deleted";
         }
