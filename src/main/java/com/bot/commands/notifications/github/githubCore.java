@@ -67,6 +67,9 @@ public class githubCore {
         files.forEach(file -> {
             String[] fileParts = file.getFileName().trim().split("/");
             String fileName = fileParts[fileParts.length-1];
+            if(affectedFiles == null){
+                affectedFiles = affectedFiles + "\n" + fileName;
+            }
             if(!affectedFiles.contains(fileName)){
                 affectedFiles = affectedFiles + "\n" + fileName;
             }
@@ -92,7 +95,9 @@ public class githubCore {
         String commitUrl = repoUrl+"/commit/"+lastCommit.getSHA1();
 
         newsha = lastCommit.getSHA1();
-        bot.jda.getTextChannelById(channelid).sendMessageEmbeds(eb.build()).setActionRow(repo_commit(repoUrl,commitUrl)).queue();
+        try {
+            bot.jda.getTextChannelById(channelid).sendMessageEmbeds(eb.build()).setActionRow(repo_commit(repoUrl, commitUrl)).queue();
+        }catch(Exception ignored){}
 
         return true;
     }
