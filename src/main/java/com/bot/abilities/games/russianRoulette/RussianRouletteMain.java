@@ -20,7 +20,7 @@ public class RussianRouletteMain extends Command {
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
 
         log.logger.info(getClass().getName()+" was executed");
-        
+
         event.getMessage().delete().queue();
 
         boolean failed = false;
@@ -60,7 +60,7 @@ public class RussianRouletteMain extends Command {
         if(failed){
             EmbedBuilder eFailed = new EmbedBuilder();
             eFailed.setTitle("How To Play RRL");
-            eFailed.setDescription(config.get("Prefix") + "rrl"+ " size shots rounds"+"\n"+" size between 5 and 10, shots and rounds < size");
+            eFailed.setDescription(config.get("Prefix") + "rrl"+ " size shots rounds"+"\n"+" size between 5 and 10, shots and rounds <= size");
             eFailed.setFooter("presented by " + config.get("bot_name"));
 
             event.getChannel().sendMessageEmbeds(eFailed.build()).queue(message -> {
