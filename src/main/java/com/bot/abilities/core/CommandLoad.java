@@ -14,7 +14,10 @@ import com.bot.abilities.prefix.getPrefix;
 import com.bot.abilities.prefix.setPrefix;
 import com.bot.abilities.reddit.redditiwantevent;
 import com.bot.abilities.reddit.redditcommand;
+import com.bot.abilities.serverManage.ban;
 import com.bot.abilities.serverManage.clear;
+import com.bot.abilities.serverManage.kick;
+import com.bot.abilities.serverManage.timeout;
 import com.bot.abilities.voice.voicehub.setGeneratedNames;
 import com.bot.abilities.voice.voicehub.setVoiceUserLimit;
 import com.bot.abilities.voice.voicehub.setVoicehub;
@@ -50,6 +53,9 @@ public class CommandLoad {
         CommandManager.addCommand(new clear());
         CommandManager.addCommand(new RussianRouletteMain());
         CommandManager.addCommand(new setGithubNotifications());
+        CommandManager.addCommand(new ban());
+        CommandManager.addCommand(new kick());
+        CommandManager.addCommand(new timeout());
 
         // Always with getPrefix callable on any server
         CommandManager.addAlwaysCommand(new deletePrefix());

@@ -5,6 +5,10 @@ import com.bot.abilities.manage.stats.setStatsNames;
 import com.bot.abilities.music.search;
 import com.bot.abilities.notifications.github.setGithubNotifications;
 import com.bot.abilities.prefix.setPrefix;
+import com.bot.abilities.serverManage.ban;
+import com.bot.abilities.serverManage.clear;
+import com.bot.abilities.serverManage.kick;
+import com.bot.abilities.serverManage.timeout;
 import com.bot.abilities.voice.voicehub.setGeneratedNames;
 import com.bot.abilities.voice.voicehub.setVoiceUserLimit;
 import com.bot.abilities.voice.voicehub.setVoicehub;
@@ -28,6 +32,10 @@ public class EventListenersLoad {
         jda.addEventListener(new search.SearchChoose());
         jda.addEventListener(new BjGame.BjListener());
         jda.addEventListener(new setGithubNotifications.ButtonClick());
+        jda.addEventListener(new clear.ButtonClick());
+        jda.addEventListener(new ban.ButtonClick());
+        jda.addEventListener(new kick.ButtonClick());
+        jda.addEventListener(new timeout.ButtonClick());
 
     }
 }

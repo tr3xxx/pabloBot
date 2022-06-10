@@ -3,10 +3,13 @@ package com.bot.abilities.core;
 import com.bot.core.config;
 import com.bot.core.sql.SQLiteDataSource;
 import com.bot.log.log;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -23,7 +26,6 @@ public class CommandManager extends ListenerAdapter {
     }
 
     public static void addCommand(Object obj){
-
         commands.add((Command) obj);
     }
 
@@ -33,6 +35,19 @@ public class CommandManager extends ListenerAdapter {
     }
 
     public void onMessageReceived(MessageReceivedEvent event) {
+        if(!event.getChannelType().isGuild()) {
+            EmbedBuilder e = new EmbedBuilder();
+            e.setColor(Color.red);
+            e.setTitle("Unfortunately I can't help you further here in a Direct Message Chat, please use a server next time", null);
+            e.setFooter("presented by " + config.get("bot_name"));
+
+            PrivateChannel channel = event.getMessage().getAuthor().openPrivateChannel().complete();
+            try{
+                channel.sendMessageEmbeds(e.build()).queue();
+            }catch(Exception ignored){}
+
+        }
+
         this.event = event;
 
         String[] msg = event.getMessage().getContentRaw().trim().split(" ");
