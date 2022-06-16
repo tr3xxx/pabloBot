@@ -1,6 +1,6 @@
 package com.bot.abilities.notifications.github;
 
-import com.bot.core.sql.SQLiteDataSource;
+import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 
 import java.sql.Connection;
@@ -16,7 +16,7 @@ public class GithubCommitNotifications {
     public GithubCommitNotifications() {
         new Timer().schedule(new TimerTask() {
             public void run() {
-                try (final Connection connection = SQLiteDataSource.getConnection();
+                try (final Connection connection = SQLDataSource.getConnection();
                      final PreparedStatement preparedStatement = connection.prepareStatement("SELECT channelid,repo,lastsha FROM githubNotifications")) {
                     try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                         while(resultSet.next()) {

@@ -1,7 +1,7 @@
 package com.bot.events;
 
 import com.bot.core.bot;
-import com.bot.core.sql.SQLiteDataSource;
+import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Member;
@@ -9,7 +9,6 @@ import net.dv8tion.jda.api.entities.VoiceChannel;
 
 import java.sql.*;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class updateStats {
     static boolean firstRun = true;
@@ -30,14 +29,14 @@ public class updateStats {
         }, 0, 30000); // 30000 = 5min, more than 2x Request in 10min would end in being rate limited
     }
     public boolean update(){
-        try (final Connection connection = SQLiteDataSource.getConnection();
+        try (final Connection connection = SQLDataSource.getConnection();
              final PreparedStatement preparedStatement = connection.prepareStatement("SELECT memberid,onlineid,boosterid FROM stats")) {
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                 while(resultSet.next()){
                     memberid = resultSet.getLong("memberid");
                     onlineid = resultSet.getLong("onlineid");
                     boosterid = resultSet.getLong("boosterid");
-                    try (final Connection connection1 = SQLiteDataSource.getConnection();
+                    try (final Connection connection1 = SQLDataSource.getConnection();
                          final PreparedStatement preparedStatement1 =connection1.prepareStatement("SELECT nameonline,namemember,namebooster FROM stats WHERE memberid = ? OR onlineid = ? OR boosterid = ? ")) {
                         preparedStatement1.setLong(1,memberid);
                         preparedStatement1.setLong(2,onlineid);

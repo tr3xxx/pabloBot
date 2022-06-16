@@ -1,7 +1,7 @@
 package com.bot.abilities.core;
 
 import com.bot.core.config;
-import com.bot.core.sql.SQLiteDataSource;
+import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -79,7 +79,7 @@ public class CommandManager extends ListenerAdapter {
     public void getPrefix() throws SQLException{
         String temp = null;
 
-        try (final Connection connection = SQLiteDataSource.getConnection();
+        try (final Connection connection = SQLDataSource.getConnection();
              final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
             preparedStatement.setLong(1, event.getGuild().getIdLong());
             try(final ResultSet resultSet = preparedStatement.executeQuery()){
@@ -97,7 +97,7 @@ public class CommandManager extends ListenerAdapter {
     }
 
     public void registerPrefix(){
-        try (final Connection connection = SQLiteDataSource.getConnection();
+        try (final Connection connection = SQLDataSource.getConnection();
              final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE prefix SET prefix = ? WHERE guildid = ?")) {
             preparedStatement.setString(1, config.get("prefix"));
             preparedStatement.setLong(2, event.getGuild().getIdLong());
@@ -108,7 +108,7 @@ public class CommandManager extends ListenerAdapter {
         } catch (SQLException e) {
             log.logger.warning(getClass()+": "+e.toString());
         }
-        try (final Connection connection = SQLiteDataSource.getConnection();
+        try (final Connection connection = SQLDataSource.getConnection();
              final PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO prefix(prefix,guildid) VALUES(?,?)")) {
             preparedStatement.setString(1, config.get("prefix"));
             preparedStatement.setLong(2, event.getGuild().getIdLong());

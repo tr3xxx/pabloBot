@@ -4,7 +4,7 @@ import com.bot.abilities.core.CommandLoad;
 import com.bot.abilities.core.CommandManager;
 import com.bot.abilities.notifications.github.GithubCommitNotifications;
 import com.bot.abilities.notifications.github.githubCore;
-import com.bot.core.sql.SQLiteDataSource;
+import com.bot.core.sql.SQLDataSource;
 import com.bot.events.Activity;
 import com.bot.events.updateStats;
 import com.bot.listeners.Boot;
@@ -28,7 +28,8 @@ public class bot {
     public static void main(String[] args) throws LoginException, IOException, SQLException {
 
         new log("./logs/" + "log_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date(System.currentTimeMillis())) + ".log");
-        SQLiteDataSource.getConnection();
+
+
 
         try {
             jda = JDABuilder.createDefault(config.get("token"))

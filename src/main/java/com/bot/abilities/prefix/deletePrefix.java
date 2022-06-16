@@ -2,7 +2,7 @@ package com.bot.abilities.prefix;
 
 import com.bot.abilities.core.Command;
 import com.bot.core.config;
-import com.bot.core.sql.SQLiteDataSource;
+import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
@@ -27,7 +27,7 @@ public class deletePrefix extends Command
         if (event.getChannelType().isGuild()) {
             if (Objects.requireNonNull(event.getMember()).hasPermission(Permission.MANAGE_SERVER)) {
 
-                try (final Connection connection = SQLiteDataSource.getConnection();
+                try (final Connection connection = SQLDataSource.getConnection();
                      final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE prefix SET prefix = ? WHERE guildid = ?")) {
                     preparedStatement.setString(1, config.get("prefix"));
                     preparedStatement.setLong(2, event.getGuild().getIdLong());

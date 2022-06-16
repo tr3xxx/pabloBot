@@ -3,7 +3,7 @@ package com.bot.abilities.reddit;
 import com.bot.abilities.core.Command;
 import com.bot.core.Redditcore;
 import com.bot.core.config;
-import com.bot.core.sql.SQLiteDataSource;
+import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 import net.dean.jraw.models.EmbeddedMedia;
 import net.dean.jraw.models.Submission;
@@ -138,7 +138,7 @@ public class redditcommand extends Command {
     public void getPrefix() throws SQLException{
         String temp = null;
 
-        try (final Connection connection = SQLiteDataSource.getConnection();
+        try (final Connection connection = SQLDataSource.getConnection();
              final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
             preparedStatement.setLong(1, e.getGuild().getIdLong());
             try(final ResultSet resultSet = preparedStatement.executeQuery()){

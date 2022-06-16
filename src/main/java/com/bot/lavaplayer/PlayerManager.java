@@ -1,8 +1,6 @@
 package com.bot.lavaplayer;
 
-import com.bot.core.bot;
 import com.bot.core.config;
-import com.bot.core.sql.SQLiteDataSource;
 import com.bot.log.log;
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
@@ -14,19 +12,11 @@ import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.interactions.components.LayoutComponent;
 import net.dv8tion.jda.api.managers.AudioManager;
 import org.apache.commons.collections4.map.HashedMap;
 
-import javax.sound.sampled.AudioSystem;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;

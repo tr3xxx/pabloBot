@@ -3,7 +3,7 @@ package com.bot.abilities.manage.stats;
 import com.bot.abilities.core.Command;
 import com.bot.core.bot;
 import com.bot.core.config;
-import com.bot.core.sql.SQLiteDataSource;
+import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -81,7 +81,7 @@ public class setStatsNames extends Command {
                     channelname = channelname.replace("{Counter}", "{counter}");
                     switch (args[2].toLowerCase()) {
                         case "m":
-                            try (final Connection connection = SQLiteDataSource.getConnection();
+                            try (final Connection connection = SQLDataSource.getConnection();
                                  final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE stats SET namemember = ? WHERE memberid = ?")) {
                                 preparedStatement.setString(1, channelname);
                                 preparedStatement.setLong(2, channelid);
@@ -106,7 +106,7 @@ public class setStatsNames extends Command {
                             }
                             break;
                         case "o":
-                            try (final Connection connection = SQLiteDataSource.getConnection();
+                            try (final Connection connection = SQLDataSource.getConnection();
                                  final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE stats SET nameonline = ? WHERE memberid = ?")) {
                                 preparedStatement.setString(1, channelname);
                                 preparedStatement.setLong(2, channelid);
@@ -137,7 +137,7 @@ public class setStatsNames extends Command {
                             }
                             break;
                         case "b":
-                            try (final Connection connection = SQLiteDataSource.getConnection();
+                            try (final Connection connection = SQLDataSource.getConnection();
                                  final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE stats SET namebooster = ? WHERE memberid = ?")) {
                                 preparedStatement.setString(1, channelname);
                                 preparedStatement.setLong(2, channelid);
@@ -273,7 +273,7 @@ public class setStatsNames extends Command {
         public void getPrefix() throws SQLException{
             String temp = null;
 
-            try (final Connection connection = SQLiteDataSource.getConnection();
+            try (final Connection connection = SQLDataSource.getConnection();
                  final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
                 preparedStatement.setLong(1, e.getGuild().getIdLong());
                 try(final ResultSet resultSet = preparedStatement.executeQuery()){

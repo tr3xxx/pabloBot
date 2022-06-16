@@ -2,7 +2,7 @@ package com.bot.abilities.manage.stats;
 
 import com.bot.abilities.core.Command;
 import com.bot.core.config;
-import com.bot.core.sql.SQLiteDataSource;
+import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -48,7 +48,7 @@ public class createStats extends Command {
 
                 event.getGuild().createCategory("Stats").queue(category -> {
                     categoryid = category.getIdLong();
-                    try (final Connection connection = SQLiteDataSource.getConnection();
+                    try (final Connection connection = SQLDataSource.getConnection();
                          final PreparedStatement preparedStatement =
                                  connection.prepareStatement("INSERT INTO stats(categoryid,memberid,onlineid,boosterid,nameonline,namemember,namebooster) VALUES(?,?,?,?,?,?,?)")) {
                         preparedStatement.setLong(1,categoryid);
@@ -67,7 +67,7 @@ public class createStats extends Command {
                             .setParent(event.getGuild().getCategoryById(categoryid))
                             .queue(voiceChannel -> {
                                 this.onlineid = voiceChannel.getIdLong();
-                                try (final Connection connection = SQLiteDataSource.getConnection();
+                                try (final Connection connection = SQLDataSource.getConnection();
                                      final PreparedStatement preparedStatement =
                                              connection.prepareStatement("UPDATE stats SET onlineid = ? WHERE categoryid = ?")) {
                                     preparedStatement.setLong(1,onlineid);
@@ -81,7 +81,7 @@ public class createStats extends Command {
                             .setParent(event.getGuild().getCategoryById(categoryid))
                             .queue(voiceChannel -> {
                                 this.memberid = voiceChannel.getIdLong();
-                                try (final Connection connection = SQLiteDataSource.getConnection();
+                                try (final Connection connection = SQLDataSource.getConnection();
                                      final PreparedStatement preparedStatement =
                                              connection.prepareStatement("UPDATE stats SET memberid = ? WHERE categoryid = ?")) {
                                     preparedStatement.setLong(1,memberid);
@@ -95,7 +95,7 @@ public class createStats extends Command {
                             .setParent(event.getGuild().getCategoryById(categoryid))
                             .queue(voiceChannel -> {
                                 this.boostid = voiceChannel.getIdLong();
-                                try (final Connection connection = SQLiteDataSource.getConnection();
+                                try (final Connection connection = SQLDataSource.getConnection();
                                      final PreparedStatement preparedStatement =
                                              connection.prepareStatement("UPDATE stats SET boosterid = ? WHERE categoryid = ?")) {
                                     preparedStatement.setLong(1,boostid);

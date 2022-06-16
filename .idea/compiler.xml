@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="discord-bot-java" />
         <module name="bot" />
+        <module name="pabloBot" />
       </profile>
     </annotationProcessing>
   </component>

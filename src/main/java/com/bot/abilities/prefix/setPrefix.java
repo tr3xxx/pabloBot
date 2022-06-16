@@ -2,7 +2,7 @@ package com.bot.abilities.prefix;
 
 import com.bot.abilities.core.Command;
 import com.bot.core.config;
-import com.bot.core.sql.SQLiteDataSource;
+import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
@@ -44,7 +44,7 @@ public class setPrefix extends Command {
                                 return false;
                             }
                         }
-                        try (final Connection connection = SQLiteDataSource.getConnection();
+                        try (final Connection connection = SQLDataSource.getConnection();
                              final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE prefix SET prefix = ? WHERE guildid = ?")) {
                             preparedStatement.setString(1, args[1]);
                             preparedStatement.setLong(2, event.getGuild().getIdLong());
@@ -163,7 +163,7 @@ public class setPrefix extends Command {
         public void getPrefix() throws SQLException{
             String temp = null;
 
-            try (final Connection connection = SQLiteDataSource.getConnection();
+            try (final Connection connection = SQLDataSource.getConnection();
                  final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
                 preparedStatement.setLong(1, e.getGuild().getIdLong());
                 try(final ResultSet resultSet = preparedStatement.executeQuery()){

@@ -2,7 +2,7 @@ package com.bot.abilities.voice.voicehub;
 
 import com.bot.abilities.core.Command;
 import com.bot.core.config;
-import com.bot.core.sql.SQLiteDataSource;
+import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
@@ -122,7 +122,7 @@ public static class MakeSelection extends ListenerAdapter {
     public void getPrefix() throws SQLException {
         String temp = null;
 
-        try (final Connection connection = SQLiteDataSource.getConnection();
+        try (final Connection connection = SQLDataSource.getConnection();
              final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
             preparedStatement.setLong(1, Objects.requireNonNull(event.getGuild()).getIdLong());
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -197,7 +197,7 @@ public static class MakeSelection extends ListenerAdapter {
 
                     case "talki":
 
-                        try (final Connection connection = SQLiteDataSource.getConnection();
+                        try (final Connection connection = SQLDataSource.getConnection();
                              final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE voicehub SET name = ? WHERE voicehubid = ?")) {
                             preparedStatement.setString(1, "Talk #{index}");
                             preparedStatement.setLong(2, setGeneratedNames.id);
@@ -209,7 +209,7 @@ public static class MakeSelection extends ListenerAdapter {
                         break;
 
                     case "italk":
-                        try (final Connection connection = SQLiteDataSource.getConnection();
+                        try (final Connection connection = SQLDataSource.getConnection();
                              final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE voicehub SET name = ? WHERE voicehubid = ?")) {
                             preparedStatement.setString(1, "#{index} Talk");
                             preparedStatement.setLong(2, setGeneratedNames.id);
@@ -220,7 +220,7 @@ public static class MakeSelection extends ListenerAdapter {
                         break;
 
                     case "voicei":
-                        try (final Connection connection = SQLiteDataSource.getConnection();
+                        try (final Connection connection = SQLDataSource.getConnection();
                              final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE voicehub SET name = ? WHERE voicehubid = ?")) {
                             preparedStatement.setString(1, "Voice #{index}");
                             preparedStatement.setLong(2, setGeneratedNames.id);
@@ -231,7 +231,7 @@ public static class MakeSelection extends ListenerAdapter {
                         break;
 
                     case "ivoice":
-                        try (final Connection connection = SQLiteDataSource.getConnection();
+                        try (final Connection connection = SQLDataSource.getConnection();
                              final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE voicehub SET name = ? WHERE voicehubid = ?")) {
                             preparedStatement.setString(1, "#{index} Voice");
                             preparedStatement.setLong(2, setGeneratedNames.id);
@@ -242,7 +242,7 @@ public static class MakeSelection extends ListenerAdapter {
                         break;
 
                     case "channeli":
-                        try (final Connection connection = SQLiteDataSource.getConnection();
+                        try (final Connection connection = SQLDataSource.getConnection();
                              final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE voicehub SET name = ? WHERE voicehubid = ?")) {
                             preparedStatement.setString(1, "Channel #{index}");
                             preparedStatement.setLong(2, setGeneratedNames.id);
@@ -253,7 +253,7 @@ public static class MakeSelection extends ListenerAdapter {
                         break;
 
                     case "ichannel":
-                        try (final Connection connection = SQLiteDataSource.getConnection();
+                        try (final Connection connection = SQLDataSource.getConnection();
                              final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE voicehub SET name = ? WHERE voicehubid = ?")) {
                             preparedStatement.setString(1, "#{index} Channel");
                             preparedStatement.setLong(2, setGeneratedNames.id);

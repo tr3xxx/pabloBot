@@ -2,7 +2,7 @@ package com.bot.abilities.notifications.github;
 
 import com.bot.abilities.core.Command;
 import com.bot.core.config;
-import com.bot.core.sql.SQLiteDataSource;
+import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
@@ -55,7 +55,7 @@ public class setGithubNotifications extends Command {
                         return false;
                     }
 
-                    try (final Connection connection = SQLiteDataSource.getConnection();
+                    try (final Connection connection = SQLDataSource.getConnection();
                          final PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO githubNotifications(channelid,repo,lastsha) VALUES(?,?,?)")) {
                             insertStatement.setLong(1,channelid);
                             insertStatement.setString(2,repo);
@@ -167,7 +167,7 @@ public class setGithubNotifications extends Command {
         public void getPrefix() throws SQLException{
             String temp = null;
 
-            try (final Connection connection = SQLiteDataSource.getConnection();
+            try (final Connection connection = SQLDataSource.getConnection();
                  final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
                 preparedStatement.setLong(1, e.getGuild().getIdLong());
                 try(final ResultSet resultSet = preparedStatement.executeQuery()){
