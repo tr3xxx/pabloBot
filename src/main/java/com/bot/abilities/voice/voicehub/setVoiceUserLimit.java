@@ -2,7 +2,6 @@ package com.bot.abilities.voice.voicehub;
 
 import com.bot.abilities.core.Command;
 import com.bot.core.config;
-import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
@@ -45,7 +44,7 @@ public class setVoiceUserLimit extends Command {
                         return false;
                     }
                     if(isVoiceHub(channelid)) {
-                        try (final Connection connection = SQLDataSource.getConnection();
+                        try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
                              final PreparedStatement insertStatement = connection.prepareStatement("UPDATE voicehub SET userlimit = ? WHERE voicehubid = ?")) {
                             insertStatement.setLong(1, userlimit);
                             insertStatement.setLong(2, channelid);
@@ -117,7 +116,7 @@ public class setVoiceUserLimit extends Command {
         return buttons;
     }
     private boolean isVoiceHub(long id) throws SQLException {
-        try (final Connection connection = SQLDataSource.getConnection();
+        try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
              final PreparedStatement preparedStatement =
                      connection.prepareStatement("SELECT voicehubid FROM voicehub WHERE voicehubid = ?")) {
             preparedStatement.setLong(1, id);
@@ -181,7 +180,7 @@ public class setVoiceUserLimit extends Command {
         public void getPrefix() throws SQLException{
             String temp = null;
 
-            try (final Connection connection = SQLDataSource.getConnection();
+            try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
                  final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
                 preparedStatement.setLong(1, e.getGuild().getIdLong());
                 try(final ResultSet resultSet = preparedStatement.executeQuery()){

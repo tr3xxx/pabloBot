@@ -2,7 +2,7 @@ package com.bot.events;
 
 import com.bot.core.bot;
 import com.bot.core.config;
-import com.bot.core.sql.SQLDataSource;
+
 import com.bot.log.log;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Member;
@@ -37,7 +37,7 @@ public class updateStats {
                     memberid = resultSet.getLong("memberid");
                     onlineid = resultSet.getLong("onlineid");
                     boosterid = resultSet.getLong("boosterid");
-                    try (final Connection connection1 = SQLDataSource.getConnection();
+                    try (final Connection connection1 = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
                          final PreparedStatement preparedStatement1 =connection1.prepareStatement("SELECT nameonline,namemember,namebooster FROM stats WHERE memberid = ? OR onlineid = ? OR boosterid = ? ")) {
                         preparedStatement1.setLong(1,memberid);
                         preparedStatement1.setLong(2,onlineid);

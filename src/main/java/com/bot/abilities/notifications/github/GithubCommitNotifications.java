@@ -1,9 +1,8 @@
 package com.bot.abilities.notifications.github;
 
 import com.bot.core.config;
-import com.bot.core.sql.SQLDataSource;
-import com.bot.log.log;
 
+import com.bot.log.log;
 import java.sql.*;
 import java.util.Timer;
 import java.util.TimerTask;

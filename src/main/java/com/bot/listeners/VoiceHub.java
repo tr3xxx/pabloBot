@@ -1,6 +1,7 @@
 package com.bot.listeners;
 
-import com.bot.core.sql.SQLDataSource;
+
+import com.bot.core.config;
 import com.bot.log.log;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
@@ -88,7 +89,7 @@ public class VoiceHub extends ListenerAdapter {
     }
 
     private boolean getUserlimit(long id) throws SQLException {
-        try (final Connection connection = SQLDataSource.getConnection();
+        try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
              final PreparedStatement preparedStatement =
                      connection.prepareStatement("SELECT userlimit FROM voicehub WHERE voicehubid = ?")){
             preparedStatement.setLong(1, id);
@@ -106,7 +107,7 @@ public class VoiceHub extends ListenerAdapter {
 
 
     private boolean isVoiceHub(long id) throws SQLException {
-        try (final Connection connection = SQLDataSource.getConnection();
+        try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
              final PreparedStatement preparedStatement =
                      connection.prepareStatement("SELECT voicehubid FROM voicehub WHERE voicehubid = ?")) {
             preparedStatement.setLong(1, id);
@@ -124,7 +125,7 @@ public class VoiceHub extends ListenerAdapter {
     }
 
     private void setValidCategory(long cat_id,long ch_id)throws SQLException {
-        try (final Connection connection = SQLDataSource.getConnection();
+        try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
              final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE voicehub SET categoryid = ? WHERE voicehubid = ?")) {
             preparedStatement.setLong(1, cat_id);
             preparedStatement.setLong(2, ch_id);
@@ -133,7 +134,7 @@ public class VoiceHub extends ListenerAdapter {
     }
 
     private boolean isValidCategory(long id) throws SQLException{
-        try (final Connection connection = SQLDataSource.getConnection();
+        try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
              final PreparedStatement preparedStatement = connection.prepareStatement("SELECT categoryid FROM voicehub WHERE categoryid = ?")) {
             preparedStatement.setLong(1, id);
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -149,7 +150,7 @@ public class VoiceHub extends ListenerAdapter {
 
     }
     private boolean getName(long id){
-        try (final Connection connection = SQLDataSource.getConnection();
+        try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
              final PreparedStatement preparedStatement =
                      connection.prepareStatement("SELECT name FROM voicehub WHERE voicehubid = ?")) {
             preparedStatement.setLong(1, id);

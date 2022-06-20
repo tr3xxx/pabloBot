@@ -1,7 +1,6 @@
 package com.bot.abilities.core;
 
 import com.bot.core.config;
-import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

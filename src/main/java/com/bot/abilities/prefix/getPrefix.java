@@ -2,16 +2,12 @@ package com.bot.abilities.prefix;
 
 import com.bot.abilities.core.Command;
 import com.bot.core.config;
-import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class getPrefix extends Command {
     @Override
@@ -24,7 +20,7 @@ public class getPrefix extends Command {
 
         String prefix = null;
         if (event.getChannelType().isGuild()) {
-            try (final Connection connection = SQLDataSource.getConnection();
+            try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
                  final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
                 preparedStatement.setLong(1, event.getGuild().getIdLong());
                 try (final ResultSet resultSet = preparedStatement.executeQuery()) {

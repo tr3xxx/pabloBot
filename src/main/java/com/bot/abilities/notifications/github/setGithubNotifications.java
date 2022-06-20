@@ -2,7 +2,7 @@ package com.bot.abilities.notifications.github;
 
 import com.bot.abilities.core.Command;
 import com.bot.core.config;
-import com.bot.core.sql.SQLDataSource;
+
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
@@ -11,10 +11,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -55,7 +52,7 @@ public class setGithubNotifications extends Command {
                         return false;
                     }
 
-                    try (final Connection connection = SQLDataSource.getConnection();
+                    try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
                          final PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO githubNotifications(channelid,repo,lastsha) VALUES(?,?,?)")) {
                             insertStatement.setLong(1,channelid);
                             insertStatement.setString(2,repo);
@@ -167,7 +164,7 @@ public class setGithubNotifications extends Command {
         public void getPrefix() throws SQLException{
             String temp = null;
 
-            try (final Connection connection = SQLDataSource.getConnection();
+            try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
                  final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
                 preparedStatement.setLong(1, e.getGuild().getIdLong());
                 try(final ResultSet resultSet = preparedStatement.executeQuery()){
