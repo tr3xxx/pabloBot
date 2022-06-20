@@ -1,11 +1,10 @@
 package com.bot.abilities.notifications.github;
 
+import com.bot.core.config;
 import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,8 +15,9 @@ public class GithubCommitNotifications {
     public GithubCommitNotifications() {
         new Timer().schedule(new TimerTask() {
             public void run() {
-                try (final Connection connection = SQLDataSource.getConnection();
-                     final PreparedStatement preparedStatement = connection.prepareStatement("SELECT channelid,repo,lastsha FROM githubNotifications")) {
+                try{
+                        Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
+                        PreparedStatement preparedStatement = connection.prepareStatement("SELECT channelid,repo,lastsha FROM githubNotifications");
                     try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                         while(resultSet.next()) {
                             repo = resultSet.getString("repo");

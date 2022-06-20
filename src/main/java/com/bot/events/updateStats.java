@@ -1,6 +1,7 @@
 package com.bot.events;
 
 import com.bot.core.bot;
+import com.bot.core.config;
 import com.bot.core.sql.SQLDataSource;
 import com.bot.log.log;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -29,7 +30,7 @@ public class updateStats {
         }, 0, 30000); // 30000 = 5min, more than 2x Request in 10min would end in being rate limited
     }
     public boolean update(){
-        try (final Connection connection = SQLDataSource.getConnection();
+        try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
              final PreparedStatement preparedStatement = connection.prepareStatement("SELECT memberid,onlineid,boosterid FROM stats")) {
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                 while(resultSet.next()){

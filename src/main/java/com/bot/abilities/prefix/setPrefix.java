@@ -12,10 +12,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -44,7 +41,7 @@ public class setPrefix extends Command {
                                 return false;
                             }
                         }
-                        try (final Connection connection = SQLDataSource.getConnection();
+                        try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
                              final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE prefix SET prefix = ? WHERE guildid = ?")) {
                             preparedStatement.setString(1, args[1]);
                             preparedStatement.setLong(2, event.getGuild().getIdLong());
