@@ -9,7 +9,6 @@ public class automatCommand extends Command {
         return new String[] {"automat"};
     }
 
-
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) {
 

@@ -22,8 +22,7 @@ import net.dv8tion.jda.api.JDA;
 
 public class CommandLoad {
     public CommandLoad(JDA jda) {
-
-
+        
         // Normal Commands, call dependents on the servers prefix
         CommandManager.addCommand(new testCommand());
         CommandManager.addCommand(new automatCommand());
