@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:sqlite:C:\Users\Leon\Documents\GitHub\discord-bot-java\database.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="database@pablobot.database.windows.net" uuid="e0166fb8-55bb-426c-81c0-49028557d39a">
+      <driver-ref>azure.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://pablobot.database.windows.net:1433;database=database</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
