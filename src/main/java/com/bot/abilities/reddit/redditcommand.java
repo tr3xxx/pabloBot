@@ -22,7 +22,7 @@ public class redditcommand extends Command {
     String [] reddits = new String[]{
             "waifusfortr3x/waifu/false",
             "memes/meme/false",
-            "vid/vid/false",
+            "videos/vid/false",
 
     };
 
@@ -75,7 +75,7 @@ public class redditcommand extends Command {
             return false;
         }
 
-
+        String message=" ";
         String url = "";
         String title = "";
         EmbeddedMedia embeddedMedia ;
@@ -97,15 +97,13 @@ public class redditcommand extends Command {
                     notNull = true;
                 }catch (Exception e){
                     pos = ThreadLocalRandom.current().nextInt(100);
-                    log.logger.warning(getClass()+": "+e.toString());
                 }
             }
             embeddedMedia = paginator.getCurrent().get(pos).getEmbeddedMedia();
             try {
                 embeddedMedia.getOEmbed().getType();
 
-
-                event.getChannel().sendMessage(paginator.getCurrent().get(0).getUrl()).queue();
+                event.getChannel().sendMessage(url).queue();
                 return false;
 
             }catch (NullPointerException e){}
