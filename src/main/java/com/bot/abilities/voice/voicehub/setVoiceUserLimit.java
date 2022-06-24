@@ -23,9 +23,18 @@ public class setVoiceUserLimit extends Command {
     }
 
     @Override
+    public Permission[] getPermissions() {
+        return new Permission[] {Permission.MANAGE_CHANNEL};
+    }
+
+    @Override
+    public boolean usableInDM() {
+        return false;
+    }
+
+    @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
         if (event.getChannelType().isGuild()) {
-            if (Objects.requireNonNull(event.getMember()).hasPermission(Permission.MANAGE_CHANNEL)) {
                 if (args.length == 3) {
                     try {
                         String[] trimmed = args[1].trim().split("#");
@@ -84,28 +93,7 @@ public class setVoiceUserLimit extends Command {
 
                     return false;
                 }
-            }else {
-                EmbedBuilder e = new EmbedBuilder();
-                e.setColor(Color.red);
-                e.setTitle("Something went wrong...", null);
-                e.setDescription("You don't have enough permissions :( " +
-                        "\n" +
-                        "In order to be able to edit Voicehubs, you need the permission to manage channels on this " +
-                        "Server");
-                e.setFooter("presented by " + config.get("bot_name"));
-                event.getChannel().sendMessageEmbeds(e.build()).queue();
             }
-
-        }else {
-            EmbedBuilder e = new EmbedBuilder();
-            e.setColor(Color.red);
-            e.setTitle("Something went wrong...", null);
-            e.setDescription("Voicehubs can not be set through DM's :( " +
-                    "\n" +
-                    "Please use a Server-TextChannel to edit a Voicehub");
-            e.setFooter("presented by " + config.get("bot_name"));
-            event.getChannel().sendMessageEmbeds(e.build()).queue();
-        }
         return false;
     }
     private static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> yes_noBT () {

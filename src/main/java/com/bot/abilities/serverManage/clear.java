@@ -1,6 +1,7 @@
 package com.bot.abilities.serverManage;
 
 import com.bot.abilities.core.Command;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.sql.SQLException;
@@ -10,6 +11,15 @@ public class clear extends Command {
     @Override
     public String[] call() {
         return new String[]{"clear","deleteLast"};
+    }
+
+    @Override
+    public Permission[] getPermissions() {
+        return new Permission[] {Permission.MANAGE_SERVER};
+    }
+    @Override
+    public boolean usableInDM() {
+        return false;
     }
 
     @Override

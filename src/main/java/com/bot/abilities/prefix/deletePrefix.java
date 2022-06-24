@@ -22,6 +22,16 @@ public class deletePrefix extends Command
     }
 
     @Override
+    public Permission[] getPermissions() {
+        return new Permission[] {Permission.MANAGE_SERVER};
+    }
+
+    @Override
+    public boolean usableInDM() {
+        return false;
+    }
+
+    @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
 
         if (event.getChannelType().isGuild()) {

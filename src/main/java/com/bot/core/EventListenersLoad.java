@@ -1,5 +1,6 @@
 package com.bot.core;
 
+import com.bot.abilities.basic.reactionroles.reactionRole;
 import com.bot.abilities.games.blackjack.BjGame;
 import com.bot.abilities.manage.stats.setStatsNames;
 import com.bot.abilities.music.search;
@@ -29,6 +30,7 @@ public class EventListenersLoad {
         jda.addEventListener(new MusicButtonPlayer());
         jda.addEventListener(new search.SearchChoose());
         jda.addEventListener(new BjGame.BjListener());
+        jda.addEventListener(new reactionRole.ButtonClick());
         jda.addEventListener(new setGithubNotifications.ButtonClick());
 
     }

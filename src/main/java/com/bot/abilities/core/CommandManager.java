@@ -3,12 +3,16 @@ package com.bot.abilities.core;
 import com.bot.core.config;
 import com.bot.events.level.updateLevel;
 import com.bot.log.log;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Channel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.awt.*;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class CommandManager extends ListenerAdapter {
     MessageReceivedEvent event;
@@ -49,11 +53,35 @@ public class CommandManager extends ListenerAdapter {
         }
 
         String call = invoke.replace(prefix, "");
+        Permission userPerms[] = event.getMember().getPermissions().toArray(new Permission[0]);
+        Channel channel = event.getChannel();
 
         commands.forEach(cmd -> {
             String [] aliases = cmd.call();
+            Permission cmdPerms[] = cmd.getPermissions();
+            boolean usableInDM = cmd.usableInDM();
             for (String alias : aliases) {
                 if(invoke.startsWith(prefix) && alias.equalsIgnoreCase(call) && !event.getAuthor().isBot()) {
+                    for (Permission permission : cmdPerms) {
+                        if (!Arrays.asList(userPerms).contains(permission)) {
+                            EmbedBuilder e = new EmbedBuilder();
+                            e.setColor(Color.red);
+                            e.setTitle("You don't have enough Permissions to use this Command", null);
+                            e.setDescription("You need the following Permissions: " + Arrays.toString(cmdPerms));
+                            e.setFooter("presented by " + config.get("bot_name"));
+                            event.getChannel().sendMessageEmbeds(e.build()).queue();
+                            return;
+                        }
+                    }
+                    if(!usableInDM && !channel.getType().isGuild()){
+                        EmbedBuilder e = new EmbedBuilder();
+                        e.setColor(Color.red);
+                        e.setTitle("This Command cannot be used in Direct Messages", null);
+                        e.setDescription("Please use this Command in a Server");
+                        e.setFooter("presented by " + config.get("bot_name"));
+                        event.getChannel().sendMessageEmbeds(e.build()).queue();
+                        return;
+                    }
                     try {
                         cmd.execute(msg, event);
                     } catch (SQLException e) {

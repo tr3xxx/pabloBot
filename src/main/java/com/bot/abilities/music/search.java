@@ -11,6 +11,7 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
@@ -33,6 +34,16 @@ public class search extends Command {
     @Override
     public String[] call() {
         return new String[] {"search","searchfor"};
+    }
+
+    @Override
+    public Permission[] getPermissions() {
+        return new Permission[] {};
+    }
+
+    @Override
+    public boolean usableInDM() {
+        return false;
     }
 
     @Override

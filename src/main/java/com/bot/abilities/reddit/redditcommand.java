@@ -8,6 +8,7 @@ import net.dean.jraw.models.EmbeddedMedia;
 import net.dean.jraw.models.Submission;
 import net.dean.jraw.pagination.DefaultPaginator;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
@@ -33,6 +34,16 @@ public class redditcommand extends Command {
                 "meme",
                 "vid",
         };
+    }
+
+    @Override
+    public Permission[] getPermissions() {
+        return new Permission[] {};
+    }
+
+    @Override
+    public boolean usableInDM() {
+        return false;
     }
 
     @Override

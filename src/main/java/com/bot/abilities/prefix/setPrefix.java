@@ -22,9 +22,16 @@ public class setPrefix extends Command {
     }
 
     @Override
+    public Permission[] getPermissions() {
+        return new Permission[]{Permission.MANAGE_SERVER};
+    }
+    @Override
+    public boolean usableInDM() {
+        return false;
+    }
+
+    @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
-        if (event.getChannelType().isGuild()) {
-            if (Objects.requireNonNull(event.getMember()).hasPermission(Permission.MANAGE_SERVER)) {
                 if (args.length == 2) {
                     if (args[1].length() < 6) {
                         for(int i=0; i<args[1].length();i++){
@@ -85,31 +92,6 @@ public class setPrefix extends Command {
                 }
 
                 return false;
-            } else {
-                EmbedBuilder e = new EmbedBuilder();
-                e.setColor(Color.red);
-                e.setTitle("Something went wrong...", null);
-                e.setDescription("You don't have enough permissions :( " +
-                        "\n" +
-                        "In order to be able to change the Server-Prefix, you need the permission to " +
-                        "manage this Server");
-                e.setFooter("presented by " + config.get("bot_name"));
-                event.getChannel().sendMessageEmbeds(e.build()).queue();
-            }
-
-
-            return false;
-        } else {
-            EmbedBuilder e = new EmbedBuilder();
-            e.setColor(Color.red);
-            e.setTitle("Something went wrong...", null);
-            e.setDescription("You can't get the Prefix through a DM :( " +
-                    "\n" +
-                    "Please use a Server-TextChannel to get the Servers-Prefix");
-            e.setFooter("presented by " + config.get("bot_name"));
-            event.getChannel().sendMessageEmbeds(e.build()).queue();
-        }
-        return false;
     }
 
     private static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> yes_noBT() {

@@ -28,11 +28,18 @@ public class setGeneratedNames extends Command{
     }
 
     @Override
+    public Permission[] getPermissions() {
+        return new Permission[] {Permission.MANAGE_SERVER};
+    }
+    @Override
+    public boolean usableInDM() {
+        return false;
+    }
+
+    @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
 
         if (args.length == 2) {
-            if (event.getChannelType().isGuild()) {
-                if (Objects.requireNonNull(event.getMember()).hasPermission(Permission.MANAGE_CHANNEL)) {
                     try {
                         String[] trimmed = args[1].trim().split("#");
                         String[] ch_id = trimmed[1].trim().split(">");
@@ -69,27 +76,7 @@ public class setGeneratedNames extends Command{
                     e.setFooter("presented by " + config.get("bot_name"));
                     event.getChannel().sendMessageEmbeds(e.build()).queue();
                     }
-            }else {
-                EmbedBuilder e = new EmbedBuilder();
-                e.setColor(Color.red);
-                e.setTitle("Something went wrong...", null);
-                e.setDescription("Voicehubs can not be edited through DM's :( " +
-                        "\n" +
-                        "Please use a Server-TextChannel to edit a Voicehub");
-                e.setFooter("presented by " + config.get("bot_name"));
-                event.getChannel().sendMessageEmbeds(e.build()).queue();
-            }
-        }else {
-            EmbedBuilder e = new EmbedBuilder();
-            e.setColor(Color.red);
-            e.setTitle("Something went wrong...", null);
-            e.setDescription("You did not run this command correctly :( " +
-                    "\n" +
-                    "Do you want to learn how to do it correctly?");
-            e.setFooter("presented by " + config.get("bot_name"));
-            event.getChannel().sendMessageEmbeds(e.build()).setActionRow(yes_noBT()).queue();
-            }
-        return false;
+            return false;
     }
     private static SelectMenu selectName(){
         return SelectMenu.create("names")

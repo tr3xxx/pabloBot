@@ -25,6 +25,16 @@ public class setGithubNotifications extends Command {
     }
 
     @Override
+    public Permission[] getPermissions() {
+        return new Permission[] {};
+    }
+
+    @Override
+    public boolean usableInDM() {
+        return false;
+    }
+
+    @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException { //!sGN tr3xxx/PabooBot <#979405505820770314>
                                                                                             // 0    1               2
         if (event.getChannelType().isGuild()) {

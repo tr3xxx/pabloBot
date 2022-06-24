@@ -7,6 +7,7 @@ import com.bot.lavaplayer.PlayerManager;
 import com.bot.log.log;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -23,6 +24,16 @@ public class skip extends Command {
     @Override
     public String[] call() {
         return new String[] {"skip","next"};
+    }
+
+    @Override
+    public Permission[] getPermissions() {
+        return new Permission[] {};
+    }
+
+    @Override
+    public boolean usableInDM() {
+        return false;
     }
 
     @Override

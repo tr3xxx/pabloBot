@@ -1,12 +1,22 @@
 package com.bot.abilities.fun;
 import com.bot.log.log;
 import com.bot.abilities.core.Command;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class automatCommand extends Command {
     @Override
     public String[] call() {
         return new String[] {"automat"};
+    }
+
+    @Override
+    public Permission[] getPermissions() {
+        return new Permission[]{};
+    }
+    @Override
+    public boolean usableInDM() {
+        return false;
     }
 
     @Override

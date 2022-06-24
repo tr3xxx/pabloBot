@@ -4,6 +4,7 @@ import com.bot.abilities.core.Command;
 import com.bot.core.config;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
@@ -16,6 +17,16 @@ public class BjMain extends Command {
     @Override
     public String[] call() {
         return new String[] {"blackjack","bj"};
+    }
+
+    @Override
+    public Permission[] getPermissions() {
+        return new Permission[] {};
+    }
+
+    @Override
+    public boolean usableInDM() {
+        return false;
     }
 
     @Override

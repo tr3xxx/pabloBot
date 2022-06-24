@@ -4,6 +4,7 @@ import com.bot.abilities.core.Command;
 import com.bot.lavaplayer.PlayerManager;
 import com.bot.core.config;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -18,6 +19,16 @@ public class play extends Command {
     @Override
     public String[] call() {
         return new String[] {"play","p"};
+    }
+
+    @Override
+    public Permission[] getPermissions() {
+        return new Permission[]{};
+    }
+
+    @Override
+    public boolean usableInDM() {
+        return false;
     }
 
 

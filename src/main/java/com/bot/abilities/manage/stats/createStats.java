@@ -32,9 +32,17 @@ public class createStats extends Command {
     }
 
     @Override
+    public Permission[] getPermissions() {
+        return new Permission[] {Permission.MANAGE_SERVER};
+    }
+
+    @Override
+    public boolean usableInDM() {
+        return false;
+    }
+
+    @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
-        if (event.getChannelType().isGuild()) {
-            if (Objects.requireNonNull(event.getMember()).hasPermission(Permission.MANAGE_CHANNEL)) {
 
                 List<Member> allMember = event.getGuild().getMembers();
                 allMember.forEach(member -> {
@@ -111,28 +119,6 @@ public class createStats extends Command {
 
 
                 return false;
-            } else {
-                EmbedBuilder e = new EmbedBuilder();
-                e.setColor(Color.red);
-                e.setTitle("Something went wrong...", null);
-                e.setDescription("You don't have enough permissions :( " +
-                        "\n" +
-                        "In order to create Stats-Channel, you need the permission to " +
-                        "manage Channel on this Server");
-                e.setFooter("presented by " + config.get("bot_name"));
-                event.getChannel().sendMessageEmbeds(e.build()).queue();
 
-            }
-        } else {
-            EmbedBuilder e = new EmbedBuilder();
-            e.setColor(Color.red);
-            e.setTitle("Something went wrong...", null);
-            e.setDescription("You can't create Stats-Channel through a DM :( " +
-                    "\n" +
-                    "Please use a Server-TextChannel to create Stats-Channel");
-            e.setFooter("presented by " + config.get("bot_name"));
-            event.getChannel().sendMessageEmbeds(e.build()).queue();
-        }
-        return false;
     }
 }

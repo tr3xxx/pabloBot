@@ -29,186 +29,164 @@ public class setStatsNames extends Command {
     }
 
     @Override
-    public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException { // setStatsName <#channelid> M/O/B channelname
-        if (event.getChannelType().isGuild()) {
-            if (Objects.requireNonNull(event.getMember()).hasPermission(Permission.MANAGE_CHANNEL)) {
-                try{
-                    String[] trimmed = args[1].trim().split("#");
-                    String[] channel_id = trimmed[1].trim().split(">");
-                    channelid = Long.parseLong(channel_id[0]);
-                    VoiceChannel channel = event.getGuild().getVoiceChannelById(channelid);
-                } catch (Exception e) {
-                    EmbedBuilder eb = new EmbedBuilder();
-                    eb.setColor(Color.red);
-                    eb.setTitle("Something went wrong...", null);
-                    eb.setDescription("You did not tagged the Channel correctly :( " +
-                            "\n" +
-                            "Do you want to learn how to do it correctly?");
-                    eb.setFooter("presented by " + config.get("bot_name"));
-                    event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(yes_noBT()).queue();
-                    return false;
-                }
-                if(args[2].toLowerCase().equals("m") || args[2].toLowerCase().equals("o") || args[2].toLowerCase().equals("b")){
+    public Permission[] getPermissions() {
+        return new Permission[] {Permission.MESSAGE_MANAGE};
+    }
+    @Override
+    public boolean usableInDM() {
+        return false;
+    }
 
-                }
-                else{
-                    EmbedBuilder eb = new EmbedBuilder();
-                    eb.setColor(Color.red);
-                    eb.setTitle("Something went wrong...", null);
-                    eb.setDescription("You did not choosed what kind of Channel the tagged Channel is :( " +
-                            "\n" +
-                            "Do you want to learn how to do it correctly?");
-                    eb.setFooter("presented by " + config.get("bot_name"));
-                    event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(yes_noBT()).queue();
-                    return false;
-                }
-                String channelname= "";
-                for (int i=3;i<=args.length-1;i++){
-                    channelname = channelname +" "+args[i];
-                }
-                if(channelname.equals("")){
-                    EmbedBuilder eb = new EmbedBuilder();
-                    eb.setColor(Color.red);
-                    eb.setTitle("Something went wrong...", null);
-                    eb.setDescription("You did not entered an Channelname:( \n" +
-                            "Do you want to learn how to do it correctly?");
-                    eb.setFooter("presented by " + config.get("bot_name"));
-                    event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(yes_noBT()).queue();
-                    return false;
-                }
-                if(channelname.toLowerCase().contains("{counter}")) {
-                    channelname = channelname.replace("{Counter}", "{counter}");
-                    switch (args[2].toLowerCase()) {
-                        case "m":
-                            try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
-                                 final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE stats SET namemember = ? WHERE memberid = ?")) {
-                                preparedStatement.setString(1, channelname);
-                                preparedStatement.setLong(2, channelid);
-                                preparedStatement.executeUpdate();
-                                VoiceChannel memberchannel = bot.jda.getVoiceChannelById(channelid);
-                                String nameMember = channelname.replace("{counter}", Integer.toString(memberchannel.getGuild().getMemberCount()));
-                                memberchannel.getManager().setName(nameMember).queue();
-
-                                if (!memberchannel.getName().equals(nameMember)) {
-                                    EmbedBuilder e = new EmbedBuilder();
-                                    e.setColor(Color.red);
-                                    e.setTitle("Something went wrong...", null);
-                                    e.setDescription("The channel name was not changed due to rate limitation implemented by Discord," +
-                                            " please wait a few minutes and try again");
-                                    e.setFooter("presented by " + config.get("bot_name"));
-                                    event.getChannel().sendMessageEmbeds(e.build()).queue();
-                                    return false;
-                                }
-
-                            } catch (Exception e) {
-                                log.logger.warning(getClass()+": "+e.toString());
-                            }
-                            break;
-                        case "o":
-                            try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
-                                 final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE stats SET nameonline = ? WHERE memberid = ?")) {
-                                preparedStatement.setString(1, channelname);
-                                preparedStatement.setLong(2, channelid);
-                                preparedStatement.executeUpdate();
-
-                                VoiceChannel onlinechannel = bot.jda.getVoiceChannelById(channelid);
-                                List<Member> allMember = onlinechannel.getGuild().getMembers();
-                                allMember.forEach(member -> {
-                                    if (!member.getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
-                                        online++;
-                                    }
-                                });
-                                String nameOnline = channelname.replace("{counter}",String.valueOf(online));
-                                onlinechannel.getManager().setName(nameOnline).queue();
-
-                                if (!onlinechannel.getName().equals(nameOnline)) {
-                                    EmbedBuilder e = new EmbedBuilder();
-                                    e.setColor(Color.red);
-                                    e.setTitle("Something went wrong...", null);
-                                    e.setDescription("The channel name was not changed due to rate limitation implemented by Discord," +
-                                            " please wait a few minutes and try again");
-                                    e.setFooter("presented by " + config.get("bot_name"));
-                                    event.getChannel().sendMessageEmbeds(e.build()).queue();
-                                    return false;
-                                }
-                            } catch (Exception e) {
-                                log.logger.warning(getClass()+": "+e.toString());
-                            }
-                            break;
-                        case "b":
-                            try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
-                                 final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE stats SET namebooster = ? WHERE memberid = ?")) {
-                                preparedStatement.setString(1, channelname);
-                                preparedStatement.setLong(2, channelid);
-                                preparedStatement.executeUpdate();
-                                VoiceChannel boosterchannel = bot.jda.getVoiceChannelById(channelid);
-                                String nameBooster = channelname.replace("{counter}", Integer.toString(boosterchannel.getGuild().getBoostCount()));
-                                boosterchannel.getManager().setName(nameBooster).queue();
-
-                                if (!boosterchannel.getName().equals(nameBooster)) {
-                                    EmbedBuilder e = new EmbedBuilder();
-                                    e.setColor(Color.red);
-                                    e.setTitle("Something went wrong...", null);
-                                    e.setDescription("The channel name was not changed due to rate limitation implemented by Discord," +
-                                            " please wait a few minutes and try again");
-                                    e.setFooter("presented by " + config.get("bot_name"));
-                                    event.getChannel().sendMessageEmbeds(e.build()).queue();
-                                    return false;
-                                }
-                            } catch (Exception e) {
-                                log.logger.warning(getClass()+": "+e.toString());
-                            }
-                            break;
-                        default:
-                            log.logger.warning("[DEFAULT CASE]");
-                            break;
-                    }
-
-                    EmbedBuilder e = new EmbedBuilder();
-                    e.setColor(Color.green);
-                    e.setTitle("Stats-Name successfully set", null);
-                    e.setFooter("presented by " + config.get("bot_name"));
-                    event.getChannel().sendMessageEmbeds(e.build()).queue();
-
-                }
-                else{
-                    EmbedBuilder e = new EmbedBuilder();
-                    e.setColor(Color.red);
-                    e.setTitle("Something went wrong...", null);
-                    e.setDescription("You did not include the necessary {counter} in the channel name :( " +
-                            "\n" +
-                            "Do you want to learn how to do it?");
-                    e.setFooter("presented by " + config.get("bot_name"));
-                    event.getChannel().sendMessageEmbeds(e.build()).setActionRow(yes_noBT()).queue();
-                    return false;
-                }
-
-            } else {
-                EmbedBuilder e = new EmbedBuilder();
-                e.setColor(Color.red);
-                e.setTitle("Something went wrong...", null);
-                e.setDescription("You don't have enough permissions :( " +
-                        "\n" +
-                        "In order to create Stats-Channel, you need the permission to " +
-                        "manage Channel on this Server");
-                e.setFooter("presented by " + config.get("bot_name"));
-                event.getChannel().sendMessageEmbeds(e.build()).queue();
-                return false;
-
-            }
-        }
-        else {
-                EmbedBuilder e = new EmbedBuilder();
-                e.setColor(Color.red);
-                e.setTitle("Something went wrong...", null);
-                e.setDescription("You can't create Stats-Channel through a DM :( " +
-                        "\n" +
-                        "Please use a Server-TextChannel to create Stats-Channel");
-                e.setFooter("presented by " + config.get("bot_name"));
-                event.getChannel().sendMessageEmbeds(e.build()).queue();
+    @Override
+    public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
+        try {
+            String[] trimmed = args[1].trim().split("#");
+            String[] channel_id = trimmed[1].trim().split(">");
+            channelid = Long.parseLong(channel_id[0]);
+            VoiceChannel channel = event.getGuild().getVoiceChannelById(channelid);
+        } catch (Exception e) {
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setColor(Color.red);
+            eb.setTitle("Something went wrong...", null);
+            eb.setDescription("You did not tagged the Channel correctly :( " +
+                    "\n" +
+                    "Do you want to learn how to do it correctly?");
+            eb.setFooter("presented by " + config.get("bot_name"));
+            event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(yes_noBT()).queue();
             return false;
+        }
+        if (args[2].toLowerCase().equals("m") || args[2].toLowerCase().equals("o") || args[2].toLowerCase().equals("b")) {
+
+        } else {
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setColor(Color.red);
+            eb.setTitle("Something went wrong...", null);
+            eb.setDescription("You did not choosed what kind of Channel the tagged Channel is :( " +
+                    "\n" +
+                    "Do you want to learn how to do it correctly?");
+            eb.setFooter("presented by " + config.get("bot_name"));
+            event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(yes_noBT()).queue();
+            return false;
+        }
+        String channelname = "";
+        for (int i = 3; i <= args.length - 1; i++) {
+            channelname = channelname + " " + args[i];
+        }
+        if (channelname.equals("")) {
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setColor(Color.red);
+            eb.setTitle("Something went wrong...", null);
+            eb.setDescription("You did not entered an Channelname:( \n" +
+                    "Do you want to learn how to do it correctly?");
+            eb.setFooter("presented by " + config.get("bot_name"));
+            event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(yes_noBT()).queue();
+            return false;
+        }
+        if (channelname.toLowerCase().contains("{counter}")) {
+            channelname = channelname.replace("{Counter}", "{counter}");
+            switch (args[2].toLowerCase()) {
+                case "m":
+                    try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"), config.get("DATABASE_USERNAME"), config.get("DATABASE_PASSWORD"));
+                         final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE stats SET namemember = ? WHERE memberid = ?")) {
+                        preparedStatement.setString(1, channelname);
+                        preparedStatement.setLong(2, channelid);
+                        preparedStatement.executeUpdate();
+                        VoiceChannel memberchannel = bot.jda.getVoiceChannelById(channelid);
+                        String nameMember = channelname.replace("{counter}", Integer.toString(memberchannel.getGuild().getMemberCount()));
+                        memberchannel.getManager().setName(nameMember).queue();
+
+                        if (!memberchannel.getName().equals(nameMember)) {
+                            EmbedBuilder e = new EmbedBuilder();
+                            e.setColor(Color.red);
+                            e.setTitle("Something went wrong...", null);
+                            e.setDescription("The channel name was not changed due to rate limitation implemented by Discord," +
+                                    " please wait a few minutes and try again");
+                            e.setFooter("presented by " + config.get("bot_name"));
+                            event.getChannel().sendMessageEmbeds(e.build()).queue();
+                            return false;
+                        }
+
+                    } catch (Exception e) {
+                        log.logger.warning(getClass() + ": " + e.toString());
+                    }
+                    break;
+                case "o":
+                    try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"), config.get("DATABASE_USERNAME"), config.get("DATABASE_PASSWORD"));
+                         final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE stats SET nameonline = ? WHERE memberid = ?")) {
+                        preparedStatement.setString(1, channelname);
+                        preparedStatement.setLong(2, channelid);
+                        preparedStatement.executeUpdate();
+
+                        VoiceChannel onlinechannel = bot.jda.getVoiceChannelById(channelid);
+                        List<Member> allMember = onlinechannel.getGuild().getMembers();
+                        allMember.forEach(member -> {
+                            if (!member.getOnlineStatus().equals(OnlineStatus.OFFLINE)) {
+                                online++;
+                            }
+                        });
+                        String nameOnline = channelname.replace("{counter}", String.valueOf(online));
+                        onlinechannel.getManager().setName(nameOnline).queue();
+
+                        if (!onlinechannel.getName().equals(nameOnline)) {
+                            EmbedBuilder e = new EmbedBuilder();
+                            e.setColor(Color.red);
+                            e.setTitle("Something went wrong...", null);
+                            e.setDescription("The channel name was not changed due to rate limitation implemented by Discord," +
+                                    " please wait a few minutes and try again");
+                            e.setFooter("presented by " + config.get("bot_name"));
+                            event.getChannel().sendMessageEmbeds(e.build()).queue();
+                            return false;
+                        }
+                    } catch (Exception e) {
+                        log.logger.warning(getClass() + ": " + e.toString());
+                    }
+                    break;
+                case "b":
+                    try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"), config.get("DATABASE_USERNAME"), config.get("DATABASE_PASSWORD"));
+                         final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE stats SET namebooster = ? WHERE memberid = ?")) {
+                        preparedStatement.setString(1, channelname);
+                        preparedStatement.setLong(2, channelid);
+                        preparedStatement.executeUpdate();
+                        VoiceChannel boosterchannel = bot.jda.getVoiceChannelById(channelid);
+                        String nameBooster = channelname.replace("{counter}", Integer.toString(boosterchannel.getGuild().getBoostCount()));
+                        boosterchannel.getManager().setName(nameBooster).queue();
+
+                        if (!boosterchannel.getName().equals(nameBooster)) {
+                            EmbedBuilder e = new EmbedBuilder();
+                            e.setColor(Color.red);
+                            e.setTitle("Something went wrong...", null);
+                            e.setDescription("The channel name was not changed due to rate limitation implemented by Discord," +
+                                    " please wait a few minutes and try again");
+                            e.setFooter("presented by " + config.get("bot_name"));
+                            event.getChannel().sendMessageEmbeds(e.build()).queue();
+                            return false;
+                        }
+                    } catch (Exception e) {
+                        log.logger.warning(getClass() + ": " + e.toString());
+                    }
+                    break;
+                default:
+                    log.logger.warning("[DEFAULT CASE]");
+                    break;
             }
 
+            EmbedBuilder e = new EmbedBuilder();
+            e.setColor(Color.green);
+            e.setTitle("Stats-Name successfully set", null);
+            e.setFooter("presented by " + config.get("bot_name"));
+            event.getChannel().sendMessageEmbeds(e.build()).queue();
+
+        } else {
+            EmbedBuilder e = new EmbedBuilder();
+            e.setColor(Color.red);
+            e.setTitle("Something went wrong...", null);
+            e.setDescription("You did not include the necessary {counter} in the channel name :( " +
+                    "\n" +
+                    "Do you want to learn how to do it?");
+            e.setFooter("presented by " + config.get("bot_name"));
+            event.getChannel().sendMessageEmbeds(e.build()).setActionRow(yes_noBT()).queue();
+            return false;
+        }
         return false;
     }
 
