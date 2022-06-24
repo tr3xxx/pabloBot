@@ -22,7 +22,6 @@ public class GithubCommitNotifications {
                             repo = resultSet.getString("repo");
                             channelid  = resultSet.getLong("channelid");
                             lastsha = resultSet.getString("lastsha");
-
                             if(githubCore.getLastCommit(repo,channelid,lastsha)){
                                 String newsha = githubCore.newsha;
                                 try (final PreparedStatement insertStatement = connection.prepareStatement("UPDATE githubNotifications SET lastsha = ? WHERE channelid = ? AND repo = ?")) {

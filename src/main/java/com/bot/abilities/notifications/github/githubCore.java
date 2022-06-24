@@ -39,10 +39,8 @@ public class githubCore {
         GHRepository repo = github.getRepository(repoFullName);
         List<GHCommit> commits = repo.listCommits().toList();
         GHCommit lastCommit = commits.get(0);
-        if(lastsha != null){
-            if(lastsha.equals(lastCommit.getSHA1()) ){
-                return false;
-            }
+        if(lastsha.equals(lastCommit.getSHA1()) ){
+            return false;
         }
         String CommiterURL = String.valueOf(lastCommit.getAuthor().getUrl());
         EmbedBuilder eb = new EmbedBuilder();

@@ -62,6 +62,7 @@ public class bot {
         new GithubCommitNotifications();
         new Redditcore();
         new githubCore();
+
     }
 
 }

@@ -12,9 +12,7 @@ import java.sql.SQLException;
 
 public class GuildJoinPrefix extends ListenerAdapter {
 
-    public void onGuildJoin(GuildJoinEvent event){
-        action(event);
-    }
+    public void onGuildJoin(GuildJoinEvent event){action(event);}
 
     public void action(GuildJoinEvent event){
         try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));

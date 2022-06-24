@@ -1,6 +1,7 @@
 package com.bot.abilities.core;
 
 import com.bot.core.config;
+import com.bot.events.level.updateLevel;
 import com.bot.log.log;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -33,6 +34,7 @@ public class CommandManager extends ListenerAdapter {
 
     public void onMessageReceived(MessageReceivedEvent event) {
         this.event = event;
+        updateLevel.messageLevelUpdate(event);
 
         String[] msg = event.getMessage().getContentRaw().trim().split(" ");
         String invoke = msg[0];

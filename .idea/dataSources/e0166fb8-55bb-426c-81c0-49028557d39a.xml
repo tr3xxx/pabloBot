@@ -51,83 +51,83 @@
       <ObjectId>11</ObjectId>
       <Type>server-role</Type>
     </login>
-    <role id="11" parent="2" name="public">
-      <AuthType>none</AuthType>
-      <ObjectId>0</ObjectId>
-      <Type>database-role</Type>
-      <OwnerId>1</OwnerId>
-    </role>
-    <role id="12" parent="2" name="dbo">
-      <AuthType>instance</AuthType>
-      <DefaultSchema>dbo</DefaultSchema>
-      <ObjectId>1</ObjectId>
-    </role>
-    <role id="13" parent="2" name="guest">
-      <AuthType>none</AuthType>
-      <DefaultSchema>guest</DefaultSchema>
-      <ObjectId>2</ObjectId>
-    </role>
-    <role id="14" parent="2" name="INFORMATION_SCHEMA">
+    <role id="11" parent="2" name="INFORMATION_SCHEMA">
       <AuthType>none</AuthType>
       <ObjectId>3</ObjectId>
     </role>
-    <role id="15" parent="2" name="sys">
-      <AuthType>none</AuthType>
-      <ObjectId>4</ObjectId>
-    </role>
-    <role id="16" parent="2" name="db_owner">
-      <AuthType>none</AuthType>
-      <ObjectId>16384</ObjectId>
-      <Type>database-role</Type>
-      <OwnerId>1</OwnerId>
-    </role>
-    <role id="17" parent="2" name="db_accessadmin">
+    <role id="12" parent="2" name="db_accessadmin">
       <AuthType>none</AuthType>
       <ObjectId>16385</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="18" parent="2" name="db_securityadmin">
-      <AuthType>none</AuthType>
-      <ObjectId>16386</ObjectId>
-      <Type>database-role</Type>
-      <OwnerId>1</OwnerId>
-    </role>
-    <role id="19" parent="2" name="db_ddladmin">
-      <AuthType>none</AuthType>
-      <ObjectId>16387</ObjectId>
-      <Type>database-role</Type>
-      <OwnerId>1</OwnerId>
-    </role>
-    <role id="20" parent="2" name="db_backupoperator">
+    <role id="13" parent="2" name="db_backupoperator">
       <AuthType>none</AuthType>
       <ObjectId>16389</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="21" parent="2" name="db_datareader">
+    <role id="14" parent="2" name="db_datareader">
       <AuthType>none</AuthType>
       <ObjectId>16390</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="22" parent="2" name="db_datawriter">
+    <role id="15" parent="2" name="db_datawriter">
       <AuthType>none</AuthType>
       <ObjectId>16391</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="23" parent="2" name="db_denydatareader">
+    <role id="16" parent="2" name="db_ddladmin">
+      <AuthType>none</AuthType>
+      <ObjectId>16387</ObjectId>
+      <Type>database-role</Type>
+      <OwnerId>1</OwnerId>
+    </role>
+    <role id="17" parent="2" name="db_denydatareader">
       <AuthType>none</AuthType>
       <ObjectId>16392</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
     </role>
-    <role id="24" parent="2" name="db_denydatawriter">
+    <role id="18" parent="2" name="db_denydatawriter">
       <AuthType>none</AuthType>
       <ObjectId>16393</ObjectId>
       <Type>database-role</Type>
       <OwnerId>1</OwnerId>
+    </role>
+    <role id="19" parent="2" name="db_owner">
+      <AuthType>none</AuthType>
+      <ObjectId>16384</ObjectId>
+      <Type>database-role</Type>
+      <OwnerId>1</OwnerId>
+    </role>
+    <role id="20" parent="2" name="db_securityadmin">
+      <AuthType>none</AuthType>
+      <ObjectId>16386</ObjectId>
+      <Type>database-role</Type>
+      <OwnerId>1</OwnerId>
+    </role>
+    <role id="21" parent="2" name="dbo">
+      <AuthType>instance</AuthType>
+      <DefaultSchema>dbo</DefaultSchema>
+      <ObjectId>1</ObjectId>
+    </role>
+    <role id="22" parent="2" name="guest">
+      <AuthType>none</AuthType>
+      <DefaultSchema>guest</DefaultSchema>
+      <ObjectId>2</ObjectId>
+    </role>
+    <role id="23" parent="2" name="public">
+      <AuthType>none</AuthType>
+      <ObjectId>0</ObjectId>
+      <Type>database-role</Type>
+      <OwnerId>1</OwnerId>
+    </role>
+    <role id="24" parent="2" name="sys">
+      <AuthType>none</AuthType>
+      <ObjectId>4</ObjectId>
     </role>
     <schema id="25" parent="2" name="INFORMATION_SCHEMA">
       <ObjectId>3</ObjectId>
@@ -161,7 +161,7 @@
     </schema>
     <schema id="35" parent="2" name="dbo">
       <Current>1</Current>
-      <IntrospectionTimestamp>2022-06-23.18:33:24.417</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2022-06-24.21:27:50.140</IntrospectionTimestamp>
       <ObjectId>1</ObjectId>
     </schema>
     <schema id="36" parent="2" name="guest">
@@ -172,97 +172,147 @@
     </schema>
     <table id="38" parent="35" name="githubNotifications">
       <CreatedTimestamp>2022-06-20.17:00:35.580</CreatedTimestamp>
-      <ModifiedTimestamp>2022-06-20.17:00:35.580</ModifiedTimestamp>
+      <ModifiedTimestamp>2022-06-24.21:07:44.290</ModifiedTimestamp>
       <ObjectId>1605580758</ObjectId>
     </table>
-    <table id="39" parent="35" name="prefix">
+    <table id="39" parent="35" name="level">
+      <CreatedTimestamp>2022-06-24.20:20:15.253</CreatedTimestamp>
+      <ModifiedTimestamp>2022-06-24.21:23:54.597</ModifiedTimestamp>
+      <ObjectId>1669580986</ObjectId>
+    </table>
+    <table id="40" parent="35" name="levelCalcPrefix">
+      <CreatedTimestamp>2022-06-24.21:17:38.340</CreatedTimestamp>
+      <ModifiedTimestamp>2022-06-24.21:27:49.183</ModifiedTimestamp>
+      <ObjectId>1685581043</ObjectId>
+    </table>
+    <table id="41" parent="35" name="prefix">
       <CreatedTimestamp>2022-06-20.17:00:35.693</CreatedTimestamp>
-      <ModifiedTimestamp>2022-06-20.17:00:35.693</ModifiedTimestamp>
+      <ModifiedTimestamp>2022-06-24.21:08:31.750</ModifiedTimestamp>
       <ObjectId>1621580815</ObjectId>
     </table>
-    <table id="40" parent="35" name="stats">
+    <table id="42" parent="35" name="stats">
       <CreatedTimestamp>2022-06-20.17:00:35.810</CreatedTimestamp>
-      <ModifiedTimestamp>2022-06-20.17:00:35.810</ModifiedTimestamp>
+      <ModifiedTimestamp>2022-06-24.21:08:55.123</ModifiedTimestamp>
       <ObjectId>1637580872</ObjectId>
     </table>
-    <table id="41" parent="35" name="voicehub">
+    <table id="43" parent="35" name="voicehub">
       <CreatedTimestamp>2022-06-20.17:00:35.923</CreatedTimestamp>
-      <ModifiedTimestamp>2022-06-20.17:00:35.923</ModifiedTimestamp>
+      <ModifiedTimestamp>2022-06-24.21:09:06.350</ModifiedTimestamp>
       <ObjectId>1653580929</ObjectId>
     </table>
-    <column id="42" parent="38" name="channelid">
+    <column id="44" parent="38" name="channelid">
       <DataType>bigint|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="43" parent="38" name="repo">
-      <DataType>text|0s</DataType>
+    <column id="45" parent="38" name="repo">
+      <DataType>varchar(max)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="44" parent="38" name="lastsha">
-      <DataType>text|0s</DataType>
+    <column id="46" parent="38" name="lastsha">
+      <DataType>varchar(max)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="45" parent="38" name="TRIAL547">
+    <column id="47" parent="38" name="TRIAL547">
       <DataType>char(1 char)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="46" parent="39" name="prefix">
-      <DataType>text|0s</DataType>
-      <Position>1</Position>
-    </column>
-    <column id="47" parent="39" name="guildid">
-      <DataType>bigint|0s</DataType>
-      <Position>2</Position>
-    </column>
-    <column id="48" parent="39" name="TRIAL550">
-      <DataType>char(1 char)|0s</DataType>
-      <Position>3</Position>
-    </column>
-    <column id="49" parent="40" name="memberid">
+    <column id="48" parent="39" name="guildid">
       <DataType>bigint|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="50" parent="40" name="onlineid">
+    <column id="49" parent="39" name="userid">
       <DataType>bigint|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="51" parent="40" name="boosterid">
+    <column id="50" parent="39" name="xp">
       <DataType>bigint|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="52" parent="40" name="categoryid">
+    <column id="51" parent="40" name="amount">
+      <DataType>int|0s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="52" parent="40" name="multiplier">
+      <DataType>float|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="53" parent="40" name="guildid">
+      <DataType>bigint|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="54" parent="40" name="lvl1_xp">
       <DataType>bigint|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="53" parent="40" name="nameonline">
-      <DataType>text|0s</DataType>
+    <column id="55" parent="40" name="msgXP">
+      <DataType>bigint|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="54" parent="40" name="namemember">
-      <DataType>text|0s</DataType>
+    <column id="56" parent="40" name="vcXP">
+      <DataType>bigint|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="55" parent="40" name="namebooster">
-      <DataType>text|0s</DataType>
+    <column id="57" parent="40" name="vc_time">
+      <DataType>bigint|0s</DataType>
       <Position>7</Position>
     </column>
-    <column id="56" parent="41" name="voicehubid">
-      <DataType>bigint|0s</DataType>
+    <column id="58" parent="41" name="prefix">
+      <DataType>varchar(max)|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="57" parent="41" name="categoryid">
+    <column id="59" parent="41" name="guildid">
       <DataType>bigint|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="58" parent="41" name="guildid">
+    <column id="60" parent="41" name="TRIAL550">
+      <DataType>char(1 char)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="61" parent="42" name="memberid">
+      <DataType>bigint|0s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="62" parent="42" name="onlineid">
+      <DataType>bigint|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="63" parent="42" name="boosterid">
       <DataType>bigint|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="59" parent="41" name="name">
-      <DataType>text|0s</DataType>
+    <column id="64" parent="42" name="categoryid">
+      <DataType>bigint|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="60" parent="41" name="userlimit">
+    <column id="65" parent="42" name="nameonline">
+      <DataType>varchar(max)|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="66" parent="42" name="namemember">
+      <DataType>varchar(max)|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <column id="67" parent="42" name="namebooster">
+      <DataType>varchar(max)|0s</DataType>
+      <Position>7</Position>
+    </column>
+    <column id="68" parent="43" name="voicehubid">
+      <DataType>bigint|0s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="69" parent="43" name="categoryid">
+      <DataType>bigint|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="70" parent="43" name="guildid">
+      <DataType>bigint|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="71" parent="43" name="name">
+      <DataType>varchar(max)|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="72" parent="43" name="userlimit">
       <DataType>bigint|0s</DataType>
       <Position>5</Position>
     </column>
