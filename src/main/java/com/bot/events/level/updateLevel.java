@@ -74,10 +74,7 @@ public class updateLevel extends ListenerAdapter {
 
 
     private static boolean isLevelUp(int oldXP, int newXP){
-        if(getLevel(oldXP) != getLevel(newXP)){
-            return true;
-        }
-        return false;
+        return getLevel(oldXP) != getLevel(newXP);
     }
 
     private static int getLevel(int xp){

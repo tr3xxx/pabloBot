@@ -1,4 +1,4 @@
-package com.bot.events;
+package com.bot.events.prefix;
 
 import com.bot.core.config;
 import com.bot.log.log;

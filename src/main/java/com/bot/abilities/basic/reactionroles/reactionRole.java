@@ -42,10 +42,7 @@ public class reactionRole extends Command {
                 long messageID = Long.parseLong(args[2]);
                 Message msg =  event.getChannel().retrieveMessageById(messageID).complete();
                 String emoji = args[3];
-                event.getJDA().getEmotesByName(emoji, true).forEach(emote -> {
-                    msg.addReaction(emote).queue();
-                });
-                //msg.addReaction(emoji).queue();
+                msg.addReaction(emoji).queue();
                 try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
                      final PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO reactionroles(msgid,role,emoji) VALUES(?,?,?)")) {
                     insertStatement.setLong(1,messageID);
@@ -58,6 +55,7 @@ public class reactionRole extends Command {
                 EmbedBuilder e = new EmbedBuilder();
                 e.setColor(Color.green);
                 e.setTitle("Reaction Role has been set successfully", null);
+                e.setDescription("You can now react to the message with the emoji ("+emoji+") to get the role ("+ Objects.requireNonNull(event.getGuild().getRoleById(roleID)).getName()+")");
                 e.setFooter("presented by " + config.get("bot_name"));
                 event.getChannel().sendMessageEmbeds(e.build()).queue();
                 return false;

@@ -161,7 +161,7 @@
     </schema>
     <schema id="35" parent="2" name="dbo">
       <Current>1</Current>
-      <IntrospectionTimestamp>2022-06-25.00:48:53.253</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2022-06-25.15:25:26.630</IntrospectionTimestamp>
       <ObjectId>1</ObjectId>
     </schema>
     <schema id="36" parent="2" name="guest">
@@ -192,7 +192,7 @@
     </table>
     <table id="42" parent="35" name="reactionroles">
       <CreatedTimestamp>2022-06-25.00:45:10.753</CreatedTimestamp>
-      <ModifiedTimestamp>2022-06-25.00:48:52.307</ModifiedTimestamp>
+      <ModifiedTimestamp>2022-06-25.15:25:25.620</ModifiedTimestamp>
       <ObjectId>1701581100</ObjectId>
     </table>
     <table id="43" parent="35" name="stats">
@@ -282,7 +282,7 @@
       <Position>2</Position>
     </column>
     <column id="64" parent="42" name="emoji">
-      <DataType>varchar(max)|0s</DataType>
+      <DataType>nvarchar(max)|0s</DataType>
       <Position>3</Position>
     </column>
     <column id="65" parent="43" name="memberid">
