@@ -30,11 +30,11 @@ public class Activity {
                     if(getDetails()) {
                         switch (index) {
                             case 0 -> {
-                                bot.jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming("to " + members + " people", "https://www.twitch.tv/."));
+                                bot.jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming("for " + members + " People", "https://www.twitch.tv/."));
                                 index = 1;
                             }
                             case 1 -> {
-                                bot.jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming(messages + " sent messages", "https://www.twitch.tv/."));
+                                bot.jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming(messages + " sent Messages", "https://www.twitch.tv/."));
                                 index = 2;
                             }
                             case 2 -> {
@@ -43,7 +43,7 @@ public class Activity {
                                 index = 3;
                             }
                             case 3 -> {
-                                bot.jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming(voiceMinutes + " min in voice chat", "https://www.twitch.tv/."));
+                                bot.jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming(voiceMinutes + " min in Voice Chats", "https://www.twitch.tv/."));
                                 index = 0;
                             }
                         }

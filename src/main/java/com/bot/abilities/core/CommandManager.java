@@ -37,9 +37,10 @@ public class CommandManager extends ListenerAdapter {
     }
 
     public void onMessageReceived(MessageReceivedEvent event) {
+        event.getChannel().sendTyping().queue();
+
         this.event = event;
         updateLevel.messageLevelUpdate(event);
-
         String[] msg = event.getMessage().getContentRaw().trim().split(" ");
         String invoke = msg[0];
         try {
@@ -106,8 +107,6 @@ public class CommandManager extends ListenerAdapter {
             if(event.getMessage().getAuthor().getIdLong() == event.getJDA().getSelfUser().getIdLong()){
                 toLivetimeStats();
             }
-
-
     }
 
     private void toLivetimeStats(){
