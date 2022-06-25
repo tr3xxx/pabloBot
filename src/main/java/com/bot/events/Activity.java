@@ -55,6 +55,9 @@ public class Activity {
     }
 
     private boolean getDetails(){
+        members = 0;
+        messages = 0;
+        voiceMinutes = 0;
 
         bot.jda.getGuilds().forEach(guild ->{
             members = members + guild.getMemberCount();
