@@ -31,14 +31,22 @@ public class updateLevel extends ListenerAdapter {
         }
     }
 
+    boolean first = true;
     public void onGuildVoiceJoin(GuildVoiceJoinEvent event){
         if (!event.getMember().getUser().isBot()) {
+
             getCalculationPrefix(event.getGuild().getIdLong());
             int oldXP = getXP(event.getGuild().getIdLong(),event.getMember().getIdLong());
             new Timer().schedule(new TimerTask() {
                 public void run() {
                     if (Objects.requireNonNull(event.getMember().getVoiceState()).inAudioChannel()) {
-                        CalculateNewXP(getXP(event.getGuild().getIdLong(), Objects.requireNonNull(event.getMember()).getIdLong()), event);
+                        if(!first){
+                            CalculateNewXP(getXP(event.getGuild().getIdLong(), Objects.requireNonNull(event.getMember()).getIdLong()), event);
+                        }
+                        else{
+                            first = false;
+                        }
+
                     } else {
                         int newXP = getXP(event.getGuild().getIdLong(),event.getMember().getIdLong());
                         if(isLevelUp(oldXP,newXP)){

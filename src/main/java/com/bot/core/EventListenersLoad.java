@@ -12,6 +12,7 @@ import com.bot.abilities.voice.voicehub.setVoicehub;
 import com.bot.events.prefix.GuildJoinPrefix;
 import com.bot.events.level.updateLevel;
 import com.bot.events.reactionroles.onReact;
+import com.bot.events.vcTracker;
 import com.bot.lavaplayer.MusicButtonPlayer;
 import com.bot.events.VoiceHub;
 import net.dv8tion.jda.api.JDA;
@@ -33,6 +34,7 @@ public class EventListenersLoad {
         jda.addEventListener(new BjGame.BjListener());
         jda.addEventListener(new reactionRole.ButtonClick());
         jda.addEventListener(new onReact());
+        jda.addEventListener(new vcTracker());
         jda.addEventListener(new setGithubNotifications.ButtonClick());
 
     }

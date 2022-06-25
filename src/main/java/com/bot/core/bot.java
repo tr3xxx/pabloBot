@@ -57,7 +57,7 @@ public class bot {
         new CommandLoad(jda);
         new updateStats();
         new console(jda);
-        new Activity(jda);
+        new Activity();
         new githubCore();
         new GithubCommitNotifications();
         new Redditcore();

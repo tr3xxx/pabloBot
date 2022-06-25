@@ -161,7 +161,7 @@
     </schema>
     <schema id="35" parent="2" name="dbo">
       <Current>1</Current>
-      <IntrospectionTimestamp>2022-06-25.22:03:29.183</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2022-06-25.22:15:50.610</IntrospectionTimestamp>
       <ObjectId>1</ObjectId>
     </schema>
     <schema id="36" parent="2" name="guest">
@@ -187,7 +187,7 @@
     </table>
     <table id="41" parent="35" name="livetime ">
       <CreatedTimestamp>2022-06-25.22:03:27.690</CreatedTimestamp>
-      <ModifiedTimestamp>2022-06-25.22:03:27.690</ModifiedTimestamp>
+      <ModifiedTimestamp>2022-06-25.22:15:49.610</ModifiedTimestamp>
       <ObjectId>1733581214</ObjectId>
     </table>
     <table id="42" parent="35" name="prefix">
@@ -275,83 +275,87 @@
       <DataType>bigint|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="62" parent="42" name="prefix">
-      <DataType>varchar(max)|0s</DataType>
-      <Position>1</Position>
-    </column>
-    <column id="63" parent="42" name="guildid">
+    <column id="62" parent="41" name="minutesVC">
       <DataType>bigint|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="64" parent="42" name="TRIAL550">
+    <column id="63" parent="42" name="prefix">
+      <DataType>varchar(max)|0s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="64" parent="42" name="guildid">
+      <DataType>bigint|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="65" parent="42" name="TRIAL550">
       <DataType>char(1 char)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="65" parent="43" name="msgid">
+    <column id="66" parent="43" name="msgid">
       <DataType>bigint|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="66" parent="43" name="role">
+    <column id="67" parent="43" name="role">
       <DataType>bigint|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="67" parent="43" name="emoji">
+    <column id="68" parent="43" name="emoji">
       <DataType>nvarchar(max)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="68" parent="44" name="url">
+    <column id="69" parent="44" name="url">
       <DataType>varchar(max)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="69" parent="44" name="lastPost">
+    <column id="70" parent="44" name="lastPost">
       <DataType>varchar(max)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="70" parent="45" name="memberid">
+    <column id="71" parent="45" name="memberid">
       <DataType>bigint|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="71" parent="45" name="onlineid">
+    <column id="72" parent="45" name="onlineid">
       <DataType>bigint|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="72" parent="45" name="boosterid">
+    <column id="73" parent="45" name="boosterid">
       <DataType>bigint|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="73" parent="45" name="categoryid">
+    <column id="74" parent="45" name="categoryid">
       <DataType>bigint|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="74" parent="45" name="nameonline">
+    <column id="75" parent="45" name="nameonline">
       <DataType>varchar(max)|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="75" parent="45" name="namemember">
+    <column id="76" parent="45" name="namemember">
       <DataType>varchar(max)|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="76" parent="45" name="namebooster">
+    <column id="77" parent="45" name="namebooster">
       <DataType>varchar(max)|0s</DataType>
       <Position>7</Position>
     </column>
-    <column id="77" parent="46" name="voicehubid">
+    <column id="78" parent="46" name="voicehubid">
       <DataType>bigint|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="78" parent="46" name="categoryid">
+    <column id="79" parent="46" name="categoryid">
       <DataType>bigint|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="79" parent="46" name="guildid">
+    <column id="80" parent="46" name="guildid">
       <DataType>bigint|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="80" parent="46" name="name">
+    <column id="81" parent="46" name="name">
       <DataType>varchar(max)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="81" parent="46" name="userlimit">
+    <column id="82" parent="46" name="userlimit">
       <DataType>bigint|0s</DataType>
       <Position>5</Position>
     </column>
