@@ -32,7 +32,6 @@ public class updateLevel extends ListenerAdapter {
     }
 
     public void onGuildVoiceJoin(GuildVoiceJoinEvent event){
-        System.out.println(1);
         if (!event.getMember().getUser().isBot()) {
             getCalculationPrefix(event.getGuild().getIdLong());
             int oldXP = getXP(event.getGuild().getIdLong(),event.getMember().getIdLong());
@@ -70,8 +69,6 @@ public class updateLevel extends ListenerAdapter {
         e.setFooter("presented by " + config.get("bot_name"));
         event.getMember().getUser().openPrivateChannel().queue(channel -> channel.sendMessageEmbeds(e.build()).queue());
     }
-
-
 
     private static boolean isLevelUp(int oldXP, int newXP){
         return getLevel(oldXP) != getLevel(newXP);

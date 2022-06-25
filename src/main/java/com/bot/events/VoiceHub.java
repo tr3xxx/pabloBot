@@ -1,4 +1,4 @@
-package com.bot.listeners;
+package com.bot.events;
 
 
 import com.bot.core.config;
@@ -34,9 +34,6 @@ public class VoiceHub extends ListenerAdapter {
                             name = name.replace("{index}",String.valueOf(index+1));
                         }
                     }
-                }
-                else{
-                    this.name = "das sollte nicht so sein";
                 }
                 getUserlimit(e.getChannelJoined().getIdLong());
                 guild.createVoiceChannel(name)

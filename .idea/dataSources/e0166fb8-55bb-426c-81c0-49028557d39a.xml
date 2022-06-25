@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="database@pablobot.database.windows.net">
-  <database-model serializer="dbm" dbms="AZURE" family-id="AZURE" format-version="4.39">
+  <database-model serializer="dbm" dbms="AZURE" family-id="AZURE" format-version="4.40">
     <root id="1">
       <Dbms>AZURE</Dbms>
       <ServerVersion>12.0.312</ServerVersion>
@@ -161,7 +161,7 @@
     </schema>
     <schema id="35" parent="2" name="dbo">
       <Current>1</Current>
-      <IntrospectionTimestamp>2022-06-25.15:25:26.630</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2022-06-25.22:03:29.183</IntrospectionTimestamp>
       <ObjectId>1</ObjectId>
     </schema>
     <schema id="36" parent="2" name="guest">
@@ -185,151 +185,173 @@
       <ModifiedTimestamp>2022-06-24.21:27:49.183</ModifiedTimestamp>
       <ObjectId>1685581043</ObjectId>
     </table>
-    <table id="41" parent="35" name="prefix">
+    <table id="41" parent="35" name="livetime ">
+      <CreatedTimestamp>2022-06-25.22:03:27.690</CreatedTimestamp>
+      <ModifiedTimestamp>2022-06-25.22:03:27.690</ModifiedTimestamp>
+      <ObjectId>1733581214</ObjectId>
+    </table>
+    <table id="42" parent="35" name="prefix">
       <CreatedTimestamp>2022-06-20.17:00:35.693</CreatedTimestamp>
       <ModifiedTimestamp>2022-06-24.21:08:31.750</ModifiedTimestamp>
       <ObjectId>1621580815</ObjectId>
     </table>
-    <table id="42" parent="35" name="reactionroles">
+    <table id="43" parent="35" name="reactionroles">
       <CreatedTimestamp>2022-06-25.00:45:10.753</CreatedTimestamp>
       <ModifiedTimestamp>2022-06-25.15:25:25.620</ModifiedTimestamp>
       <ObjectId>1701581100</ObjectId>
     </table>
-    <table id="43" parent="35" name="stats">
+    <table id="44" parent="35" name="rssfeeds">
+      <CreatedTimestamp>2022-06-25.18:09:44.507</CreatedTimestamp>
+      <ModifiedTimestamp>2022-06-25.18:10:03.663</ModifiedTimestamp>
+      <ObjectId>1717581157</ObjectId>
+    </table>
+    <table id="45" parent="35" name="stats">
       <CreatedTimestamp>2022-06-20.17:00:35.810</CreatedTimestamp>
       <ModifiedTimestamp>2022-06-24.21:08:55.123</ModifiedTimestamp>
       <ObjectId>1637580872</ObjectId>
     </table>
-    <table id="44" parent="35" name="voicehub">
+    <table id="46" parent="35" name="voicehub">
       <CreatedTimestamp>2022-06-20.17:00:35.923</CreatedTimestamp>
       <ModifiedTimestamp>2022-06-24.21:09:06.350</ModifiedTimestamp>
       <ObjectId>1653580929</ObjectId>
     </table>
-    <column id="45" parent="38" name="channelid">
+    <column id="47" parent="38" name="channelid">
       <DataType>bigint|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="46" parent="38" name="repo">
+    <column id="48" parent="38" name="repo">
       <DataType>varchar(max)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="47" parent="38" name="lastsha">
+    <column id="49" parent="38" name="lastsha">
       <DataType>varchar(max)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="48" parent="38" name="TRIAL547">
+    <column id="50" parent="38" name="TRIAL547">
       <DataType>char(1 char)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="49" parent="39" name="guildid">
+    <column id="51" parent="39" name="guildid">
       <DataType>bigint|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="50" parent="39" name="userid">
+    <column id="52" parent="39" name="userid">
       <DataType>bigint|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="51" parent="39" name="xp">
+    <column id="53" parent="39" name="xp">
       <DataType>bigint|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="52" parent="40" name="amount">
+    <column id="54" parent="40" name="amount">
       <DataType>int|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="53" parent="40" name="multiplier">
+    <column id="55" parent="40" name="multiplier">
       <DataType>float|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="54" parent="40" name="guildid">
+    <column id="56" parent="40" name="guildid">
       <DataType>bigint|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="55" parent="40" name="lvl1_xp">
+    <column id="57" parent="40" name="lvl1_xp">
       <DataType>bigint|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="56" parent="40" name="msgXP">
+    <column id="58" parent="40" name="msgXP">
       <DataType>bigint|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="57" parent="40" name="vcXP">
+    <column id="59" parent="40" name="vcXP">
       <DataType>bigint|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="58" parent="40" name="vc_time">
+    <column id="60" parent="40" name="vc_time">
       <DataType>bigint|0s</DataType>
       <Position>7</Position>
     </column>
-    <column id="59" parent="41" name="prefix">
+    <column id="61" parent="41" name="messages">
+      <DataType>bigint|0s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="62" parent="42" name="prefix">
       <DataType>varchar(max)|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="60" parent="41" name="guildid">
+    <column id="63" parent="42" name="guildid">
       <DataType>bigint|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="61" parent="41" name="TRIAL550">
+    <column id="64" parent="42" name="TRIAL550">
       <DataType>char(1 char)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="62" parent="42" name="msgid">
+    <column id="65" parent="43" name="msgid">
       <DataType>bigint|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="63" parent="42" name="role">
+    <column id="66" parent="43" name="role">
       <DataType>bigint|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="64" parent="42" name="emoji">
+    <column id="67" parent="43" name="emoji">
       <DataType>nvarchar(max)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="65" parent="43" name="memberid">
+    <column id="68" parent="44" name="url">
+      <DataType>varchar(max)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="69" parent="44" name="lastPost">
+      <DataType>varchar(max)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="70" parent="45" name="memberid">
       <DataType>bigint|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="66" parent="43" name="onlineid">
+    <column id="71" parent="45" name="onlineid">
       <DataType>bigint|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="67" parent="43" name="boosterid">
+    <column id="72" parent="45" name="boosterid">
       <DataType>bigint|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="68" parent="43" name="categoryid">
+    <column id="73" parent="45" name="categoryid">
       <DataType>bigint|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="69" parent="43" name="nameonline">
+    <column id="74" parent="45" name="nameonline">
       <DataType>varchar(max)|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="70" parent="43" name="namemember">
+    <column id="75" parent="45" name="namemember">
       <DataType>varchar(max)|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="71" parent="43" name="namebooster">
+    <column id="76" parent="45" name="namebooster">
       <DataType>varchar(max)|0s</DataType>
       <Position>7</Position>
     </column>
-    <column id="72" parent="44" name="voicehubid">
+    <column id="77" parent="46" name="voicehubid">
       <DataType>bigint|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="73" parent="44" name="categoryid">
+    <column id="78" parent="46" name="categoryid">
       <DataType>bigint|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="74" parent="44" name="guildid">
+    <column id="79" parent="46" name="guildid">
       <DataType>bigint|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="75" parent="44" name="name">
+    <column id="80" parent="46" name="name">
       <DataType>varchar(max)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="76" parent="44" name="userlimit">
+    <column id="81" parent="46" name="userlimit">
       <DataType>bigint|0s</DataType>
       <Position>5</Position>
     </column>

@@ -13,7 +13,7 @@ import com.bot.events.prefix.GuildJoinPrefix;
 import com.bot.events.level.updateLevel;
 import com.bot.events.reactionroles.onReact;
 import com.bot.lavaplayer.MusicButtonPlayer;
-import com.bot.listeners.VoiceHub;
+import com.bot.events.VoiceHub;
 import net.dv8tion.jda.api.JDA;
 
 public class EventListenersLoad {

@@ -103,6 +103,23 @@ public class CommandManager extends ListenerAdapter {
                 }
             }});
 
+            if(event.getMessage().getAuthor().getIdLong() == event.getJDA().getSelfUser().getIdLong()){
+                toLivetimeStats();
+            }
+
+
+    }
+
+    private void toLivetimeStats(){
+        try {
+            Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("UPDATE livetime SET messages = messages + 1 ");
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            log.logger.warning(getClass()+": "+e.toString());
+        }
     }
 
     public void getPrefix() throws SQLException{
