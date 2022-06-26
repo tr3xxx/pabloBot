@@ -11,6 +11,7 @@ import com.bot.abilities.manage.stats.createStats;
 import com.bot.abilities.manage.stats.setStatsNames;
 import com.bot.abilities.music.*;
 import com.bot.abilities.notifications.github.setGithubNotifications;
+import com.bot.abilities.notifications.twitch.setTwitchNotifications;
 import com.bot.abilities.prefix.deletePrefix;
 import com.bot.abilities.prefix.getPrefix;
 import com.bot.abilities.prefix.setPrefix;
@@ -48,6 +49,7 @@ public class CommandLoad {
         CommandManager.addCommand(new redditcommand());
         CommandManager.addCommand(new clear());
         CommandManager.addCommand(new reactionRole());
+        CommandManager.addCommand(new setTwitchNotifications());
         CommandManager.addCommand(new passwortGenerator());
         CommandManager.addCommand(new RussianRouletteMain());
         CommandManager.addCommand(new setGithubNotifications());

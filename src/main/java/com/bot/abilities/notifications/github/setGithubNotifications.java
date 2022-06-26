@@ -27,7 +27,7 @@ public class setGithubNotifications extends Command {
 
     @Override
     public Permission[] getPermissions() {
-        return new Permission[] {};
+        return new Permission[] {Permission.MANAGE_SERVER};
     }
 
     @Override

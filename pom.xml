@@ -47,9 +47,24 @@
             <version>5.0.0-alpha.10</version>
         </dependency>
         <dependency>
+            <groupId>com.github.twitch4j</groupId>
+            <artifactId>twitch4j</artifactId>
+            <version>1.10.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.kohsuke</groupId>
             <artifactId>github-api</artifactId>
             <version>1.302</version>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>7.0.0.jre8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.philippheuer.events4j</groupId>
+            <artifactId>events4j-handler-simple</artifactId>
+            <version>0.9.2</version>
         </dependency>
         <dependency>
             <groupId>org.reflections</groupId>

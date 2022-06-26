@@ -5,6 +5,7 @@ import com.bot.abilities.core.CommandManager;
 import com.bot.abilities.notifications.github.GithubCommitNotifications;
 import com.bot.abilities.notifications.github.githubCore;
 
+import com.bot.abilities.notifications.twitch.twitchCore;
 import com.bot.events.Activity;
 import com.bot.events.updateStats;
 import com.bot.listeners.Boot;
@@ -61,7 +62,7 @@ public class bot {
         new githubCore();
         new GithubCommitNotifications();
         new Redditcore();
-        new githubCore();
+        new twitchCore();
 
     }
 
