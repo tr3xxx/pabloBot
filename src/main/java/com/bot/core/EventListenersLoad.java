@@ -7,6 +7,7 @@ import com.bot.abilities.music.search;
 import com.bot.abilities.notifications.github.setGithubNotifications;
 import com.bot.abilities.notifications.twitch.setTwitchNotifications;
 import com.bot.abilities.prefix.setPrefix;
+import com.bot.abilities.ticketSystem.createTicketSystem;
 import com.bot.abilities.voice.voicehub.setGeneratedNames;
 import com.bot.abilities.voice.voicehub.setVoiceUserLimit;
 import com.bot.abilities.voice.voicehub.setVoicehub;
@@ -36,6 +37,7 @@ public class EventListenersLoad {
         jda.addEventListener(new reactionRole.ButtonClick());
         jda.addEventListener(new onReact());
         jda.addEventListener(new setTwitchNotifications.ButtonClick());
+        jda.addEventListener(new createTicketSystem.ButtonClick());
         jda.addEventListener(new vcTracker());
         jda.addEventListener(new setGithubNotifications.ButtonClick());
 

@@ -17,6 +17,7 @@ import com.bot.abilities.prefix.getPrefix;
 import com.bot.abilities.prefix.setPrefix;
 import com.bot.abilities.reddit.redditcommand;
 import com.bot.abilities.serverManage.clear;
+import com.bot.abilities.ticketSystem.createTicketSystem;
 import com.bot.abilities.voice.voicehub.setGeneratedNames;
 import com.bot.abilities.voice.voicehub.setVoiceUserLimit;
 import com.bot.abilities.voice.voicehub.setVoicehub;
@@ -50,6 +51,7 @@ public class CommandLoad {
         CommandManager.addCommand(new clear());
         CommandManager.addCommand(new reactionRole());
         CommandManager.addCommand(new setTwitchNotifications());
+        CommandManager.addCommand(new createTicketSystem());
         CommandManager.addCommand(new passwortGenerator());
         CommandManager.addCommand(new RussianRouletteMain());
         CommandManager.addCommand(new setGithubNotifications());
