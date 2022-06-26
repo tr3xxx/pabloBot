@@ -43,10 +43,10 @@ public class CommandManager extends ListenerAdapter {
         String[] msg = event.getMessage().getContentRaw().trim().split(" ");
         String invoke = msg[0];
         try {
-            getPrefix();
+            prefix = Prefix.getPrefix(event);
             if(prefix == null){
-                registerPrefix();
-                getPrefix();
+                Prefix.registerPrefix(event);
+                Prefix.getPrefix(event);
             }
         } catch (SQLException e) {
             log.logger.warning(getClass()+": "+e.toString());
@@ -117,51 +117,6 @@ public class CommandManager extends ListenerAdapter {
             statement.executeUpdate("UPDATE livetime SET messages = messages + 1 ");
             statement.close();
             connection.close();
-        } catch (SQLException e) {
-            log.logger.warning(getClass()+": "+e.toString());
-        }
-    }
-
-    public void getPrefix() throws SQLException{
-        String temp = null;
-
-        try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
-             final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
-            preparedStatement.setLong(1, event.getGuild().getIdLong());
-            try(final ResultSet resultSet = preparedStatement.executeQuery()){
-                if(resultSet.next()){
-                    //return resultSet.getString("prefix");
-                    temp = resultSet.getString("prefix");
-                    this.prefix = temp;
-
-                }
-            }
-        } catch (SQLException e) {
-            log.logger.warning(getClass()+": "+e.toString());
-        }
-
-    }
-
-    public void registerPrefix(){
-        try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
-             final PreparedStatement preparedStatement = connection.prepareStatement("UPDATE prefix SET prefix = ? WHERE guildid = ?")) {
-            preparedStatement.setString(1, config.get("prefix"));
-            preparedStatement.setLong(2, event.getGuild().getIdLong());
-            preparedStatement.executeUpdate();
-
-            log.logger.info("New Server-Prefix has been set  (Server: " + event.getGuild().getName() + ", Prefix: " + config.get("prefix") + ", User: Bot");
-
-        } catch (SQLException e) {
-            log.logger.warning(getClass()+": "+e.toString());
-        }
-        try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
-             final PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO prefix(prefix,guildid) VALUES(?,?)")) {
-            preparedStatement.setString(1, config.get("prefix"));
-            preparedStatement.setLong(2, event.getGuild().getIdLong());
-            preparedStatement.executeUpdate();
-
-            log.logger.info("New Server-Prefix has been set  (Server: " + event.getGuild().getName() + ", Prefix: " + config.get("prefix") + ", User: Bot");
-
         } catch (SQLException e) {
             log.logger.warning(getClass()+": "+e.toString());
         }

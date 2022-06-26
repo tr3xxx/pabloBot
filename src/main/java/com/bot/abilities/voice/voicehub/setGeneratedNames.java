@@ -1,6 +1,7 @@
 package com.bot.abilities.voice.voicehub;
 
 import com.bot.abilities.core.Command;
+import com.bot.abilities.core.Prefix;
 import com.bot.core.config;
 
 import com.bot.log.log;
@@ -103,32 +104,11 @@ public static class MakeSelection extends ListenerAdapter {
     ButtonInteractionEvent event;
     String prefix;
 
-    public void getPrefix() throws SQLException {
-        String temp = null;
-
-        try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
-             final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
-            preparedStatement.setLong(1, Objects.requireNonNull(event.getGuild()).getIdLong());
-            try (final ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    //return resultSet.getString("prefix");
-                    temp = resultSet.getString("prefix");
-                    this.prefix = temp;
-
-                }
-            }
-        } catch (SQLException e) {
-            log.logger.warning(getClass()+": "+e.toString());
-        }
-
-    }
-
-
     public void onButtonInteraction(ButtonInteractionEvent e) {
         //e.deferEdit().queue();
         this.event = e;
         try {
-            getPrefix();
+            prefix = Prefix.getPrefix(e);
         } catch (SQLException ex) {
             log.logger.warning(getClass()+": "+e.toString());
         }

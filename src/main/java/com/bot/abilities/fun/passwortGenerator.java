@@ -1,6 +1,7 @@
 package com.bot.abilities.fun;
 
 import com.bot.abilities.core.Command;
+import com.bot.abilities.core.Prefix;
 import com.bot.core.config;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -31,6 +32,7 @@ public class passwortGenerator extends Command {
     String prefix;
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException { // !gPW <length>
+        event.getMessage().delete().queue();
         if(args.length == 2){
             try{
                 int length = Integer.parseInt(args[1]);
@@ -51,6 +53,7 @@ public class passwortGenerator extends Command {
                 e.setDescription(password);
                 e.setFooter("presented by " + config.get("bot_name"));
                 event.getMember().getUser().openPrivateChannel().queue(channel -> channel.sendMessageEmbeds(e.build()).queue());
+                return false;
             }catch (NumberFormatException er){
                 EmbedBuilder e = new EmbedBuilder();
                 e.setColor(Color.red);
@@ -65,11 +68,12 @@ public class passwortGenerator extends Command {
                     }catch(NullPointerException ignored){}
 
                 });
+                return false;
             }
         }
         else{
             try{
-                getPrefix(event);
+                prefix = Prefix.getPrefix(event);
             }catch (Exception e){
                 log.logger.warning(getClass().getName() + ": " + e.getMessage());
             }
@@ -82,27 +86,7 @@ public class passwortGenerator extends Command {
                     "Please use the following command: " + prefix + "gPW <length>");
             e.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(e.build()).queue();
+            return false;
         }
-        return false;
-    }
-
-    public void getPrefix(MessageReceivedEvent event) throws SQLException{
-        String temp = null;
-
-        try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
-             final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
-            preparedStatement.setLong(1, event.getGuild().getIdLong());
-            try(final ResultSet resultSet = preparedStatement.executeQuery()){
-                if(resultSet.next()){
-                    //return resultSet.getString("prefix");
-                    temp = resultSet.getString("prefix");
-                    this.prefix = temp;
-
-                }
-            }
-        } catch (SQLException e) {
-            log.logger.warning(getClass()+": "+e.toString());
-        }
-
     }
 }

@@ -1,6 +1,7 @@
 package com.bot.abilities.voice.voicehub;
 
 import com.bot.abilities.core.Command;
+import com.bot.abilities.core.Prefix;
 import com.bot.core.config;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -130,7 +131,7 @@ public class setVoiceUserLimit extends Command {
             //e.deferEdit().queue();
             this.e = e;
             try {
-                getPrefix();
+                prefix = Prefix.getPrefix(e);
             } catch (SQLException ex) {
                 log.logger.warning(ex.toString());
             }

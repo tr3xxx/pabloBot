@@ -1,6 +1,7 @@
 package com.bot.abilities.notifications.github;
 
 import com.bot.abilities.core.Command;
+import com.bot.abilities.core.Prefix;
 import com.bot.core.config;
 
 import com.bot.log.log;
@@ -35,10 +36,8 @@ public class setGithubNotifications extends Command {
     }
 
     @Override
-    public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException { //!sGN tr3xxx/PabooBot <#979405505820770314>
-                                                                                            // 0    1               2
-        if (event.getChannelType().isGuild()) {
-            if (Objects.requireNonNull(event.getMember()).hasPermission(Permission.MANAGE_SERVER)) {
+    public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
+
                 if (args.length == 3) {
                     try {
                         String[] trimmed = args[2].trim().split("#");
@@ -91,37 +90,8 @@ public class setGithubNotifications extends Command {
                     event.getChannel().sendMessageEmbeds(e.build()).setActionRow(yes_noBT()).queue();
                     return false;
                     }
-                } else {
-                EmbedBuilder e = new EmbedBuilder();
-                e.setColor(Color.red);
-                e.setTitle("Something went wrong...", null);
-                e.setDescription("You don't have enough permissions :( " +
-                        "\n" +
-                        "In order to be able to set up Github Notifications, you need the permission to manage channels on this " +
-                        "Server");
-                e.setFooter("presented by " + config.get("bot_name"));
-                event.getChannel().sendMessageEmbeds(e.build()).queue();
-
-                    return false;
-
-                }
-
                 return false;
-            } else {
-            EmbedBuilder e = new EmbedBuilder();
-            e.setColor(Color.red);
-            e.setTitle("Something went wrong...", null);
-            e.setDescription("Github Notifications can not be set through DM's :( " +
-                    "\n" +
-                    "Please use a Server-TextChannel to set up Github Notifications");
-            e.setFooter("presented by " + config.get("bot_name"));
-            event.getChannel().sendMessageEmbeds(e.build()).queue();
-
-            return false;
-            }
-
-
-        }
+                }
 
 
     private static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> yes_noBT() {
@@ -141,7 +111,7 @@ public class setGithubNotifications extends Command {
             //e.deferEdit().queue();
             this.e = e;
             try {
-                getPrefix();
+                prefix = Prefix.getPrefix(e);
             } catch (SQLException ex) {
                 log.logger.warning(ex.toString());
             }
@@ -166,27 +136,6 @@ public class setGithubNotifications extends Command {
                 }
                 default -> {
                 }
-            }
-
-        }
-
-
-        public void getPrefix() throws SQLException{
-            String temp = null;
-
-            try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
-                 final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
-                preparedStatement.setLong(1, e.getGuild().getIdLong());
-                try(final ResultSet resultSet = preparedStatement.executeQuery()){
-                    if(resultSet.next()){
-                        //return resultSet.getString("prefix");
-                        temp = resultSet.getString("prefix");
-                        this.prefix = temp;
-
-                    }
-                }
-            } catch (SQLException e) {
-                log.logger.warning(getClass()+": "+e.toString());
             }
 
         }

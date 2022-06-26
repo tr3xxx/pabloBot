@@ -1,6 +1,7 @@
 package com.bot.abilities.prefix;
 
 import com.bot.abilities.core.Command;
+import com.bot.abilities.core.Prefix;
 import com.bot.core.config;
 import com.bot.log.log;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -111,7 +112,7 @@ public class setPrefix extends Command {
             //e.deferEdit().queue();
             this.e = e;
             try {
-                getPrefix();
+                prefix = Prefix.getPrefix(e);
             } catch (SQLException ex) {
                 log.logger.warning(ex.toString());
             }
@@ -135,25 +136,6 @@ public class setPrefix extends Command {
                 }
                 default -> {
                 }
-            }
-
-        }
-        public void getPrefix() throws SQLException{
-            String temp = null;
-
-            try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
-                 final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
-                preparedStatement.setLong(1, e.getGuild().getIdLong());
-                try(final ResultSet resultSet = preparedStatement.executeQuery()){
-                    if(resultSet.next()){
-                        //return resultSet.getString("prefix");
-                        temp = resultSet.getString("prefix");
-                        this.prefix = temp;
-
-                    }
-                }
-            } catch (SQLException e) {
-                log.logger.warning(getClass()+": "+e.toString());
             }
 
         }
