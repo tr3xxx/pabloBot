@@ -42,7 +42,12 @@ public class githubCore {
         if(lastsha.equals(lastCommit.getSHA1()) ){
             return false;
         }
-        String CommiterURL = String.valueOf(lastCommit.getAuthor().getUrl());
+        String CommiterURL;
+        try {
+            CommiterURL = String.valueOf(lastCommit.getAuthor().getUrl());
+        }catch (NullPointerException e){
+            CommiterURL= "not resolvable";
+        }
         EmbedBuilder eb = new EmbedBuilder();
         List<GHCommit.File> files = lastCommit.getFiles();
         String sha =  lastCommit.getSHA1().substring(0,7);

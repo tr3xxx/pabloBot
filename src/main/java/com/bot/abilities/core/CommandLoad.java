@@ -4,6 +4,7 @@ package com.bot.abilities.core;
 import com.bot.abilities.basic.reactionroles.reactionRole;
 import com.bot.abilities.basic.testCommand;
 import com.bot.abilities.fun.automatCommand;
+import com.bot.abilities.fun.passwortGenerator;
 import com.bot.abilities.games.blackjack.BjMain;
 import com.bot.abilities.games.russianRoulette.RussianRouletteMain;
 import com.bot.abilities.manage.stats.createStats;
@@ -47,6 +48,7 @@ public class CommandLoad {
         CommandManager.addCommand(new redditcommand());
         CommandManager.addCommand(new clear());
         CommandManager.addCommand(new reactionRole());
+        CommandManager.addCommand(new passwortGenerator());
         CommandManager.addCommand(new RussianRouletteMain());
         CommandManager.addCommand(new setGithubNotifications());
 

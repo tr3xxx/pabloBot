@@ -37,7 +37,6 @@ public class CommandManager extends ListenerAdapter {
     }
 
     public void onMessageReceived(MessageReceivedEvent event) {
-        event.getChannel().sendTyping().queue();
 
         this.event = event;
         updateLevel.messageLevelUpdate(event);
@@ -84,6 +83,7 @@ public class CommandManager extends ListenerAdapter {
                         return;
                     }
                     try {
+                        event.getChannel().sendTyping().queue();
                         cmd.execute(msg, event);
                     } catch (SQLException e) {
                         log.logger.warning(getClass()+": "+e.toString());
@@ -97,6 +97,7 @@ public class CommandManager extends ListenerAdapter {
             for (String alias : aliases) {
                 if(invoke.startsWith(config.get("prefix")) && alias.equalsIgnoreCase(invoke.replace(config.get("prefix"), "")) && !event.getAuthor().isBot()){
                     try {
+                        event.getChannel().sendTyping().queue();
                         cmd.execute(msg, event);
                     } catch (SQLException e) {
                         log.logger.warning(getClass()+": "+e.toString());
