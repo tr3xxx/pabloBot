@@ -19,7 +19,9 @@ public class Activity {
     private boolean first = true;
 
     public Activity() {
+        bot.jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming( "$help","https://www.twitch.tv/."));
 
+        /*
         new Timer().schedule(new TimerTask() {
             public void run() {
                 if(first){
@@ -30,12 +32,12 @@ public class Activity {
                     if(getDetails()) {
                         switch (index) {
                             case 0 -> {
-                                bot.jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming("for " + members + " People", "https://www.twitch.tv/."));
+                                bot.jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming("$help", "https://www.twitch.tv/."));
                                 index = 1;
                             }
                             case 1 -> {
                                 bot.jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming(messages + " sent Messages", "https://www.twitch.tv/."));
-                                index = 2;
+                                index = 0;
                             }
                             case 2 -> {
                                 bot.jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming("on " + bot.jda.getGuilds().size() + " Servers", "https://www.twitch.tv/."));
@@ -52,6 +54,8 @@ public class Activity {
 
             }
         }, 0, 10_000);
+        */
+
     }
 
     private boolean getDetails(){
@@ -87,5 +91,7 @@ public class Activity {
         }
         return true;
     }
+
+
 }
 

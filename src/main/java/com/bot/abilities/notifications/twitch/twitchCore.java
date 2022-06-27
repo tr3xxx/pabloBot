@@ -19,7 +19,6 @@ public class twitchCore {
     static private TwitchClient twitchClient;
     static private SimpleEventHandler eventHandler;
     public twitchCore() {
-        System.out.println(0);
         twitchClient = TwitchClientBuilder.builder()
                 .withEnableHelix(true)
                 .withDefaultEventHandler(SimpleEventHandler.class)
