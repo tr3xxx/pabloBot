@@ -23,7 +23,7 @@ public class setVoicehub extends Command {
 
     @Override
     public String[] call() {
-        return new String[] {"setVoicehub","sV"};
+        return new String[] {"setVoicehub"};
     }
 
     @Override
@@ -53,9 +53,9 @@ public class setVoicehub extends Command {
                         EmbedBuilder e = new EmbedBuilder();
                         e.setColor(Color.red);
                         e.setTitle("Something went wrong...", null);
-                        e.setDescription("You did not run this command correctly :( " +
+                        e.setDescription("You have not executed this command correctly! " +
                                 "\n" +
-                                "Do you want to learn how to do it correctly?");
+                                "Do you want to learn how to do it right?");
                         e.setFooter("presented by " + config.get("bot_name"));
                         event.getChannel().sendMessageEmbeds(e.build()).setActionRow(yes_noBT()).queue();
                         return false;
@@ -85,9 +85,9 @@ public class setVoicehub extends Command {
                     EmbedBuilder e = new EmbedBuilder();
                     e.setColor(Color.red);
                     e.setTitle("Something went wrong...", null);
-                    e.setDescription("You did not run this command correctly :( " +
+                    e.setDescription("You have not executed this command correctly! " +
                             "\n" +
-                            "Do you want to learn how to do it correctly?");
+                            "Do you want to learn how to do it right?");
                     e.setFooter("presented by " + config.get("bot_name"));
                     event.getChannel().sendMessageEmbeds(e.build()).setActionRow(yes_noBT()).queue();
 
@@ -124,12 +124,12 @@ public class setVoicehub extends Command {
                 case "help_yes" -> {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.decode(config.get("color")));
-                    eb.setTitle("How to set a VoiceHub", null);
-                    eb.setDescription("To set a VoiceHub you need to execute: \n" +
+                    eb.setTitle("How to set a voicehub", null);
+                    eb.setDescription("To set a voicehub you need to execute: \n" +
                             "'" + prefix + "setVoicehub <#channelid>' " +
                             "\n \n" +
-                            "Replace the 'channelid' with the ID of the desired channel"
-                    );
+                            "Replace _channelID_ with the id of the channel which you want to make to a voicehub");
+
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(more_helpBT()).queue();
                 }

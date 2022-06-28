@@ -19,7 +19,7 @@ import java.util.Objects;
 public class setPrefix extends Command {
     @Override
     public String[] call() {
-        return new String[] {"setPrefix","sP"};
+        return new String[] {"setPrefix"};
     }
 
     @Override
@@ -40,9 +40,7 @@ public class setPrefix extends Command {
                                 EmbedBuilder e = new EmbedBuilder();
                                 e.setColor(Color.red);
                                 e.setTitle("Something went wrong...", null);
-                                e.setDescription("Prefix contains an illegal character :( " +
-                                        "\n \n" +
-                                        "Please try another one");
+                                e.setDescription("The prefix contains an illegal character, please try another one ");
                                 e.setFooter("presented by " + config.get("bot_name"));
                                 event.getChannel().sendMessageEmbeds(e.build()).queue();
                                 return false;
@@ -59,9 +57,8 @@ public class setPrefix extends Command {
 
                             EmbedBuilder e = new EmbedBuilder();
                             e.setColor(Color.green);
-                            e.setTitle("Prefix successfully set to '" + args[1] + "'", null);
-                            e.setDescription("You will always be able to call "+config.get("prefix")+"deletePrefix to" +
-                                    " reset the Prefix to "+config.get("prefix"));
+                            e.setTitle("The prefix successfully set to '" + args[1] + "'", null);
+                            e.setDescription("If you have enough permissions you can always call " + config.get("prefix") + "deletePrefix  to set the prefix back to '" + config.get("prefix")+"'");
                             e.setFooter("presented by " + config.get("bot_name"));
                             event.getChannel().sendMessageEmbeds(e.build()).queue();
 
@@ -72,9 +69,7 @@ public class setPrefix extends Command {
                         EmbedBuilder e = new EmbedBuilder();
                         e.setColor(Color.red);
                         e.setTitle("Something went wrong...", null);
-                        e.setDescription("Prefix may not be longer than 5 character:( " +
-                                "\n \n" +
-                                "Please choose a shorter Prefix/");
+                        e.setDescription("The prefix cannot be longer than 5 characters. \n Please choose a shorter one");
                         e.setFooter("presented by " + config.get("bot_name"));
                         event.getChannel().sendMessageEmbeds(e.build()).queue();
                     }
@@ -82,9 +77,9 @@ public class setPrefix extends Command {
                     EmbedBuilder e = new EmbedBuilder();
                     e.setColor(Color.red);
                     e.setTitle("Something went wrong...", null);
-                    e.setDescription("You did not run this command correctly :( " +
+                    e.setDescription("You have not executed this command correctly! " +
                             "\n" +
-                            "Do you want to learn how to do it correctly?");
+                            "Do you want to learn how to do it right?");
                     e.setFooter("presented by " + config.get("bot_name"));
                     event.getChannel().sendMessageEmbeds(e.build()).setActionRow(yes_noBT()).queue();
 
@@ -120,11 +115,11 @@ public class setPrefix extends Command {
                 case "help_yesPrefix" -> {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.decode(config.get("color")));
-                    eb.setTitle("How to set a Prefix", null);
-                    eb.setDescription("To set a Prefix you need to execute: \n" +
+                    eb.setTitle("How do I set a prefix?", null);
+                    eb.setDescription("To set a prefix you need to execute: \n" +
                             "'" + prefix + "setPrefix _character_' " +
                             "\n \n" +
-                            "Replace the _character_ with whatever you wish to be your new Prefix"
+                            "Replace _character_ with your desired prefix"
                     );
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue();

@@ -18,17 +18,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class createStats extends Command {
-    long members;
-    long boosters;
-    long online = 0;
-    long categoryid;
-    long onlineid;
-    long memberid;
-    long boostid;
+    private long members,boosters,online = 0,categoryid,onlineid,memberid,boostid;
 
     @Override
     public String[] call() {
-        return new String[] {"createStats","cS"};
+        return new String[] {"createStats"};
     }
 
     @Override

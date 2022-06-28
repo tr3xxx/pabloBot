@@ -30,7 +30,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 if(!Objects.requireNonNull(Objects.requireNonNull(e.getMember()).getVoiceState()).inAudioChannel()){
                     EmbedBuilder eb= new EmbedBuilder();
                     eb.setColor(Color.red);
-                    eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                    eb.setTitle("You must be in a voice channel to do this!", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{
@@ -44,7 +44,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 else if(!Objects.requireNonNull(Objects.requireNonNull(e.getGuild()).getSelfMember().getVoiceState()).inAudioChannel() || !Objects.equals(e.getGuild().getSelfMember().getVoiceState().getChannel(), e.getMember().getVoiceState().getChannel())){
                     EmbedBuilder eb= new EmbedBuilder();
                     eb.setColor(Color.red);
-                    eb.setTitle("I have to be in your VoiceChannel to do this", null);
+                    eb.setTitle("I need to be in your voice channel to do this!", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{
@@ -115,7 +115,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 if(!Objects.requireNonNull(Objects.requireNonNull(e.getMember()).getVoiceState()).inAudioChannel()){
                     EmbedBuilder eb= new EmbedBuilder();
                     eb.setColor(Color.red);
-                    eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                    eb.setTitle("You must be in a voice channel to do this!", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{
@@ -129,7 +129,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 else if(!Objects.requireNonNull(Objects.requireNonNull(e.getGuild()).getSelfMember().getVoiceState()).inAudioChannel() || !Objects.equals(e.getGuild().getSelfMember().getVoiceState().getChannel(), e.getMember().getVoiceState().getChannel())){
                     EmbedBuilder eb= new EmbedBuilder();
                     eb.setColor(Color.red);
-                    eb.setTitle("I have to be in your VoiceChannel to do this", null);
+                    eb.setTitle("I need to be in your voice channel to do this!", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{
@@ -174,7 +174,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 if(!Objects.requireNonNull(Objects.requireNonNull(e.getMember()).getVoiceState()).inAudioChannel()){
                     EmbedBuilder eb= new EmbedBuilder();
                     eb.setColor(Color.red);
-                    eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                    eb.setTitle("You must be in a voice channel to do this!", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
                     try{
                         e.getMessage().delete().queue();
@@ -191,7 +191,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 else if(!Objects.requireNonNull(Objects.requireNonNull(e.getGuild()).getSelfMember().getVoiceState()).inAudioChannel() || !Objects.equals(e.getGuild().getSelfMember().getVoiceState().getChannel(), e.getMember().getVoiceState().getChannel())){
                     EmbedBuilder eb= new EmbedBuilder();
                     eb.setColor(Color.red);
-                    eb.setTitle("I have to be in your VoiceChannel to do this", null);
+                    eb.setTitle("I need to be in your voice channel to do this!", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
                     try{
                         e.getMessage().delete().queue();
@@ -217,7 +217,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                     else{
                         EmbedBuilder eb= new EmbedBuilder();
                         eb.setColor(Color.decode(config.get("color")));
-                        eb.setTitle("There are no Songs in the Queue currently", null);
+                        eb.setTitle("There are currently no songs in the queue!", null);
                         eb.setFooter("presented by " + config.get("bot_name"));
                         e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                             try{
@@ -241,7 +241,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 if(!Objects.requireNonNull(Objects.requireNonNull(e.getMember()).getVoiceState()).inAudioChannel()){
                     EmbedBuilder eb= new EmbedBuilder();
                     eb.setColor(Color.red);
-                    eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                    eb.setTitle("You must be in a voice channel to do this!", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{
@@ -254,7 +254,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 else if(!Objects.requireNonNull(Objects.requireNonNull(e.getGuild()).getSelfMember().getVoiceState()).inAudioChannel() || !Objects.equals(e.getGuild().getSelfMember().getVoiceState().getChannel(), e.getMember().getVoiceState().getChannel())){
                     EmbedBuilder eb= new EmbedBuilder();
                     eb.setColor(Color.red);
-                    eb.setTitle("I have to be in your VoiceChannel to do this", null);
+                    eb.setTitle("I need to be in your voice channel to do this!", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{
@@ -341,7 +341,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 if(!Objects.requireNonNull(Objects.requireNonNull(e.getMember()).getVoiceState()).inAudioChannel()){
                     EmbedBuilder eb= new EmbedBuilder();
                     eb.setColor(Color.red);
-                    eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                    eb.setTitle("You must be in a voice channel to do this!", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{
@@ -353,7 +353,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 else if(!Objects.requireNonNull(Objects.requireNonNull(e.getGuild()).getSelfMember().getVoiceState()).inAudioChannel() || !Objects.equals(e.getGuild().getSelfMember().getVoiceState().getChannel(), e.getMember().getVoiceState().getChannel())){
                     EmbedBuilder eb= new EmbedBuilder();
                     eb.setColor(Color.red);
-                    eb.setTitle("I have to be in your VoiceChannel to do this", null);
+                    eb.setTitle("I need to be in your voice channel to do this!", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{
@@ -474,7 +474,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
                 if (!e.getMember().getVoiceState().inAudioChannel()) {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.red);
-                    eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                    eb.setTitle("You must be in a voice channel to do this!", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue();
                     return;
@@ -508,7 +508,7 @@ public class MusicButtonPlayer extends ListenerAdapter {
 
                     EmbedBuilder eb= new EmbedBuilder();
                     eb.setColor(Color.red);
-                    eb.setTitle("There are no Songs in the Queue currently", null);
+                    eb.setTitle("There are currently no songs in the queue!", null);
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                         try{

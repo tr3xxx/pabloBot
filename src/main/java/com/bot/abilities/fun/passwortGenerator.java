@@ -29,7 +29,7 @@ public class passwortGenerator extends Command {
         return true;
     }
 
-    String prefix;
+    private String prefix;
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException { // !gPW <length>
         event.getMessage().delete().queue();

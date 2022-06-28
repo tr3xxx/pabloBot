@@ -113,7 +113,7 @@ public class search extends Command {
                         EmbedBuilder e = new EmbedBuilder();
                         e.setColor(Color.red);
                         e.setTitle("**NO MATCHES**", null);
-                        e.setDescription("Nothing found for"+finalInput);
+                        e.setDescription("I have not found anything about this: "+finalInput);
                         e.setFooter("presented by " + config.get("bot_name"));
 
                         event.getChannel().sendMessageEmbeds(e.build()).queue(m -> m.delete().queueAfter(20, TimeUnit.SECONDS));
@@ -162,7 +162,7 @@ public class search extends Command {
                     if (!event.getMember().getVoiceState().inAudioChannel()) {
                         EmbedBuilder eb = new EmbedBuilder();
                         eb.setColor(Color.red);
-                        eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                        eb.setTitle("You must be in a voice channel to do this!", null);
                         eb.setFooter("presented by " + config.get("bot_name"));
                         event.getChannel().sendMessageEmbeds(eb.build()).queue();
                         return;
@@ -181,7 +181,7 @@ public class search extends Command {
                     if (!event.getMember().getVoiceState().inAudioChannel()) {
                         EmbedBuilder eb = new EmbedBuilder();
                         eb.setColor(Color.red);
-                        eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                        eb.setTitle("You must be in a voice channel to do this!", null);
                         eb.setFooter("presented by " + config.get("bot_name"));
                         event.getChannel().sendMessageEmbeds(eb.build()).queue();
                         return;
@@ -200,7 +200,7 @@ public class search extends Command {
                     if (!event.getMember().getVoiceState().inAudioChannel()) {
                         EmbedBuilder eb = new EmbedBuilder();
                         eb.setColor(Color.red);
-                        eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                        eb.setTitle("You must be in a voice channel to do this!", null);
                         eb.setFooter("presented by " + config.get("bot_name"));
                         event.getChannel().sendMessageEmbeds(eb.build()).queue();
                         return;
@@ -219,7 +219,7 @@ public class search extends Command {
                     if (!event.getMember().getVoiceState().inAudioChannel()) {
                         EmbedBuilder eb = new EmbedBuilder();
                         eb.setColor(Color.red);
-                        eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                        eb.setTitle("You must be in a voice channel to do this!", null);
                         eb.setFooter("presented by " + config.get("bot_name"));
                         event.getChannel().sendMessageEmbeds(eb.build()).queue();
                         return;
@@ -238,7 +238,7 @@ public class search extends Command {
                     if (!event.getMember().getVoiceState().inAudioChannel()) {
                         EmbedBuilder eb = new EmbedBuilder();
                         eb.setColor(Color.red);
-                        eb.setTitle("You have to be in a VoiceChannel to do this", null);
+                        eb.setTitle("You must be in a voice channel to do this!", null);
                         eb.setFooter("presented by " + config.get("bot_name"));
                         event.getChannel().sendMessageEmbeds(eb.build()).queue();
                         return;

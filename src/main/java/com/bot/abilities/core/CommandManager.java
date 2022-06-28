@@ -27,7 +27,6 @@ public class CommandManager extends ListenerAdapter {
     }
 
     public static void addCommand(Object obj){
-
         commands.add((Command) obj);
     }
 
@@ -35,6 +34,8 @@ public class CommandManager extends ListenerAdapter {
 
         always.add((Command) obj);
     }
+
+
 
     public void onMessageReceived(MessageReceivedEvent event) {
 

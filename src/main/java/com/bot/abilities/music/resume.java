@@ -41,7 +41,7 @@ public class resume extends Command {
         if (!Objects.requireNonNull(Objects.requireNonNull(event.getMember()).getVoiceState()).inAudioChannel()) {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setColor(Color.red);
-            eb.setTitle("You have to be in a VoiceChannel to do this", null);
+            eb.setTitle("You must be in a voice channel to do this!", null);
             eb.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                 try{
@@ -54,7 +54,7 @@ public class resume extends Command {
         } else if (!Objects.requireNonNull(Objects.requireNonNull(event.getGuild()).getSelfMember().getVoiceState()).inAudioChannel() || !Objects.equals(event.getGuild().getSelfMember().getVoiceState().getChannel(), event.getMember().getVoiceState().getChannel())) {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setColor(Color.red);
-            eb.setTitle("I have to be in your VoiceChannel to do this", null);
+            eb.setTitle("I need to be in your voice channel to do this!", null);
             eb.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                 try{

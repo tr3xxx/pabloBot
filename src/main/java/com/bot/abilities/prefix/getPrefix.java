@@ -13,7 +13,7 @@ import java.sql.*;
 public class getPrefix extends Command {
     @Override
     public String[] call() {
-        return new String[] {"getPrefix","gP"};
+        return new String[] {"getPrefix"};
     }
 
     @Override
@@ -30,7 +30,6 @@ public class getPrefix extends Command {
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
 
         String prefix = null;
-        if (event.getChannelType().isGuild()) {
             try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
                  final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
                 preparedStatement.setLong(1, event.getGuild().getIdLong());
@@ -41,9 +40,8 @@ public class getPrefix extends Command {
 
                         EmbedBuilder e = new EmbedBuilder();
                         e.setColor(Color.decode(config.get("color")));
-                        e.setTitle("Prefix on this server is'" + prefix + "'", null);
-                        e.setDescription("You will always be able to call " + config.get("prefix") + "deletePrefix to" +
-                                " reset the Prefix to " + config.get("prefix"));
+                        e.setTitle("The prefix of this server is '" + prefix + "'", null);
+                        e.setDescription("If you have enough permissions you can always call " + config.get("prefix") + "deletePrefix  to set the prefix back to '" + config.get("prefix")+"'");
                         e.setFooter("presented by " + config.get("bot_name"));
                         event.getChannel().sendMessageEmbeds(e.build()).queue();
                         return false;
@@ -53,17 +51,6 @@ public class getPrefix extends Command {
             } catch (SQLException e) {
                 log.logger.warning(getClass()+": "+e.toString());
             }
-        }EmbedBuilder e = new EmbedBuilder();
-        e.setColor(Color.red);
-        e.setTitle("Something went wrong...", null);
-        e.setDescription("You can't get the Prefix through a DM :( " +
-                "\n" +
-                "Please use a Server-TextChannel to get the Servers-Prefix");
-        e.setFooter("presented by " + config.get("bot_name"));
-        event.getChannel().sendMessageEmbeds(e.build()).queue();
-
-
-
         return false;
     }
 }

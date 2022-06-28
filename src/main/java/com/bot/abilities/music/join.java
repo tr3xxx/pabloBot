@@ -20,7 +20,7 @@ import static com.bot.lavaplayer.PlayerManager.getMusicManager;
 public class join extends Command {
     @Override
     public String[] call() {
-        return new String[]{"join", "j"};
+        return new String[]{"join"};
     }
 
     @Override
@@ -39,7 +39,7 @@ public class join extends Command {
         if (!event.getMember().getVoiceState().inAudioChannel()) {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setColor(Color.red);
-            eb.setTitle("You have to be in a VoiceChannel to do this", null);
+            eb.setTitle("You must be in a voice channel to do this!", null);
             eb.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                 try{
@@ -63,7 +63,7 @@ public class join extends Command {
             event.getMessage().delete().queue();
             EmbedBuilder eb = new EmbedBuilder();
             eb.setColor(Color.red);
-            eb.setTitle("I am already in a VoiceChannel", null);
+            eb.setTitle("I am already in a voice channel", null);
             eb.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(eb.build()).queue();
             return false;

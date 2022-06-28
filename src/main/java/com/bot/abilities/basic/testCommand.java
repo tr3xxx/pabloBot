@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public class testCommand extends Command {
     @Override
     public String[] call() {
-        return new String[] {"test","testanomi"};
+        return new String[] {"test"};
     }
 
     @Override

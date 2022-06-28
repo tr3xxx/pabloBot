@@ -50,9 +50,9 @@ public class setTwitchNotifications extends Command {
                 EmbedBuilder e = new EmbedBuilder();
                 e.setColor(Color.red);
                 e.setTitle("Something went wrong...", null);
-                e.setDescription("You did not run this command correctly :( " +
+                e.setDescription("You have not executed this command correctly! " +
                         "\n" +
-                        "Do you want to learn how to do it correctly?");
+                        "Do you want to learn how to do it right?");
                 e.setFooter("presented by " + config.get("bot_name"));
                 event.getChannel().sendMessageEmbeds(e.build()).setActionRow(yes_noBT()).queue();
                 return false;
@@ -79,9 +79,9 @@ public class setTwitchNotifications extends Command {
             EmbedBuilder e = new EmbedBuilder();
             e.setColor(Color.getColor("#800080"));
             e.setTitle("Something went wrong...", null);
-            e.setDescription("You did not run this command correctly :( " +
+            e.setDescription("You have not executed this command correctly! " +
                     "\n" +
-                    "Do you want to learn how to do it correctly?");
+                    "Do you want to learn how to do it right?");
             e.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(e.build()).setActionRow(yes_noBT()).queue();
             return false;

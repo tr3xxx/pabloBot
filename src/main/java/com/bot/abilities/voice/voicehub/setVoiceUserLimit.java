@@ -20,7 +20,7 @@ public class setVoiceUserLimit extends Command {
     int userlimit;
     @Override
     public String[] call() {
-        return new String[] {"setUserlimit","sU"};
+        return new String[] {"setUserlimit"};
     }
 
     @Override
@@ -46,9 +46,9 @@ public class setVoiceUserLimit extends Command {
                         EmbedBuilder eb = new EmbedBuilder();
                         eb.setColor(Color.red);
                         eb.setTitle("Something went wrong...", null);
-                        eb.setDescription("You did not run this command correctly :( " +
+                        eb.setDescription("You have not executed this command correctly! " +
                                 "\n" +
-                                "Do you want to learn how to do it correctly?");
+                                "Do you want to learn how to do it right?");
                         eb.setFooter("presented by " + config.get("bot_name"));
                         event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(yes_noBT()).queue();
                         return false;
@@ -66,7 +66,7 @@ public class setVoiceUserLimit extends Command {
                         log.logger.info("New Voicehub-Userlimit has been set. (Server: " + event.getGuild().getName() + ", Voicehub: " + event.getGuild().getVoiceChannelById(channelid).getName()  + "Limit: " + userlimit + ")");
                         EmbedBuilder e = new EmbedBuilder();
                         e.setColor(Color.green);
-                        e.setTitle("Voicehub-Limit successfully set to '" + userlimit + "'", null);
+                        e.setTitle("The voicehub user limit was successfully set to '" + userlimit + "'", null);
                         e.setDescription(" ");
                         e.setFooter("presented by " + config.get("bot_name"));
                         event.getChannel().sendMessageEmbeds(e.build()).queue();
@@ -74,9 +74,7 @@ public class setVoiceUserLimit extends Command {
                         EmbedBuilder eb = new EmbedBuilder();
                         eb.setColor(Color.red);
                         eb.setTitle("Something went wrong...", null);
-                        eb.setDescription("Tagged channel is no Voicehub :( " +
-                                "\n" +
-                                "Do you want to learn how to do it correctly?");
+                        eb.setDescription("The channel you entered is not registered as a voicehub");
                         eb.setFooter("presented by " + config.get("bot_name"));
                         event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(yes_noBT()).queue();
                         return false;
@@ -86,9 +84,9 @@ public class setVoiceUserLimit extends Command {
                     EmbedBuilder e = new EmbedBuilder();
                     e.setColor(Color.red);
                     e.setTitle("Something went wrong...", null);
-                    e.setDescription("You did not run this command correctly :( " +
+                    e.setDescription("You have not executed this command correctly! " +
                             "\n" +
-                            "Do you want to learn how to do it correctly?");
+                            "Do you want to learn how to do it right?");
                     e.setFooter("presented by " + config.get("bot_name"));
                     event.getChannel().sendMessageEmbeds(e.build()).setActionRow(yes_noBT()).queue();
 
@@ -139,11 +137,12 @@ public class setVoiceUserLimit extends Command {
                 case "help_yesUserlimit" -> {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.decode(config.get("color")));
-                    eb.setTitle("How to set a VoiceHub", null);
-                    eb.setDescription("To set a Userlimit for created Voice-Channels you need to execute: \n" +
-                            "'" + prefix + "setUserlimit <#channelid> 'userlimit'' " +
+                    eb.setTitle("How do I set the user limit of a voicehub?", null);
+                    eb.setDescription("To set the user limit of a voicehub you need to execute: \n" +
+                            "'" + prefix + "setUserlimit <#_channelid_> _userlimit_' " +
                             "\n \n" +
-                            "Replace 'channelid' with the ID of the desired channel and 'userlimit with your wished userlimit'"
+                            "Replace _channelid_ with the ID of the desired channel \n" +
+                            "Replace _userlimit_ with the desired user limit'"
                     );
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(more_helpBT()).queue();
@@ -165,25 +164,6 @@ public class setVoiceUserLimit extends Command {
                     "How to get the Channel-ID"));
 
             return buttons;
-        }
-        public void getPrefix() throws SQLException{
-            String temp = null;
-
-            try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
-                 final PreparedStatement preparedStatement = connection.prepareStatement("SELECT prefix FROM prefix WHERE guildid = ?")) {
-                preparedStatement.setLong(1, e.getGuild().getIdLong());
-                try(final ResultSet resultSet = preparedStatement.executeQuery()){
-                    if(resultSet.next()){
-                        //return resultSet.getString("prefix");
-                        temp = resultSet.getString("prefix");
-                        this.prefix = temp;
-
-                    }
-                }
-            } catch (SQLException e) {
-                log.logger.warning(getClass()+": "+e.toString());
-            }
-
         }
 
     }

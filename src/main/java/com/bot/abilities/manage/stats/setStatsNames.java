@@ -22,16 +22,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class setStatsNames extends Command {
-    long channelid;
-    long online;
+    private long channelid,online;
     @Override
     public String[] call() {
-        return new String[] {"customizeStatsName","cSN"};
+        return new String[] {"modifyStats"};
     }
-
     @Override
     public Permission[] getPermissions() {
-        return new Permission[] {Permission.MESSAGE_MANAGE};
+        return new Permission[] {Permission.MANAGE_SERVER};
     }
     @Override
     public boolean usableInDM() {
@@ -45,13 +43,12 @@ public class setStatsNames extends Command {
             String[] channel_id = trimmed[1].trim().split(">");
             channelid = Long.parseLong(channel_id[0]);
             VoiceChannel channel = event.getGuild().getVoiceChannelById(channelid);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setColor(Color.red);
             eb.setTitle("Something went wrong...", null);
-            eb.setDescription("You did not tagged the Channel correctly :( " +
-                    "\n" +
-                    "Do you want to learn how to do it correctly?");
+            eb.setDescription("You have not mentioned the channel correctly!" +
+                    "\nDo you want to learn how to do it right?");
             eb.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(yes_noBT()).queue();
             return false;
@@ -62,9 +59,9 @@ public class setStatsNames extends Command {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setColor(Color.red);
             eb.setTitle("Something went wrong...", null);
-            eb.setDescription("You did not choosed what kind of Channel the tagged Channel is :( " +
+            eb.setDescription("You have not specified which channel you want to modify!" +
                     "\n" +
-                    "Do you want to learn how to do it correctly?");
+                    "Do you want to learn how to do it right?");
             eb.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(yes_noBT()).queue();
             return false;
@@ -77,8 +74,8 @@ public class setStatsNames extends Command {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setColor(Color.red);
             eb.setTitle("Something went wrong...", null);
-            eb.setDescription("You did not entered an Channelname:( \n" +
-                    "Do you want to learn how to do it correctly?");
+            eb.setDescription("You have not given a name for the channel \n" +
+                    "Do you want to learn how to do it right?");
             eb.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(eb.build()).setActionRow(yes_noBT()).queue();
             return false;
@@ -100,8 +97,8 @@ public class setStatsNames extends Command {
                             EmbedBuilder e = new EmbedBuilder();
                             e.setColor(Color.red);
                             e.setTitle("Something went wrong...", null);
-                            e.setDescription("The channel name was not changed due to rate limitation implemented by Discord," +
-                                    " please wait a few minutes and try again");
+                            e.setDescription("The channel name was not changed due to rate limitation implemented by discord,\n" +
+                                    " Please wait a few minutes and try again");
                             e.setFooter("presented by " + config.get("bot_name"));
                             event.getChannel().sendMessageEmbeds(e.build()).queue();
                             return false;
@@ -132,8 +129,8 @@ public class setStatsNames extends Command {
                             EmbedBuilder e = new EmbedBuilder();
                             e.setColor(Color.red);
                             e.setTitle("Something went wrong...", null);
-                            e.setDescription("The channel name was not changed due to rate limitation implemented by Discord," +
-                                    " please wait a few minutes and try again");
+                            e.setDescription("The channel name was not changed due to rate limitation implemented by discord,\n" +
+                                    " Please wait a few minutes and try again");
                             e.setFooter("presented by " + config.get("bot_name"));
                             event.getChannel().sendMessageEmbeds(e.build()).queue();
                             return false;
@@ -156,8 +153,8 @@ public class setStatsNames extends Command {
                             EmbedBuilder e = new EmbedBuilder();
                             e.setColor(Color.red);
                             e.setTitle("Something went wrong...", null);
-                            e.setDescription("The channel name was not changed due to rate limitation implemented by Discord," +
-                                    " please wait a few minutes and try again");
+                            e.setDescription("The channel name was not changed due to rate limitation implemented by discord,\n" +
+                                    " Please wait a few minutes and try again");
                             e.setFooter("presented by " + config.get("bot_name"));
                             event.getChannel().sendMessageEmbeds(e.build()).queue();
                             return false;
@@ -167,13 +164,12 @@ public class setStatsNames extends Command {
                     }
                     break;
                 default:
-                    log.logger.warning("[DEFAULT CASE]");
                     break;
             }
 
             EmbedBuilder e = new EmbedBuilder();
             e.setColor(Color.green);
-            e.setTitle("Stats-Name successfully set", null);
+            e.setTitle("Stats were successfully modified", null);
             e.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(e.build()).queue();
 
@@ -181,9 +177,9 @@ public class setStatsNames extends Command {
             EmbedBuilder e = new EmbedBuilder();
             e.setColor(Color.red);
             e.setTitle("Something went wrong...", null);
-            e.setDescription("You did not include the necessary {counter} in the channel name :( " +
+            e.setDescription("You have not specified the necessary variable _{counter}_, please use it where the number of counted persons should be placed" +
                     "\n" +
-                    "Do you want to learn how to do it?");
+                    "Do you want to learn how to do it right?");
             e.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(e.build()).setActionRow(yes_noBT()).queue();
             return false;
@@ -215,17 +211,16 @@ public class setStatsNames extends Command {
                 case "help_yesCustomStatNames" -> {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.decode(config.get("color")));
-                    eb.setTitle("How to customize Stats-Names", null);
-                    eb.setDescription("To customize Stats-Names you need to execute: \n" +
-                            "'" + prefix+ "customizeStatsNames <#channelid> M/O/B 'customName {counter}' " +
+                    eb.setTitle("How to modify the names of the individual stats counter", null);
+                    eb.setDescription("To modify the channel names you need to execute: \n" +
+                            "'" + prefix+ "modifyStats <#_channelID_> _M/O/B_  _name_' " +
                             "\n \n" +
-                            "1. Replace 'channelid' with the ID of the Channel you want to edit\n"+
-                            "2. Choose if the tagged Channel is a (M)ember-/(O)nline- or (B)oostercounter-Channel \n"+
-                            "3. Replace 'customName' with your own Custom Name\n\n"+
+                            "Replace _channelID_ with the id of the channel you want to edit\n"+
+                            "Select if it is a (_M_)ember-/(_O_)nline- or (_B_)oostercounter channel \n"+
+                            "Replace _name_ with your desired name\n\n"+
                             "**ATTENTION**\n"+
-                            "'customName' has to include {counter}, it will later be replaced with the counter, place it " +
-                            "where ever you want to"
-                    );
+                            "_name_ has to include {counter}, it will later be replaced the number of counted persons, place it where ever you want to in _name_");
+
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(more_helpBT()).queue();
                 }

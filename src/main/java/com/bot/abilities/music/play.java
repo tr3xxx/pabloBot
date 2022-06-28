@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class play extends Command {
     @Override
     public String[] call() {
-        return new String[] {"play","p"};
+        return new String[] {"play"};
     }
 
     @Override
@@ -37,7 +37,7 @@ public class play extends Command {
         if(!event.getMember().getVoiceState().inAudioChannel()){
             EmbedBuilder eb= new EmbedBuilder();
             eb.setColor(Color.red);
-            eb.setTitle("You have to be in a VoiceChannel to do this", null);
+            eb.setTitle("You must be in a voice channel to do this!", null);
             eb.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                 try{

@@ -23,7 +23,7 @@ import static com.bot.lavaplayer.PlayerManager.getMusicManager;
 public class queue extends Command {
     @Override
     public String[] call() {
-        return new String[]{"queue", "q"};
+        return new String[]{"queue"};
     }
 
     @Override
@@ -45,7 +45,7 @@ public class queue extends Command {
         if (!event.getMember().getVoiceState().inAudioChannel()) {
             EmbedBuilder eb = new EmbedBuilder();
             eb.setColor(Color.red);
-            eb.setTitle("You have to be in a VoiceChannel to do this", null);
+            eb.setTitle("You must be in a voice channel to do this!", null);
             eb.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                 try{
@@ -88,14 +88,13 @@ public class queue extends Command {
             event.getMessage().delete().queue();
             EmbedBuilder eb= new EmbedBuilder();
             eb.setColor(Color.red);
-            eb.setTitle("There are no Songs in the Queue currently", null);
+            eb.setTitle("There are currently no songs in the queue!", null);
             eb.setFooter("presented by " + config.get("bot_name"));
             event.getChannel().sendMessageEmbeds(eb.build()).queue(m -> {
                 try{
                     m.delete().queueAfter(20, TimeUnit.SECONDS);
                 }catch(NullPointerException ignored){}
             });
-            log.logger.info("Tried to skip, but queue is empty on ("+event.getGuild().getName()+")");
             return false;
         }
 
