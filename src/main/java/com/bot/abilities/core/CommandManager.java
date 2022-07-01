@@ -34,17 +34,15 @@ public class CommandManager extends ListenerAdapter {
 
         always.add((Command) obj);
     }
-
-
-
+    
     public void onMessageReceived(MessageReceivedEvent event) {
 
         this.event = event;
-        updateLevel.messageLevelUpdate(event);
         String[] msg = event.getMessage().getContentRaw().trim().split(" ");
         String invoke = msg[0];
         try {
             prefix = Prefix.getPrefix(event);
+            // BETA --> prefix = config.get("prefix");
             if(prefix == null){
                 Prefix.registerPrefix(event);
                 Prefix.getPrefix(event);
@@ -109,6 +107,9 @@ public class CommandManager extends ListenerAdapter {
             if(event.getMessage().getAuthor().getIdLong() == event.getJDA().getSelfUser().getIdLong()){
                 toLivetimeStats();
             }
+
+
+            updateLevel.messageLevelUpdate(event);
     }
 
     private void toLivetimeStats(){

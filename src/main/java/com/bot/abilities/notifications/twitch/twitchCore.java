@@ -18,8 +18,9 @@ import java.util.List;
 public class twitchCore {
     static private TwitchClient twitchClient;
     static private SimpleEventHandler eventHandler;
+
     public twitchCore() {
-        twitchClient = TwitchClientBuilder.builder()
+       /* twitchClient = TwitchClientBuilder.builder()
                 .withEnableHelix(true)
                 .withDefaultEventHandler(SimpleEventHandler.class)
                 .build();
@@ -57,6 +58,7 @@ public class twitchCore {
         }
 
     }
+
     public static void createListener(String name){
         twitchClient.getClientHelper().enableStreamEventListener(name);
     }
@@ -92,6 +94,8 @@ public class twitchCore {
             });
 
         });
+    }*/
+
     }
 
 }

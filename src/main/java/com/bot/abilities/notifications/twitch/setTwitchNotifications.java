@@ -99,7 +99,6 @@ public class setTwitchNotifications extends Command {
     }
 
 
-
     public static class ButtonClick extends ListenerAdapter {
         ButtonInteractionEvent e;
         String prefix;

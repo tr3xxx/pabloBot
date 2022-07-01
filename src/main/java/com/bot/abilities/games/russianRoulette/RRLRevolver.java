@@ -15,6 +15,7 @@ public class RRLRevolver {
     public int getShots(){
         return shots;
     }
+
     public int getSize(){
         return size;
     }

@@ -20,7 +20,7 @@ public class Activity {
 
     public Activity() {
         bot.jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming( "$help","https://www.twitch.tv/."));
-
+        // BETA -> bot.jda.getPresence().setActivity(net.dv8tion.jda.api.entities.Activity.streaming( "V 0.1","https://www.twitch.tv/."));
         /*
         new Timer().schedule(new TimerTask() {
             public void run() {

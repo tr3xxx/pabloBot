@@ -17,6 +17,7 @@ public class TrackScheduler extends AudioEventAdapter {
         this.audioPlayer = audioPlayer;
         this.queue = new LinkedBlockingQueue<>();
     }
+
     public void queue(AudioTrack track){
         if(!this.audioPlayer.startTrack(track, true)){
             this.queue.offer(track);

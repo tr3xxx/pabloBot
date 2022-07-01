@@ -98,9 +98,9 @@ public class setGeneratedNames extends Command{
     }
 
 
-public static class MakeSelection extends ListenerAdapter {
-    ButtonInteractionEvent event;
-    String prefix;
+    public static class MakeSelection extends ListenerAdapter {
+        ButtonInteractionEvent event;
+        String prefix;
 
     public void onButtonInteraction(ButtonInteractionEvent e) {
         //e.deferEdit().queue();
@@ -152,7 +152,7 @@ public static class MakeSelection extends ListenerAdapter {
 
     }
 
-    public void casesMenu(SelectMenuInteraction event) throws SQLException {
+        public void casesMenu(SelectMenuInteraction event) throws SQLException {
         if (Objects.equals(event.getComponent().getId(), "names")) {
             for (int i = 0; i < event.getValues().size(); i++) {
                 switch (event.getValues().get(i)) {

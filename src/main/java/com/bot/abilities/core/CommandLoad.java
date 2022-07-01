@@ -8,8 +8,12 @@ import com.bot.abilities.fun.passwortGenerator;
 import com.bot.abilities.games.blackjack.BjMain;
 import com.bot.abilities.games.russianRoulette.RussianRouletteMain;
 import com.bot.abilities.help.helpCommand;
+import com.bot.abilities.levelsystem.LevelSettings;
+import com.bot.abilities.levelsystem.getLevel;
 import com.bot.abilities.manage.stats.createStats;
 import com.bot.abilities.manage.stats.setStatsNames;
+import com.bot.abilities.manage.welcomeMessages.setWelcomeChannel;
+import com.bot.abilities.manage.welcomeMessages.setWelcomeMessage;
 import com.bot.abilities.music.*;
 import com.bot.abilities.notifications.github.setGithubNotifications;
 import com.bot.abilities.notifications.twitch.setTwitchNotifications;
@@ -56,6 +60,10 @@ public class CommandLoad {
         CommandManager.addCommand(new helpCommand());
         CommandManager.addCommand(new passwortGenerator());
         CommandManager.addCommand(new RussianRouletteMain());
+        CommandManager.addCommand(new getLevel());
+        CommandManager.addCommand(new LevelSettings());
+        CommandManager.addCommand(new setWelcomeChannel());
+        CommandManager.addCommand(new setWelcomeMessage());
         CommandManager.addCommand(new setGithubNotifications());
 
         // Always with getPrefix callable on any server

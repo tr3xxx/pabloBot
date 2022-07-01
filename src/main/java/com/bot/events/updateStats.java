@@ -29,6 +29,7 @@ public class updateStats {
             }
         }, 0, 30000); // 30000 = 5min, more than 2x Request in 10min would end in being rate limited
     }
+
     public boolean update(){
         try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
              final PreparedStatement preparedStatement = connection.prepareStatement("SELECT memberid,onlineid,boosterid FROM stats")) {

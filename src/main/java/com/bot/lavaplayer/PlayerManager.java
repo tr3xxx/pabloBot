@@ -350,12 +350,14 @@ public class PlayerManager {
 
 
     }
+
     public static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> watchQueue() {
         java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("listqueue","Queue"));
 
         return buttons;
     }
+
     public static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> pause0Rstop() {
         java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("pause","Pause"));
@@ -366,6 +368,7 @@ public class PlayerManager {
 
         return buttons;
     }
+
     public static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> pause0RstopLOOP() {
         java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("pause","Pause"));
@@ -376,6 +379,7 @@ public class PlayerManager {
 
         return buttons;
     }
+
     public static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> resumeORskipORstop() {
         java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("resume","Pause"));
@@ -385,6 +389,7 @@ public class PlayerManager {
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.primary("listqueue","Queue"));
         return buttons;
     }
+
     public static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> resumeORskipORstopLOOP() {
         java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
         buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("resume","Pause"));

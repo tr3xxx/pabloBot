@@ -119,7 +119,6 @@ public class BjGame implements Runnable {
     }
 
 
-
     public int winOrLose(){ // 0 = nothing ; 1 = won ; 2 = lost ; 3 = draw
 
         if(dealer.getScore()> player.getScore()){
@@ -168,8 +167,6 @@ public class BjGame implements Runnable {
     }
 
 
-
-
     public static class BjListener extends ListenerAdapter{
 
 
@@ -210,6 +207,7 @@ public class BjGame implements Runnable {
             return buttons;
 
         }
+
         public static List<Button> sendOKButton(){
             List<Button> buttons = new ArrayList<>();
             buttons.add(Button.success("bjOver","Game is over"));

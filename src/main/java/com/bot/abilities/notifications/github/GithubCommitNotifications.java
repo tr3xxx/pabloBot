@@ -11,6 +11,7 @@ public class GithubCommitNotifications {
     Long channelid;
     String repo;
     String lastsha;
+
     public GithubCommitNotifications() {
         new Timer().schedule(new TimerTask() {
             public void run() {

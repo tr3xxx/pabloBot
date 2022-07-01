@@ -8,7 +8,9 @@ import java.sql.SQLException;
 
 public abstract class Command extends ListenerAdapter {
     public abstract String[] call();
+
     public abstract Permission[] getPermissions();
+
     public abstract boolean usableInDM();
 
     public abstract boolean execute(String[] args, MessageReceivedEvent event) throws SQLException;

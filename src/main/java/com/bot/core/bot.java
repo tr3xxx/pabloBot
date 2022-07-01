@@ -26,12 +26,9 @@ import java.util.Date;
 
 public class bot {
     public static JDA jda;
+
     public static void main(String[] args) throws LoginException, IOException, SQLException {
-
         new log("./logs/" + "log_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date(System.currentTimeMillis())) + ".log");
-
-
-
         try {
             jda = JDABuilder.createDefault(config.get("token"))
                     .enableIntents(GatewayIntent.GUILD_PRESENCES)
@@ -52,6 +49,7 @@ public class bot {
 
 
     }
+
     public static void loadComponents() throws SQLException, IOException {
         new EventListenersLoad().load(jda);
         new CommandManager().load(jda);

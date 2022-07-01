@@ -47,8 +47,6 @@ public class setVoicehub extends Command {
                         guild_id = event.getGuild().getIdLong();
 
 
-
-
                     } catch (Exception err) {
                         EmbedBuilder e = new EmbedBuilder();
                         e.setColor(Color.red);
@@ -101,8 +99,8 @@ public class setVoicehub extends Command {
 
         private static java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> yes_noBT () {
             java.util.List<net.dv8tion.jda.api.interactions.components.buttons.Button> buttons = new ArrayList<>();
-            buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.success("help_yes", "Yes"));
-            buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("help_no", "No"));
+            buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.success("help_yesVH", "Yes"));
+            buttons.add(net.dv8tion.jda.api.interactions.components.buttons.Button.danger("help_noVH", "No"));
 
             return buttons;
         }
@@ -121,7 +119,7 @@ public class setVoicehub extends Command {
                 log.logger.warning(ex.toString());
             }
             switch (Objects.requireNonNull(e.getButton().getId())) {
-                case "help_yes" -> {
+                case "help_yesVH" -> {
                     EmbedBuilder eb = new EmbedBuilder();
                     eb.setColor(Color.decode(config.get("color")));
                     eb.setTitle("How to set a voicehub", null);
@@ -133,7 +131,7 @@ public class setVoicehub extends Command {
                     eb.setFooter("presented by " + config.get("bot_name"));
                     e.getChannel().sendMessageEmbeds(eb.build()).setActionRow(more_helpBT()).queue();
                 }
-                case "help_no" -> {
+                case "help_noVH" -> {
                     try{
                         e.getMessage().delete().queue();
                     }catch(NullPointerException ignored){}

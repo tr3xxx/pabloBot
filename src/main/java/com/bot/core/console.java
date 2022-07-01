@@ -61,6 +61,10 @@ public class console {
                     log.logger.info("CPU-USAGE JAVA: "+cpuload[0]+"%");
                     log.logger.info("UPTIME: "+uptime);
                 }
+                else if(shutdown.equalsIgnoreCase("list") ){
+                    log.logger.info(bot.jda.getRegisteredListeners().toString());
+                    log.logger.info(String.valueOf(bot.jda.getRegisteredListeners().size()));
+                }
 
                 else {
                     System.out.println("Invalid Input");

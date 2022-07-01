@@ -36,6 +36,7 @@ public class onReact extends ListenerAdapter {
                             if(!event.getMember().getUser().isBot()) {
                                 event.getMember().getUser().openPrivateChannel().queue(channel -> channel.sendMessageEmbeds(e.build()).queue());
                             }
+                            return;
                         } else {
                             EmbedBuilder e = new EmbedBuilder();
                             e.setColor(Color.red);
@@ -44,6 +45,7 @@ public class onReact extends ListenerAdapter {
                             if(!event.getMember().getUser().isBot()) {
                                 event.getMember().getUser().openPrivateChannel().queue(channel -> channel.sendMessageEmbeds(e.build()).queue());
                             }
+                            return;
                         }
                     }
                 }
@@ -74,6 +76,7 @@ public class onReact extends ListenerAdapter {
                             e.setTitle("You lost the Role: " + Objects.requireNonNull(event.getGuild().getRoleById(roleID)).getName() + " on " + event.getGuild().getName(), null);
                             e.setFooter("presented by " + config.get("bot_name"));
                             event.getMember().getUser().openPrivateChannel().queue(channel -> channel.sendMessageEmbeds(e.build()).queue());
+                            return;
                         }
 
                     }

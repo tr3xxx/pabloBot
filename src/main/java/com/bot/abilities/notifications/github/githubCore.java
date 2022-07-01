@@ -18,6 +18,7 @@ public class githubCore {
     public static GitHub github;
     static String affectedFiles=null;
     public static String newsha = null;
+
     public githubCore() throws IOException {github = GitHubBuilder.fromPropertyFile(".github/github.properties").build();}
 
     public static boolean testRepo(String repo) {

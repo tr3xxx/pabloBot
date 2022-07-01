@@ -16,8 +16,9 @@ import java.util.TimerTask;
 
 public class updateLevel extends ListenerAdapter {
 
-    static double multiplier;
-    static int lvl1_xp, msgXP,vcXP,vcTime,levelAmount,oldXP;
+    private static double multiplier;
+    private static int lvl1_xp, msgXP,vcXP,vcTime,levelAmount,oldXP;
+
     public static void messageLevelUpdate(MessageReceivedEvent event){
         if(!event.getAuthor().isBot() && event.getChannelType().isGuild()){
             getCalculationPrefix(event.getGuild().getIdLong());
@@ -63,8 +64,8 @@ public class updateLevel extends ListenerAdapter {
         int level = getLevel(newXP);
         EmbedBuilder e = new EmbedBuilder();
         e.setColor(Color.decode(config.get("color")));
-        e.setTitle("LEVEL UP #"+(level-1)+" -> #"+level ,null);
-        e.setThumbnail(Objects.requireNonNull(event.getMember()).getAvatarUrl());
+        e.setTitle("You have reached level "+level+" on "+event.getGuild().getName()+"!" ,null);
+        e.setThumbnail(Objects.requireNonNull(event.getGuild().getIconUrl()));
         e.setFooter("presented by " + config.get("bot_name"));
         event.getMember().getUser().openPrivateChannel().queue(channel -> channel.sendMessageEmbeds(e.build()).queue());
     }
@@ -72,8 +73,8 @@ public class updateLevel extends ListenerAdapter {
         int level = getLevel(newXP);
         EmbedBuilder e = new EmbedBuilder();
         e.setColor(Color.decode(config.get("color")));
-        e.setTitle("LEVEL UP #"+(level-1)+" -> #"+level ,null);
-        e.setThumbnail(Objects.requireNonNull(event.getMember()).getAvatarUrl());
+        e.setTitle("You have reached level "+level+" on "+event.getGuild().getName()+"!" ,null);
+        e.setThumbnail(Objects.requireNonNull(event.getGuild().getIconUrl()));
         e.setFooter("presented by " + config.get("bot_name"));
         event.getMember().getUser().openPrivateChannel().queue(channel -> channel.sendMessageEmbeds(e.build()).queue());
     }
@@ -132,7 +133,15 @@ public class updateLevel extends ListenerAdapter {
                 if(resultSet.next()){
                     oldXP = resultSet.getInt("xp");
                 }
-                else{throw new SQLException("No Result");}
+                else{
+                    try (final PreparedStatement preparedStatement2 = connection.prepareStatement("INSERT INTO level (userid,guildid,xp) VALUES (?,?,?)")) {
+                        preparedStatement2.setLong(1, userid);
+                        preparedStatement2.setLong(2, guildid);
+                        preparedStatement2.setInt(3, 0);
+                        preparedStatement2.executeUpdate();
+                    }
+                    oldXP = 0;
+                }
 
             }
         }

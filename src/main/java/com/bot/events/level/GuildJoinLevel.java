@@ -11,6 +11,7 @@ import java.util.List;
 
 public class GuildJoinLevel extends ListenerAdapter {
     static int count = 0;
+
     public void onGuildJoin(MessageReceivedEvent event){ action(event);}
 
 
@@ -56,6 +57,7 @@ public class GuildJoinLevel extends ListenerAdapter {
 
 
     }
+
     public boolean xpCalculationPrefix(long guildid){
         try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
              final PreparedStatement preparedStatement = connection.prepareStatement("SELECT amount,multiplier,lvl1_xp FROM levelCalcPrefix WHERE guildid = ?")) {
@@ -70,6 +72,7 @@ public class GuildJoinLevel extends ListenerAdapter {
             return false;
         }
     }
+
     public void createCalculationPrefix(long guildid){
         try (final Connection connection = DriverManager.getConnection(config.get("DATABASE_URL"),config.get("DATABASE_USERNAME"),config.get("DATABASE_PASSWORD"));
              final PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO levelCalcPrefix(guildid,amount,multiplier,lvl1_xp,msgXP,vcXP,vc_time) VALUES(?,?,?,?,?,?,?)")) {
