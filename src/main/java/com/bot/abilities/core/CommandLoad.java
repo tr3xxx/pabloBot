@@ -15,6 +15,8 @@ import com.bot.abilities.manage.stats.setStatsNames;
 import com.bot.abilities.manage.welcomeMessages.setWelcomeChannel;
 import com.bot.abilities.manage.welcomeMessages.setWelcomeMessage;
 import com.bot.abilities.music.*;
+import com.bot.abilities.news.AddRss;
+import com.bot.abilities.news.setNews;
 import com.bot.abilities.notifications.github.setGithubNotifications;
 import com.bot.abilities.notifications.twitch.setTwitchNotifications;
 import com.bot.abilities.prefix.deletePrefix;
@@ -65,6 +67,8 @@ public class CommandLoad {
         CommandManager.addCommand(new setWelcomeChannel());
         CommandManager.addCommand(new setWelcomeMessage());
         CommandManager.addCommand(new setGithubNotifications());
+        CommandManager.addCommand(new setNews());
+        CommandManager.addCommand(new AddRss());
 
         // Always with getPrefix callable on any server
         CommandManager.addAlwaysCommand(new deletePrefix());

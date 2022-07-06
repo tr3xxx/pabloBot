@@ -44,7 +44,7 @@ public class BjMain extends Command {
                 BjGame game = new BjGame(message.getIdLong(), event);
                 Thread gameThread = new Thread(game);
                 BjDraw.gameInProgress = true;
-                gameThread.run();
+                gameThread.start();
                 BjDraw.gameInProgress = false;
                 try{
                     message.delete().queueAfter(3, TimeUnit.MINUTES);

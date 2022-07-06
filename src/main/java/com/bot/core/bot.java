@@ -2,6 +2,7 @@ package com.bot.core;
 
 import com.bot.abilities.core.CommandLoad;
 import com.bot.abilities.core.CommandManager;
+import com.bot.abilities.news.StartNews;
 import com.bot.abilities.notifications.github.GithubCommitNotifications;
 import com.bot.abilities.notifications.github.githubCore;
 
@@ -61,7 +62,7 @@ public class bot {
         new GithubCommitNotifications();
         new Redditcore();
         new twitchCore();
-
+        StartNews.startNews();
     }
 
 }
