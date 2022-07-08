@@ -18,7 +18,7 @@ class newsCommand implements Runnable {
     protected void command(){
 
         newsRSSReader rssReader = new newsRSSReader();
-        String[] replacements = {"&quot;","<![CDATA[","2022]]>","![CDATA[","]]"};
+        String[] replacements = {"&quot;","<![CDATA[","]]>","![CDATA[","]]"};
         int i = 1;
 
         //replace Placeholders
@@ -68,7 +68,7 @@ class newsCommand implements Runnable {
             boolean isInDatabase = false;
 
             while (rs.next()){
-                 System.out.println("In Loop");
+                 //System.out.println("In Loop");
                  if(feed.equals(rs.getString("url"))){
                      //System.out.println("Is in Database");
                      isInDatabase = true;
