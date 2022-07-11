@@ -66,7 +66,7 @@ public class setNews extends Command {
                         boolean isInDatabase = false;
 
                         while (rs.next()) {
-                            System.out.println("In Loop");
+                            //System.out.println("In Loop");
                             if (channelid == rs.getLong("ChannelID")) {
                                 System.out.println("Is in Database");
                                 isInDatabase = true;
