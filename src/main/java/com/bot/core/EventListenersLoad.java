@@ -1,5 +1,7 @@
 package com.bot.core;
 
+import com.bot.abilities.basic.JoinAndLeaveMessage.JoinMessage;
+import com.bot.abilities.basic.JoinAndLeaveMessage.LeaveMessage;
 import com.bot.abilities.basic.reactionroles.reactionRole;
 import com.bot.abilities.games.blackjack.BjGame;
 import com.bot.abilities.manage.stats.setStatsNames;
@@ -40,6 +42,7 @@ public class EventListenersLoad {
         jda.addEventListener(new createTicketSystem.ButtonClick());
         jda.addEventListener(new vcTracker());
         jda.addEventListener(new setGithubNotifications.ButtonClick());
-
+        jda.addEventListener(new JoinMessage());
+        jda.addEventListener(new LeaveMessage());
     }
 }

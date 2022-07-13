@@ -1,6 +1,7 @@
 package com.bot.abilities.core;
 
 
+import com.bot.abilities.basic.JoinAndLeaveMessage.addWelcomeChannel;
 import com.bot.abilities.basic.reactionroles.reactionRole;
 import com.bot.abilities.basic.testCommand;
 import com.bot.abilities.fun.automatCommand;
@@ -69,6 +70,7 @@ public class CommandLoad {
         CommandManager.addCommand(new setGithubNotifications());
         CommandManager.addCommand(new setNews());
         CommandManager.addCommand(new AddRss());
+        CommandManager.addCommand(new addWelcomeChannel());
 
         // Always with getPrefix callable on any server
         CommandManager.addAlwaysCommand(new deletePrefix());
