@@ -27,7 +27,7 @@ public class AddRss extends Command {
     @Override
     public boolean execute(String[] args, MessageReceivedEvent event) throws SQLException {
         newsCommand c = new newsCommand();
-        c.putInDatabase("https://www.gamestar.de/news/rss/news.rss");
+        c.putInDatabase("http://feeds.4players.de/PC-CDROM/articles/-/rss.xml");
 
 
         return false;

@@ -2,6 +2,7 @@ package com.bot.abilities.basic.JoinAndLeaveMessage;
 
 import com.bot.core.bot;
 import com.bot.core.config;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -25,7 +26,10 @@ public class JoinMessage extends ListenerAdapter {
                 id = set.getLong("channelid");
             }
             try {
-                bot.jda.getTextChannelById(id).sendMessage("Welcome "+Objects.requireNonNull(event.getMember()).getEffectiveName()+"!").queue();
+
+                EmbedBuilder e = new EmbedBuilder();
+                e.setTitle("**Welcome "+Objects.requireNonNull(event.getMember()).getEffectiveName()+"!**");
+                bot.jda.getTextChannelById(id).sendMessageEmbeds(e.build()).queue();
             }catch (NullPointerException e){}
 
         }catch (SQLException e){}

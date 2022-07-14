@@ -2,6 +2,7 @@ package com.bot.abilities.basic.JoinAndLeaveMessage;
 
 import com.bot.core.bot;
 import com.bot.core.config;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
@@ -29,7 +30,10 @@ public class LeaveMessage extends ListenerAdapter {
                 id = set.getLong("channelid");
             }
             try {
-                bot.jda.getTextChannelById(id).sendMessage(Objects.requireNonNull(event.getMember()).getEffectiveName()+" left the server!").queue();
+                EmbedBuilder e = new EmbedBuilder();
+                e.setTitle("**"+Objects.requireNonNull(event.getMember()).getEffectiveName()+" left the server!**");
+                bot.jda.getTextChannelById(id).sendMessageEmbeds(e.build()).queue();
+
             }catch (NullPointerException e){}
 
         }catch (SQLException e){}
