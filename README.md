@@ -1,1 +1,1 @@
-# Readme wird überbewertet
+# java bot - development currently stopped
